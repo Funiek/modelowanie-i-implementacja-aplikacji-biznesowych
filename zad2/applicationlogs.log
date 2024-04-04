@@ -1,0 +1,67 @@
+2024-04-04 10:01:46.412 [main] TRACE org.example.TestService - Method test2 called with args [a, 2]
+2024-04-04 10:01:46.415 [main] ERROR org.example.TestService - Method test2 threw java.lang.IllegalStateException: Test wyjatku
+2024-04-04 10:05:45.504 [main] TRACE org.example.TestService - Method: test2 called
+2024-04-04 10:05:45.506 [main] ERROR org.example.TestService - Method: test2 threw java.lang.IllegalStateException: Test wyjatku
+2024-04-04 10:06:33.396 [main] TRACE org.example.TestService - Method: test1 called
+2024-04-04 10:06:33.397 [main] TRACE org.example.TestService - Method: test2 called
+2024-04-04 10:06:33.397 [main] ERROR org.example.TestService - Method: test2 threw java.lang.IllegalStateException: Test wyjatku
+2024-04-04 10:07:50.995 [main] TRACE org.example.TestService - Method: test1 called
+2024-04-04 10:07:50.996 [main] TRACE org.example.TestService - Method: test2 called
+2024-04-04 10:07:50.996 [main] ERROR org.example.TestService - Method: test2 threw java.lang.IllegalStateException: Test wyjatku
+2024-04-04 10:22:15.548 [main] TRACE org.example.TestService - Method: test1 called
+2024-04-04 10:22:15.550 [main] TRACE org.example.TestService - Method: test2 called
+2024-04-04 10:22:15.550 [main] ERROR org.example.TestService - Method: test2 threw java.lang.IllegalStateException: Test wyjatku
+2024-04-04 10:22:44.648 [main] TRACE org.example.TestService - Method: test1 called
+2024-04-04 10:22:44.649 [main] TRACE org.example.TestService - Method: test2 called
+2024-04-04 10:22:44.649 [main] ERROR org.example.TestService - Method: test2 threw java.lang.IllegalStateException: Test wyjatku
+2024-04-04 10:23:04.112 [main] TRACE org.example.TestService - Method: test1 called
+2024-04-04 10:23:04.113 [main] TRACE org.example.TestService - Method: test2 called
+2024-04-04 10:23:04.113 [main] ERROR org.example.TestService - Method: test2 threw java.lang.IllegalStateException: Test wyjatku
+2024-04-04 10:23:58.989 [main] TRACE org.example.TestService - Method: test1 called
+2024-04-04 10:23:58.990 [main] TRACE org.example.TestService - Method: test2 called
+2024-04-04 10:23:58.990 [main] ERROR org.example.TestService - Method: test2 threw java.lang.IllegalStateException: Test wyjatku
+2024-04-04 10:24:10.849 [main] TRACE org.example.TestService - Method: test1 called
+2024-04-04 10:24:10.852 [main] TRACE org.example.TestService - Method: test2 called
+2024-04-04 10:24:10.852 [main] ERROR org.example.TestService - Method: test2 threw java.lang.IllegalStateException: Test wyjatku
+2024-04-04 10:24:24.036 [main] TRACE org.example.TestService - Method: test1 called
+2024-04-04 10:24:24.038 [main] TRACE org.example.TestService - Method: test2 called
+2024-04-04 10:24:24.038 [main] ERROR org.example.TestService - Method: test2 threw java.lang.IllegalStateException: Test wyjatku
+2024-04-04 10:24:43.786 [main] TRACE org.example.TestService - Method: test1 called
+2024-04-04 10:24:43.787 [main] TRACE org.example.TestService - Method: test2 called
+2024-04-04 10:24:43.787 [main] ERROR org.example.TestService - Method: test2 threw java.lang.IllegalStateException: Test wyjatku
+2024-04-04 10:24:55.877 [main] TRACE org.example.TestService - Method: test1 called
+2024-04-04 10:24:55.878 [main] TRACE org.example.TestService - Method: test2 called
+2024-04-04 10:24:55.878 [main] ERROR org.example.TestService - Method: test2 threw java.lang.IllegalStateException: Test wyjatku
+2024-04-04 10:25:07.230 [main] TRACE org.example.TestService - Method: test1 called
+2024-04-04 10:25:07.232 [main] TRACE org.example.TestService - Method: test2 called
+2024-04-04 10:25:07.232 [main] ERROR org.example.TestService - Method: test2 threw java.lang.IllegalStateException: Test wyjatku
+2024-04-04 10:25:24.585 [main] TRACE org.example.TestService - Method: test1 called
+2024-04-04 10:25:24.587 [main] TRACE org.example.TestService - Method: test2 called
+2024-04-04 10:25:24.587 [main] ERROR org.example.TestService - Method: test2 threw java.lang.IllegalStateException: Test wyjatku
+2024-04-04 10:25:36.305 [main] TRACE org.example.TestService - Method: test1 called
+2024-04-04 10:25:36.307 [main] TRACE org.example.TestService - Method: test2 called
+2024-04-04 10:25:36.307 [main] ERROR org.example.TestService - Method: test2 threw java.lang.IllegalStateException: Test wyjatku
+2024-04-04 10:26:52.870 [main] TRACE org.example.TestService - Method: test1 called
+2024-04-04 10:26:52.871 [main] TRACE org.example.TestService - Method: test2 called
+2024-04-04 10:26:52.871 [main] ERROR org.example.TestService - Method: test2 threw java.lang.IllegalStateException: Test wyjatku
+2024-04-04 10:35:46.187 [main] TRACE org.example.TestService - Method: test1 called
+2024-04-04 10:35:46.189 [main] TRACE org.example.TestService - Method: test2 called
+2024-04-04 10:35:46.189 [main] ERROR org.example.TestService - Method: test2 threw java.lang.IllegalStateException: Test wyjatku
+2024-04-04 10:39:16.878 [main] TRACE org.example.TestService - Method: test1 called
+2024-04-04 10:39:16.879 [main] TRACE org.example.TestService - Method: test2 called
+2024-04-04 10:39:16.879 [main] ERROR org.example.TestService - Method: test2 threw java.lang.IllegalStateException: Test wyjatku
+2024-04-04 10:39:25.585 [main] TRACE org.example.TestService - Method: test1 called
+2024-04-04 10:39:25.586 [main] TRACE org.example.TestService - Method: test2 called
+2024-04-04 10:39:25.586 [main] ERROR org.example.TestService - Method: test2 threw java.lang.IllegalStateException: Test wyjatku
+2024-04-04 10:45:51.151 [main] TRACE org.example.TestService - Method: test1 called
+2024-04-04 10:45:51.152 [main] TRACE org.example.TestService - Method: test2 called
+2024-04-04 10:45:51.152 [main] ERROR org.example.TestService - Method: test2 threw java.lang.IllegalStateException: Test wyjatku
+2024-04-04 10:46:07.877 [main] TRACE org.example.TestService - Method: test1 called
+2024-04-04 10:46:07.879 [main] TRACE org.example.TestService - Method: test2 called
+2024-04-04 10:46:07.879 [main] ERROR org.example.TestService - Method: test2 threw java.lang.IllegalStateException: Test wyjatku
+2024-04-04 10:46:43.990 [main] TRACE org.example.TestService - Method: test1 called
+2024-04-04 10:46:43.992 [main] TRACE org.example.TestService - Method: test2 called
+2024-04-04 10:46:43.992 [main] ERROR org.example.TestService - Method: test2 threw java.lang.IllegalStateException: Test wyjatku
+2024-04-04 10:47:00.715 [main] TRACE org.example.TestService - Method: test1 called
+2024-04-04 10:47:00.717 [main] TRACE org.example.TestService - Method: test2 called
+2024-04-04 10:47:00.717 [main] ERROR org.example.TestService - Method: test2 threw java.lang.IllegalStateException: Test wyjatku
