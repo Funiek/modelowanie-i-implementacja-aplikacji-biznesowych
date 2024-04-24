@@ -31,6 +31,6 @@ public class Recipe {
             inverseJoinColumns = @JoinColumn(name = "product_id"))
     private List<Product> products;
 
-    @OneToMany(mappedBy="cart")
+    @OneToMany(mappedBy="recipe")
     private List<Vote> votes;
 }
