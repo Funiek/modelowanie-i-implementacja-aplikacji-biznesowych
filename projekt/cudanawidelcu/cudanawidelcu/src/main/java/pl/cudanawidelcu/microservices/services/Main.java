@@ -3,6 +3,7 @@ package pl.cudanawidelcu.microservices.services;
 import java.net.InetAddress;
 
 import pl.cudanawidelcu.microservices.services.accounts.AccountsServer;
+import pl.cudanawidelcu.microservices.services.recipes.RecipesServer;
 import pl.cudanawidelcu.microservices.services.registration.RegistrationServer;
 import pl.cudanawidelcu.microservices.services.web.WebServer;
 
@@ -42,7 +43,7 @@ public class Main {
         }
 
         // No server name supplied, print usage and exit
-        if (serverName == NO_VALUE) {
+        if (serverName.equals(NO_VALUE)) {
             usage();
             return;
         }
@@ -64,6 +65,8 @@ public class Main {
             RegistrationServer.main(args);
         } else if (serverName.equals("accounts")) {
             AccountsServer.main(args);
+        } else if (serverName.equals("recipes")) {
+            RecipesServer.main(args);
         } else if (serverName.equals("web")) {
             WebServer.main(args);
         } else {
