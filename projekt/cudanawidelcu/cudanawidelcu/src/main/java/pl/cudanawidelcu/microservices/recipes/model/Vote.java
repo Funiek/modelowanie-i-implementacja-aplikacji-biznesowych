@@ -16,7 +16,7 @@ public class Vote {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(nullable = false) //moze bedzie trzeba usunac, daje na test
+    @Column(nullable = false)
     private Double rating;
 
     @ManyToOne

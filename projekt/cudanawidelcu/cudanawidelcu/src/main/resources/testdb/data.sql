@@ -20,3 +20,5 @@ insert into T_ACCOUNT (NUMBER, NAME) values ('123456017', 'Rachel Vogt');
 insert into T_ACCOUNT (NUMBER, NAME) values ('123456018', 'Julia DeLong');
 insert into T_ACCOUNT (NUMBER, NAME) values ('123456019', 'Mark T. Rizzoli');
 insert into T_ACCOUNT (NUMBER, NAME) values ('123456020', 'Maria J. Angelo');
+
+insert into recipe (category, count_votes, description, name, rating, id) values ('BREAKFAST', '0', 'lovely PANCIAKI', 'PANCIAKI', '5.0', '12345')

@@ -19,7 +19,7 @@ public interface RecipeService {
 //
 //        Recipe getRecipeByName(String name);
 //
-//        void addRecipe(Recipe recipe);
+        Recipe addRecipe(Recipe recipe);
 //
 //        void modifyRecipe(Recipe recipe);
 //

@@ -31,8 +31,8 @@ public class RecipeMapper {
     public static ProductDto convertProductToProductDto(Product product) {
         ProductDto productDto = new ProductDto();
         productDto.setName(product.getName());
-        productDto.setQty(productDto.getQty());
-        productDto.setMeasure(productDto.getMeasure());
+        productDto.setQty(product.getQty());
+        productDto.setMeasure(product.getMeasure());
 
         return productDto;
     }
@@ -59,5 +59,51 @@ public class RecipeMapper {
             voteListDto.add(RecipeMapper.convertVoteToVoteDto(vote));
         }
         return voteListDto;
+    }
+
+    public static Recipe convertRecipeDtoToRecipe(RecipeDto recipeDto) {
+        Recipe recipe = new Recipe();
+        recipe.setName(recipeDto.getName());
+        recipe.setDescription(recipeDto.getDescription());
+        recipe.setRating(recipeDto.getRating());
+        recipe.setCountVotes(recipeDto.getCountVotes());
+        recipe.setCategory(recipeDto.getCategory());
+        recipe.setProducts(RecipeMapper.convertProductDtoListToProductList(recipeDto.getProducts()));
+        recipe.setVotes(RecipeMapper.convertVoteDtoListToVoteList(recipeDto.getVotes()));
+
+        return recipe;
+    }
+
+    public static Product convertProductDtoToProduct(ProductDto productDto) {
+        Product product = new Product();
+        product.setName(productDto.getName());
+        product.setQty(productDto.getQty());
+        product.setMeasure(productDto.getMeasure());
+
+        return product;
+    }
+
+    public static List<Product> convertProductDtoListToProductList(List<ProductDto> productDtoList) {
+        List<Product> productList = new ArrayList<>();
+        for (ProductDto productDto : productDtoList) {
+            productList.add(RecipeMapper.convertProductDtoToProduct(productDto));
+        }
+        return productList;
+    }
+
+    public static Vote convertVoteDtoToVote(VoteDto voteDto) {
+        Vote vote = new Vote();
+        vote.setRating(voteDto.getRating());
+        vote.setRecipe(voteDto.getRecipe()); // This assumes that the `setRecipe` accepts a Recipe object directly.
+
+        return vote;
+    }
+
+    public static List<Vote> convertVoteDtoListToVoteList(List<VoteDto> voteDtoList) {
+        List<Vote> voteList = new ArrayList<>();
+        for (VoteDto voteDto : voteDtoList) {
+            voteList.add(RecipeMapper.convertVoteDtoToVote(voteDto));
+        }
+        return voteList;
     }
 }
