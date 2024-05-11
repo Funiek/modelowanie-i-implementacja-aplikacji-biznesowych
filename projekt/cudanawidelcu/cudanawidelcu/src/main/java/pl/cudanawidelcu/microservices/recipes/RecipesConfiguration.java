@@ -45,8 +45,8 @@ public class RecipesConfiguration {
 
 		// Sanity check
 		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
-		List<Map<String, Object>> accounts = jdbcTemplate.queryForList("SELECT number FROM T_ACCOUNT");
-		logger.info("System has " + accounts.size() + " accounts");
+		List<Map<String, Object>> recipes = jdbcTemplate.queryForList("SELECT count(*) FROM recipe");
+		logger.info("System has " + recipes.size() + " recipes");
 
 		return dataSource;
 	}

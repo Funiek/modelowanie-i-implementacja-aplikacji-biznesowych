@@ -32,7 +32,7 @@
 					<td th:text="${recipe.category}"></td>
 					<td th:text="${recipe.rating}"></td>
 					<td>
-						Szczegóły
+						<a class="index-detail-btn" th:href="@{'details/' + ${recipe.name}}">Szczegóły</a>
 					</td>
 				</tr>
 				</tbody>

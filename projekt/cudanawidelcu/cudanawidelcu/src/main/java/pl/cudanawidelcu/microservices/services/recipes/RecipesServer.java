@@ -8,8 +8,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.context.annotation.Import;
 
-import pl.cudanawidelcu.microservices.accounts.AccountRepository;
-import pl.cudanawidelcu.microservices.accounts.AccountsConfiguration;
 import pl.cudanawidelcu.microservices.recipes.RecipesConfiguration;
 
 @SpringBootApplication
