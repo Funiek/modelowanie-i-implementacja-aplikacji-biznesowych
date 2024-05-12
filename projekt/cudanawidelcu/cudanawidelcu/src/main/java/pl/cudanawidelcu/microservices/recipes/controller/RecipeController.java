@@ -42,12 +42,11 @@ public class RecipeController {
     @PostMapping
     public RecipeDto add(@RequestBody RecipeDto recipeDto) {
         Recipe recipe = RecipeMapper.convertRecipeDtoToRecipe(recipeDto);
-        Recipe createdRecipe = recipeService.addRecipe(recipe);
+        Recipe createdRecipe = recipeService.createOrUpdateRecipe(recipe);
         return RecipeMapper.convertRecipeToRecipeDto(createdRecipe);
     }
 
     @PostMapping("/rate")
-    @Transactional
     public RecipeDto rate(@RequestBody RateRecipeDto rateRecipeDto) {
         Recipe recipe = recipeService.rateRecipe(rateRecipeDto.getName(), rateRecipeDto.getVote());
         return RecipeMapper.convertRecipeToRecipeDto(recipe);

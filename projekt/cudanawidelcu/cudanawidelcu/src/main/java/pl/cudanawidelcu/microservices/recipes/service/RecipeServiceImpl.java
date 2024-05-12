@@ -4,6 +4,7 @@ package pl.cudanawidelcu.microservices.recipes.service;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pl.cudanawidelcu.microservices.exceptions.RecipeNotFoundException;
+import pl.cudanawidelcu.microservices.recipes.model.Category;
 import pl.cudanawidelcu.microservices.recipes.model.Recipe;
 import pl.cudanawidelcu.microservices.recipes.model.Vote;
 import pl.cudanawidelcu.microservices.recipes.repository.ProductRepository;
@@ -40,7 +41,7 @@ public class RecipeServiceImpl implements RecipeService {
     }
 
     @Override
-    public Recipe addRecipe(Recipe recipe) {
+    public Recipe createOrUpdateRecipe(Recipe recipe) {
         return recipeRepository.save(recipe);
 
     }
@@ -56,6 +57,8 @@ public class RecipeServiceImpl implements RecipeService {
         catch (Exception e) {
             throw new RecipeNotFoundException(name);
         }
+        
+        if(recipe == null) return null;
 
         int countVotes = recipe.getCountVotes() + 1;
         recipe.setCountVotes(countVotes);
@@ -80,5 +83,15 @@ public class RecipeServiceImpl implements RecipeService {
         recipeRepository.save(recipe);
 
         return recipe;
+    }
+
+    @Override
+    public List<Recipe> getRecipesByCategory(Category category) {
+        return recipeRepository.findRecipesByCategory(category);
+    }
+
+    @Override
+    public void deleteRecipeByName(String name) {
+        recipeRepository.deleteByName(name);
     }
 }
