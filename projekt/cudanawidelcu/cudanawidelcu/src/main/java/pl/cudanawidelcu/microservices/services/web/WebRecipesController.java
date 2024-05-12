@@ -3,7 +3,8 @@ package pl.cudanawidelcu.microservices.services.web;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+import pl.cudanawidelcu.microservices.services.web.dto.RateRecipeDto;
 import pl.cudanawidelcu.microservices.services.web.dto.RecipeDto;
 
 import java.util.List;
@@ -21,11 +22,22 @@ public class WebRecipesController {
     }
 
     @RequestMapping("/")
-    public String home(Model model) {
+    public String index(Model model) {
         List<RecipeDto> recipeDtos = recipesService.getAll();
-        logger.info("AAAAAAAAAAAAAAAAAAAAAAAAAAA: "+recipeDtos.size());
         model.addAttribute("recipeDtos", recipeDtos);
-
         return "index";
+    }
+
+    @RequestMapping("/details/{recipeName}")
+    public String details(@PathVariable("recipeName") String recipeName, Model model) {
+        RecipeDto recipeDto = recipesService.getByName(recipeName);
+        model.addAttribute("recipeDto", recipeDto);
+        return "details";
+    }
+
+    @RequestMapping(value = "/rate", method = RequestMethod.POST, headers = "Accept=application/json")
+    @ResponseBody
+    public RecipeDto rate(@RequestBody RateRecipeDto rateRecipeDto) {
+        return recipesService.rate(rateRecipeDto);
     }
 }

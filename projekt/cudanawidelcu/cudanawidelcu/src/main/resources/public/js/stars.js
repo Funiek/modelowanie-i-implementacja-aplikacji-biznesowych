@@ -61,15 +61,25 @@ submitButton.addEventListener("click", () => {
 
     let activeElements = document.getElementsByClassName("active");
 
-    $.post("https://localhost:7236/Recipe/Rating",
-        {
-            RecipeId: RecipeId,
-            Rating: activeElements.length
-        },
-        function (data, status) {
+    let postData = {
+        name: recipeName,
+        vote: activeElements.length
+    }
+
+    console.log(JSON.stringify(postData))
+
+    $.ajax({
+        type: "POST",
+        url: window.location.protocol + "//" + window.location.host + "/rate",
+        contentType: "application/json",
+        data: JSON.stringify(postData),
+        success: function(data, status) {
             console.log("cos poszlo " + status);
+        },
+        error: function(xhr, status, error) {
+            console.error("Wystąpił błąd podczas wysyłania żądania: " + status);
         }
-    );
+    });
     
 });
 

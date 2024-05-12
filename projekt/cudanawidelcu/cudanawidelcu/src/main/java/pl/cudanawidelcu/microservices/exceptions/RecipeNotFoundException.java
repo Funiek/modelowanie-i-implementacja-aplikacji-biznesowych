@@ -15,7 +15,7 @@ public class RecipeNotFoundException extends RuntimeException {
 
 	private static final long serialVersionUID = 1L;
 
-	public RecipeNotFoundException(String recipeNumber) {
-		super("No such recipe: " + recipeNumber);
+	public RecipeNotFoundException(String recipeName) {
+		super("No such recipe: " + recipeName);
 	}
 }

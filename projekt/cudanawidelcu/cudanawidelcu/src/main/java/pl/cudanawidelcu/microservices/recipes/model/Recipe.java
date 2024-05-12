@@ -1,12 +1,14 @@
 package pl.cudanawidelcu.microservices.recipes.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Data
 @Getter
 @Setter
 @AllArgsConstructor
@@ -28,8 +30,9 @@ public class Recipe {
     @JoinTable(name = "recipe_product",
             joinColumns = @JoinColumn(name = "recipe_id"),
             inverseJoinColumns = @JoinColumn(name = "product_id"))
-    private List<Product> products;
+    private List<Product> products = new ArrayList<>();
 
-    @OneToMany(mappedBy="recipe")
-    private List<Vote> votes;
+    @OneToMany(mappedBy="recipe", cascade = CascadeType.ALL)
+    @JsonManagedReference
+    private List<Vote> votes = new ArrayList<>();
 }

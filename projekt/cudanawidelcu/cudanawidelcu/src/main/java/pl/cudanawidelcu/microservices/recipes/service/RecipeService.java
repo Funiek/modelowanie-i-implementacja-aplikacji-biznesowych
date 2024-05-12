@@ -17,9 +17,9 @@ public interface RecipeService {
 //
 //        Recipe getRecipe(int id) throws RecipeNotFoundException;
 //
-//        Recipe getRecipeByName(String name);
+    Recipe getRecipeByName(String name);
 //
-        Recipe addRecipe(Recipe recipe);
+    Recipe addRecipe(Recipe recipe);
 //
 //        void modifyRecipe(Recipe recipe);
 //
@@ -27,7 +27,7 @@ public interface RecipeService {
 //
 //        void deleteRecipeByName(String name);
 //
-//        void rateRecipe(int id, int vote) throws RecipeNotFoundException;
+    Recipe rateRecipe(String name, int vote) throws RecipeNotFoundException;
 //
 //        void rateRecipeByName(String name, int vote);
 //

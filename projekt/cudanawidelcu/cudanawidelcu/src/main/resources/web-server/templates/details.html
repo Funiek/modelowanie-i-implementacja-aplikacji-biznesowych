@@ -8,12 +8,12 @@
 <header th:replace="header :: copy"></header>
 <div class="container">
   <main role="main" class="pb-3">
-    <link rel="stylesheet" href="~/css/stars.css" />
+    <link rel="stylesheet" href="/css/stars.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" />
 
-    <script src="~/js/stars.js" defer></script>
-    <script src="~/js/pdf.js" defer></script>
+    <script src="/js/stars.js" defer></script>
+    <script src="/js/pdf.js" defer></script>
     <script th:inline="javascript">
       let recipeName = [[${recipeDto.name}]];
       let photoName = [[${recipeDto.name}]] + ".jpeg";
@@ -21,15 +21,13 @@
 
 
     <div>
-      <h4>Strona produktu - @Model.Name</h4>
-      @{
-      var photoName = Model.Name + ".jpeg";
-      }
+      <h4>Strona produktu - <span th:text="${recipeDto.name}"></span></h4>
+
 
       <hr />
       <div class="row">
         <div class="col-sm-7">
-          <img class="detail-img" th:src="@{${'/img/' + recipeDto.name}}" th:alt="${recipeDto.name}" />
+          <img class="detail-img" th:src="@{'/img/' + ${recipeDto.name} + '.jpeg'}" th:alt="${recipeDto.name}" />
         </div>
         <div class="col-sm-5 detail-props">
           <dl class="row">
@@ -48,9 +46,9 @@
             <h5>Lista produktów</h5>
             <ol>
               <li th:each="product : ${recipeDto.products}">
-                <span th:text="${product.Name}"></span> *
-                <span th:text="${product.Qty}"></span> *
-                <span th:text="${product.Measure}"></span>
+                <span th:text="${product.name}"></span> *
+                <span th:text="${product.qty}"></span>
+                <span th:text="${product.measure}"></span>
               </li>
             </ol>
           </div>
