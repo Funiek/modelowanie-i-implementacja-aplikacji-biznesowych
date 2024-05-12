@@ -41,9 +41,7 @@ public class RecipeServiceImpl implements RecipeService {
 
     @Override
     public Recipe addRecipe(Recipe recipe) {
-        Recipe newRecipe = recipeRepository.save(recipe);
-        logger.info("RECIPE NEW ID: " + newRecipe.getId());
-        return newRecipe;
+        return recipeRepository.save(recipe);
 
     }
 
@@ -59,8 +57,6 @@ public class RecipeServiceImpl implements RecipeService {
             throw new RecipeNotFoundException(name);
         }
 
-        logger.info("AAAAA!!!! "+recipe.getId());
-
         int countVotes = recipe.getCountVotes() + 1;
         recipe.setCountVotes(countVotes);
 
@@ -73,7 +69,6 @@ public class RecipeServiceImpl implements RecipeService {
         votes.add(newVote);
 
         recipe.setVotes(votes);
-        recipe.setDescription("aaaa");
 
         Double newRating = 0.0;
         for(Vote v: recipe.getVotes()) {
@@ -83,8 +78,6 @@ public class RecipeServiceImpl implements RecipeService {
 
         recipe.setRating(newRating);
         recipeRepository.save(recipe);
-
-        logger.info("AAAAAAAAAAAAAAAA "+recipe.getVotes().size());
 
         return recipe;
     }

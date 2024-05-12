@@ -66,21 +66,21 @@ submitButton.addEventListener("click", () => {
         vote: activeElements.length
     }
 
-    console.log(JSON.stringify(postData))
-
     $.ajax({
         type: "POST",
         url: window.location.protocol + "//" + window.location.host + "/rate",
         contentType: "application/json",
         data: JSON.stringify(postData),
         success: function(data, status) {
-            console.log("cos poszlo " + status);
+            $('#dd-rating').text(data.rating);
+            $('#dd-count-votes').text(data.countVotes);
         },
         error: function(xhr, status, error) {
-            console.error("Wystąpił błąd podczas wysyłania żądania: " + status);
+            console.error("Wystąpił błąd podczas wysyłania żądania: " + status + "Error: " + error);
         }
     });
-    
+
+
 });
 
 window.onload = () => {

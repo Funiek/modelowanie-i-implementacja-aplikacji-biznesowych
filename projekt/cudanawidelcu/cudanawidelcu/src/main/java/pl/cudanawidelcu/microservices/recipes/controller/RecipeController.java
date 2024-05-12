@@ -39,22 +39,12 @@ public class RecipeController {
         return RecipeMapper.convertRecipeToRecipeDto(recipe);
     }
 
-//    @GetMapping("/name/{recipeName}")
-//    public Recipe getAll(@PathVariable("recipeName") String recipeName) {
-//        return recipeService.getRecipeByName(recipeName);
-//    }
-
     @PostMapping
     public RecipeDto add(@RequestBody RecipeDto recipeDto) {
         Recipe recipe = RecipeMapper.convertRecipeDtoToRecipe(recipeDto);
         Recipe createdRecipe = recipeService.addRecipe(recipe);
         return RecipeMapper.convertRecipeToRecipeDto(createdRecipe);
     }
-
-//    @PostMapping
-//    public Recipe add(@RequestBody Recipe recipeDto) {
-//        return recipeService.addRecipe(recipeDto);
-//    }
 
     @PostMapping("/rate")
     @Transactional

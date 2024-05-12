@@ -4,8 +4,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import pl.cudanawidelcu.microservices.services.web.dto.RateRecipeDto;
+import pl.cudanawidelcu.microservices.services.web.Request.RateRecipeRequest;
+import pl.cudanawidelcu.microservices.services.web.Response.UpdateRatingResponse;
 import pl.cudanawidelcu.microservices.services.web.dto.RecipeDto;
+import pl.cudanawidelcu.microservices.services.web.Request.UpdateRatingRequest;
 
 import java.util.List;
 import java.util.logging.Logger;
@@ -37,7 +39,19 @@ public class WebRecipesController {
 
     @RequestMapping(value = "/rate", method = RequestMethod.POST, headers = "Accept=application/json")
     @ResponseBody
-    public RecipeDto rate(@RequestBody RateRecipeDto rateRecipeDto) {
-        return recipesService.rate(rateRecipeDto);
+    public RecipeDto rate(@RequestBody RateRecipeRequest rateRecipeRequest) {
+        return recipesService.rate(rateRecipeRequest);
+    }
+
+    @RequestMapping(value = "/updaterating", method = RequestMethod.POST, headers = "Accept=application/json")
+    @ResponseBody
+    public UpdateRatingResponse rate(@RequestBody UpdateRatingRequest updateRatingRequest) {
+        RecipeDto recipeDto = recipesService.getByName(updateRatingRequest.getName());
+
+        UpdateRatingResponse updateRatingResponse = new UpdateRatingResponse();
+        updateRatingResponse.setRating(recipeDto.getRating());
+        updateRatingResponse.setCountVotes(recipeDto.getCountVotes());
+
+        return updateRatingResponse;
     }
 }

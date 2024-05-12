@@ -38,9 +38,9 @@
             <dt class="col-sm-4">Kategoria:</dt>
             <dd class="col-sm-8" th:text="${recipeDto.category}"></dd>
             <dt class="col-sm-4">Ocena przepisu:</dt>
-            <dd class="col-sm-8" th:text="${recipeDto.rating}"></dd>
+            <dd id="dd-rating" class="col-sm-8" th:text="${recipeDto.rating}"></dd>
             <dt class="col-sm-4">Liczba ocen:</dt>
-            <dd class="col-sm-8" th:text="${recipeDto.countVotes}"></dd>
+            <dd id="dd-count-votes" class="col-sm-8" th:text="${recipeDto.countVotes}"></dd>
           </dl>
           <div th:if="${recipeDto.products}">
             <h5>Lista produktów</h5>

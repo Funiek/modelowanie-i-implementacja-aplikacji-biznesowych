@@ -10,7 +10,7 @@ import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
-import pl.cudanawidelcu.microservices.services.web.dto.RateRecipeDto;
+import pl.cudanawidelcu.microservices.services.web.Request.RateRecipeRequest;
 import pl.cudanawidelcu.microservices.services.web.dto.RecipeDto;
 
 import javax.annotation.PostConstruct;
@@ -65,12 +65,12 @@ public class WebRecipesService {
 	}
 
 	@SneakyThrows
-	public RecipeDto rate(RateRecipeDto rateRecipeDto) {
+	public RecipeDto rate(RateRecipeRequest rateRecipeRequest) {
 		RecipeDto recipeDto = null;
 
 		JSONObject rateRecipeJsonObject = new JSONObject();
-		rateRecipeJsonObject.put("name", rateRecipeDto.getName());
-		rateRecipeJsonObject.put("vote", rateRecipeDto.getVote());
+		rateRecipeJsonObject.put("name", rateRecipeRequest.getName());
+		rateRecipeJsonObject.put("vote", rateRecipeRequest.getVote());
 
 		HttpHeaders headers = new HttpHeaders();
 		headers.setContentType(MediaType.APPLICATION_JSON);
