@@ -57,7 +57,7 @@ public class RecipeServiceImpl implements RecipeService {
         catch (Exception e) {
             throw new RecipeNotFoundException(name);
         }
-        
+
         if(recipe == null) return null;
 
         int countVotes = recipe.getCountVotes() + 1;
