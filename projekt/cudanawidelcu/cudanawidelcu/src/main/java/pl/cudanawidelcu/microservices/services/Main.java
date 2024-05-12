@@ -1,6 +1,7 @@
 package pl.cudanawidelcu.microservices.services;
 
 import java.net.InetAddress;
+import java.util.Objects;
 
 import pl.cudanawidelcu.microservices.services.recipes.RecipesServer;
 import pl.cudanawidelcu.microservices.services.registration.RegistrationServer;
@@ -22,7 +23,8 @@ public class Main {
         String port = null;
 
         // Eureka server assumed to be on localhost
-        System.setProperty("registration.server.hostname", "localhost");
+//        System.setProperty("registration.server.hostname", "localhost");
+        System.setProperty("registration.server.hostname", "172.16.238.10");
 
         // Look for server name and (optional) port property
         // Ignore any -- arguments intended for Spring Boot
@@ -40,6 +42,13 @@ public class Main {
                 return;
             }
         }
+//
+//
+        String serviceEnv = System.getenv("SERVICE_ENV");
+        if(serviceEnv != null && !serviceEnv.isEmpty()) {
+            serverName = serviceEnv;
+        }
+        System.out.println(serviceEnv);
 
         // No server name supplied, print usage and exit
         if (serverName.equals(NO_VALUE)) {
