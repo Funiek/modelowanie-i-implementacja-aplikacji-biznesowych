@@ -48,7 +48,7 @@ public class RecipeMapper {
     public static VoteDto convertVoteToVoteDto(Vote vote) {
         VoteDto voteDto = new VoteDto();
         voteDto.setRating(vote.getRating());
-        voteDto.setRecipe(vote.getRecipe());
+        voteDto.setRecipe(RecipeMapper.convertRecipeToRecipeDto(vote.getRecipe()));
 
         return voteDto;
     }
@@ -94,8 +94,7 @@ public class RecipeMapper {
     public static Vote convertVoteDtoToVote(VoteDto voteDto) {
         Vote vote = new Vote();
         vote.setRating(voteDto.getRating());
-        vote.setRecipe(voteDto.getRecipe()); // This assumes that the `setRecipe` accepts a Recipe object directly.
-
+        vote.setRecipe(RecipeMapper.convertRecipeDtoToRecipe(voteDto.getRecipe()));
         return vote;
     }
 

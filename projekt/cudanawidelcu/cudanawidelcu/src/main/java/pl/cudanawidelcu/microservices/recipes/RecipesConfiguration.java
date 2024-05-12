@@ -25,7 +25,7 @@ import java.util.logging.Logger;
 @ComponentScan
 @EntityScan("pl.cudanawidelcu.microservices.recipes")
 @EnableJpaRepositories("pl.cudanawidelcu.microservices.recipes")
-@PropertySource("classpath:db-config.properties")
+@PropertySource("classpath:application.properties")
 public class RecipesConfiguration {
 	protected Logger logger;
 	public RecipesConfiguration() {
@@ -36,8 +36,6 @@ public class RecipesConfiguration {
 	public DataSource dataSource() {
 		logger.info("dataSource() invoked");
 
-		// Create an in-memory H2 relational database containing some demo
-		// accounts.
 		DataSource dataSource = (new EmbeddedDatabaseBuilder()).addScript("classpath:testdb/schema.sql")
 				.addScript("classpath:testdb/data.sql").build();
 
