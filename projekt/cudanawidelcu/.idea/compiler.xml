@@ -8,8 +8,9 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="test-service" />
-        <module name="eureka-server" />
         <module name="recipes-service" />
+        <module name="eureka-server" />
+        <module name="web-service" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>

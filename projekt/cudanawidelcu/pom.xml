@@ -13,7 +13,8 @@
 		<module>test-service</module>
 		<module>eureka-server</module>
 		<module>recipes-service</module>
-	</modules>
+        <module>web-service</module>
+    </modules>
 
 	<properties>
 		<java.version>17</java.version>
