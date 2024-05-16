@@ -2,10 +2,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
 
-<head th:replace="head :: copy"></head>
+<head th:replace="~{head :: copy}"></head>
 
 <body>
-<header th:replace="header :: copy"></header>
+<header th:replace="~{header :: copy}"></header>
 <div class="container">
   <main role="main" class="pb-3">
     <link rel="stylesheet" href="/css/stars.css" />
@@ -13,7 +13,6 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" />
 
     <script src="/js/stars.js" defer></script>
-    <script src="/js/pdf.js" defer></script>
     <script th:inline="javascript">
       let recipeName = [[${recipeDto.name}]];
       let photoName = [[${recipeDto.name}]] + ".jpeg";
@@ -103,12 +102,11 @@
     <div class="nice-button" style="float:left; margin-right: 16px;">
       <a style="text-decoration:none; color: #ffffff" href="/">Powrót</a>
     </div>
-<!--    <button id="pdfButton" style="float:left;" class="nice-button">Pobierz PDF</button>-->
 
     <div style="clear:both"></div>
   </main>
 </div>
 
-<footer th:replace="footer :: copy"></footer>
+<footer th:replace="~{footer :: copy}"></footer>
 </body>
 </html>

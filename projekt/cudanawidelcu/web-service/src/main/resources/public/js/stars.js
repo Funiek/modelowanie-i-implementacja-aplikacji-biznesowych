@@ -72,7 +72,7 @@ submitButton.addEventListener("click", () => {
         contentType: "application/json",
         data: JSON.stringify(postData),
         success: function(data, status) {
-            $('#dd-rating').text(data.rating);
+            $('#dd-rating').text(data.rating.toFixed(2));
             $('#dd-count-votes').text(data.countVotes);
         },
         error: function(xhr, status, error) {

@@ -1,0 +1,10 @@
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: recipes-service
+          uri: lb://recipes-service
+          predicates:
+            - Path=/recipes-service/**
+          filters:
+            - StripPrefix=1

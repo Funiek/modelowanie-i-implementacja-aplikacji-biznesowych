@@ -11,6 +11,7 @@
         <module name="recipes-service" />
         <module name="eureka-server" />
         <module name="web-service" />
+        <module name="application-gateway" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>

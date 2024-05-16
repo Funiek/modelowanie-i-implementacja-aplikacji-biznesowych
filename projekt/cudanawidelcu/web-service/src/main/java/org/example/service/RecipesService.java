@@ -1,19 +1,19 @@
 package org.example.service;
 
 import jakarta.annotation.PostConstruct;
-import lombok.SneakyThrows;
 import org.example.dto.RecipeDto;
 import org.example.request.RateRecipeRequest;
+import org.json.JSONException;
 import org.json.JSONObject;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.MediaType;
+import org.springframework.http.*;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.util.UriComponentsBuilder;
 
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.List;
 import java.util.logging.Logger;
@@ -22,7 +22,7 @@ import java.util.logging.Logger;
 public class RecipesService {
 	protected final RestTemplate restTemplate;
 
-	protected final String RECIPES_SERVICE_URL = "http://RECIPES-SERVICE";
+	protected final String RECIPES_SERVICE_URL = "http://APPLICATION-GATEWAY/recipes-service";
 
 	protected Logger logger = Logger.getLogger(RecipesService.class
 			.getName());
@@ -32,7 +32,7 @@ public class RecipesService {
 	}
 
 	@PostConstruct
-	public void demoOnly() {
+	public void init() {
 		logger.warning("The RestTemplate request factory is " + restTemplate.getRequestFactory().getClass());
 	}
 
@@ -40,10 +40,11 @@ public class RecipesService {
 		RecipeDto[] recipeDtos = null;
 
 		try {
-			recipeDtos = restTemplate.getForObject(RECIPES_SERVICE_URL + "/api/v1/recipes", RecipeDto[].class);
+			String url = RECIPES_SERVICE_URL + "/api/v1/recipes";
+			recipeDtos = restTemplate.getForObject(url, RecipeDto[].class);
 		}
 		catch (HttpClientErrorException e) {
-			logger.throwing(this.getClass().getSimpleName(), this.getClass().getEnclosingMethod().getName(), e);
+			logger.throwing(this.getClass().getSimpleName(), "getAll", e);
 		}
 
 		return (recipeDtos == null || recipeDtos.length == 0) ? null : Arrays.asList(recipeDtos);
@@ -56,29 +57,40 @@ public class RecipesService {
 			recipeDto = restTemplate.getForObject(RECIPES_SERVICE_URL + "/api/v1/recipes/" + name, RecipeDto.class);
 		}
 		catch (HttpClientErrorException e) {
-			logger.throwing(this.getClass().getSimpleName(), this.getClass().getEnclosingMethod().getName(), e);
+			logger.throwing(this.getClass().getSimpleName(), "getByName", e);
 		}
 
 		return recipeDto;
 	}
 
-	@SneakyThrows
+
 	public RecipeDto rate(RateRecipeRequest rateRecipeRequest) {
 		RecipeDto recipeDto = null;
 
 		JSONObject rateRecipeJsonObject = new JSONObject();
-		rateRecipeJsonObject.put("name", rateRecipeRequest.getName());
-		rateRecipeJsonObject.put("vote", rateRecipeRequest.getVote());
-
-		HttpHeaders headers = new HttpHeaders();
-		headers.setContentType(MediaType.APPLICATION_JSON);
-		HttpEntity<String> request = new HttpEntity<>(rateRecipeJsonObject.toString(), headers);
+		try {
+			rateRecipeJsonObject.put("name", rateRecipeRequest.getName());
+			rateRecipeJsonObject.put("vote", rateRecipeRequest.getVote());
+		} catch (JSONException e) {
+			throw new RuntimeException(e);
+		}
 
 		try {
-			recipeDto = restTemplate.postForObject(RECIPES_SERVICE_URL + "/api/v1/recipes/rate/", request, RecipeDto.class);
-		}
-		catch (HttpClientErrorException e) {
-			logger.throwing(this.getClass().getSimpleName(), "rate", e);
+			HttpHeaders headers = new HttpHeaders();
+			headers.setContentType(MediaType.APPLICATION_JSON);
+
+			HttpEntity<String> requestEntity = new HttpEntity<>(rateRecipeJsonObject.toString(), headers);
+
+			ResponseEntity<RecipeDto> responseEntity = restTemplate.exchange(
+					RECIPES_SERVICE_URL + "/api/v1/recipes/rate",
+					HttpMethod.POST,
+					requestEntity,
+					RecipeDto.class
+			);
+
+			recipeDto = responseEntity.getBody();
+		} catch (Exception e) {
+			throw new RuntimeException("Błąd podczas wysyłania zapytania POST: " + e.getMessage(), e);
 		}
 
 		return recipeDto;

@@ -4,110 +4,52 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="bdadf3cf-7676-41a1-af01-9ce8cef14cc3" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/recipes-service/src/main/java/org/example/dto/CategoryDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web-service/src/main/java/org/example/dto/CategoryDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web-service/src/main/java/org/example/service/RecipesService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web-service/target/classes/application.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web-service/target/classes/org/example/WebServiceApplication.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web-service/target/classes/public/css/site.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web-service/target/classes/public/css/stars.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web-service/target/classes/public/css/style.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web-service/target/classes/public/favicon.ico" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web-service/target/classes/public/img/Nalesniki.jpeg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web-service/target/classes/public/img/Schabowe.jpeg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web-service/target/classes/public/img/Skyr.jpeg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web-service/target/classes/public/img/Spaghetti.jpeg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web-service/target/classes/public/js/pdf.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web-service/target/classes/public/js/site.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web-service/target/classes/public/js/stars.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web-service/target/classes/public/lib/bootstrap/LICENSE" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web-service/target/classes/public/lib/bootstrap/dist/css/bootstrap-grid.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web-service/target/classes/public/lib/bootstrap/dist/css/bootstrap-grid.css.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web-service/target/classes/public/lib/bootstrap/dist/css/bootstrap-grid.min.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web-service/target/classes/public/lib/bootstrap/dist/css/bootstrap-grid.min.css.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web-service/target/classes/public/lib/bootstrap/dist/css/bootstrap-grid.rtl.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web-service/target/classes/public/lib/bootstrap/dist/css/bootstrap-grid.rtl.css.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web-service/target/classes/public/lib/bootstrap/dist/css/bootstrap-grid.rtl.min.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web-service/target/classes/public/lib/bootstrap/dist/css/bootstrap-grid.rtl.min.css.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web-service/target/classes/public/lib/bootstrap/dist/css/bootstrap-reboot.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web-service/target/classes/public/lib/bootstrap/dist/css/bootstrap-reboot.css.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web-service/target/classes/public/lib/bootstrap/dist/css/bootstrap-reboot.min.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web-service/target/classes/public/lib/bootstrap/dist/css/bootstrap-reboot.min.css.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web-service/target/classes/public/lib/bootstrap/dist/css/bootstrap-reboot.rtl.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web-service/target/classes/public/lib/bootstrap/dist/css/bootstrap-reboot.rtl.css.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web-service/target/classes/public/lib/bootstrap/dist/css/bootstrap-reboot.rtl.min.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web-service/target/classes/public/lib/bootstrap/dist/css/bootstrap-reboot.rtl.min.css.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web-service/target/classes/public/lib/bootstrap/dist/css/bootstrap-utilities.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web-service/target/classes/public/lib/bootstrap/dist/css/bootstrap-utilities.css.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web-service/target/classes/public/lib/bootstrap/dist/css/bootstrap-utilities.min.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web-service/target/classes/public/lib/bootstrap/dist/css/bootstrap-utilities.min.css.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web-service/target/classes/public/lib/bootstrap/dist/css/bootstrap-utilities.rtl.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web-service/target/classes/public/lib/bootstrap/dist/css/bootstrap-utilities.rtl.css.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web-service/target/classes/public/lib/bootstrap/dist/css/bootstrap-utilities.rtl.min.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web-service/target/classes/public/lib/bootstrap/dist/css/bootstrap-utilities.rtl.min.css.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web-service/target/classes/public/lib/bootstrap/dist/css/bootstrap.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web-service/target/classes/public/lib/bootstrap/dist/css/bootstrap.css.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web-service/target/classes/public/lib/bootstrap/dist/css/bootstrap.min.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web-service/target/classes/public/lib/bootstrap/dist/css/bootstrap.min.css.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web-service/target/classes/public/lib/bootstrap/dist/css/bootstrap.rtl.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web-service/target/classes/public/lib/bootstrap/dist/css/bootstrap.rtl.css.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web-service/target/classes/public/lib/bootstrap/dist/css/bootstrap.rtl.min.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web-service/target/classes/public/lib/bootstrap/dist/css/bootstrap.rtl.min.css.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web-service/target/classes/public/lib/bootstrap/dist/js/bootstrap.bundle.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web-service/target/classes/public/lib/bootstrap/dist/js/bootstrap.bundle.js.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web-service/target/classes/public/lib/bootstrap/dist/js/bootstrap.bundle.min.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web-service/target/classes/public/lib/bootstrap/dist/js/bootstrap.bundle.min.js.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web-service/target/classes/public/lib/bootstrap/dist/js/bootstrap.esm.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web-service/target/classes/public/lib/bootstrap/dist/js/bootstrap.esm.js.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web-service/target/classes/public/lib/bootstrap/dist/js/bootstrap.esm.min.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web-service/target/classes/public/lib/bootstrap/dist/js/bootstrap.esm.min.js.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web-service/target/classes/public/lib/bootstrap/dist/js/bootstrap.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web-service/target/classes/public/lib/bootstrap/dist/js/bootstrap.js.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web-service/target/classes/public/lib/bootstrap/dist/js/bootstrap.min.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web-service/target/classes/public/lib/bootstrap/dist/js/bootstrap.min.js.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web-service/target/classes/public/lib/jquery-validation-unobtrusive/LICENSE.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web-service/target/classes/public/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web-service/target/classes/public/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web-service/target/classes/public/lib/jquery-validation/LICENSE.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web-service/target/classes/public/lib/jquery-validation/dist/additional-methods.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web-service/target/classes/public/lib/jquery-validation/dist/additional-methods.min.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web-service/target/classes/public/lib/jquery-validation/dist/jquery.validate.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web-service/target/classes/public/lib/jquery-validation/dist/jquery.validate.min.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web-service/target/classes/public/lib/jquery/LICENSE.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web-service/target/classes/public/lib/jquery/dist/jquery.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web-service/target/classes/public/lib/jquery/dist/jquery.min.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web-service/target/classes/public/lib/jquery/dist/jquery.min.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web-service/target/classes/public/pdf/Nalesniki.pdf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web-service/target/classes/templates/details.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web-service/target/classes/templates/empty.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web-service/target/classes/templates/error.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web-service/target/classes/templates/footer.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web-service/target/classes/templates/head.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web-service/target/classes/templates/header.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web-service/target/classes/templates/index.html" afterDir="false" />
+    <list default="true" id="bdadf3cf-7676-41a1-af01-9ce8cef14cc3" name="Changes" comment="heheeeee dziala web service">
+      <change afterPath="$PROJECT_DIR$/application-gateway/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/application-gateway/src/main/java/org/example/ApplicationGateway.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/application-gateway/src/main/resources/application.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/application-gateway/src/main/resources/application.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/eureka-server/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/eureka-server/src/main/resources/application.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/recipes-service/src/main/java/org/example/controller/RecipeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/recipes-service/src/main/java/org/example/controller/RecipeController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/recipes-service/src/main/java/org/example/dto/RecipeDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/recipes-service/src/main/java/org/example/dto/RecipeDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/recipes-service/src/main/java/org/example/model/Category.java" beforeDir="false" afterPath="$PROJECT_DIR$/recipes-service/src/main/java/org/example/model/Category.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/recipes-service/src/main/java/org/example/service/RecipeServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/recipes-service/src/main/java/org/example/service/RecipeServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/recipes-service/src/main/java/org/example/util/RecipeMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/recipes-service/src/main/java/org/example/util/RecipeMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/recipes-service/target/classes/org/example/service/RecipeServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/recipes-service/target/classes/org/example/service/RecipeServiceImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/recipes-service/src/main/java/org/example/model/Product.java" beforeDir="false" afterPath="$PROJECT_DIR$/recipes-service/src/main/java/org/example/model/Product.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/recipes-service/src/main/java/org/example/model/Recipe.java" beforeDir="false" afterPath="$PROJECT_DIR$/recipes-service/src/main/java/org/example/model/Recipe.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/recipes-service/src/main/java/org/example/model/Vote.java" beforeDir="false" afterPath="$PROJECT_DIR$/recipes-service/src/main/java/org/example/model/Vote.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/recipes-service/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/recipes-service/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/recipes-service/src/main/resources/data.sql" beforeDir="false" afterPath="$PROJECT_DIR$/recipes-service/src/main/resources/data.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/recipes-service/target/classes/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/recipes-service/target/classes/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/recipes-service/target/classes/data.sql" beforeDir="false" afterPath="$PROJECT_DIR$/recipes-service/target/classes/data.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/recipes-service/target/classes/org/example/model/Product$ProductBuilder.class" beforeDir="false" afterPath="$PROJECT_DIR$/recipes-service/target/classes/org/example/model/Product$ProductBuilder.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/recipes-service/target/classes/org/example/model/Product.class" beforeDir="false" afterPath="$PROJECT_DIR$/recipes-service/target/classes/org/example/model/Product.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/recipes-service/target/classes/org/example/model/Recipe$RecipeBuilder.class" beforeDir="false" afterPath="$PROJECT_DIR$/recipes-service/target/classes/org/example/model/Recipe$RecipeBuilder.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/recipes-service/target/classes/org/example/model/Recipe.class" beforeDir="false" afterPath="$PROJECT_DIR$/recipes-service/target/classes/org/example/model/Recipe.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/recipes-service/target/classes/org/example/model/Vote$VoteBuilder.class" beforeDir="false" afterPath="$PROJECT_DIR$/recipes-service/target/classes/org/example/model/Vote$VoteBuilder.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/recipes-service/target/classes/org/example/model/Vote.class" beforeDir="false" afterPath="$PROJECT_DIR$/recipes-service/target/classes/org/example/model/Vote.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test-service/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/test-service/src/main/resources/application.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/web-service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/web-service/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-service/src/main/java/org/example/Request/RateRecipeRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/web-service/src/main/java/org/example/request/RateRecipeRequest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-service/src/main/java/org/example/Request/UpdateRatingRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/web-service/src/main/java/org/example/request/UpdateRatingRequest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-service/src/main/java/org/example/Response/UpdateRatingResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/web-service/src/main/java/org/example/response/UpdateRatingResponse.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-service/src/main/java/org/example/WebRecipesController.java" beforeDir="false" afterPath="$PROJECT_DIR$/web-service/src/main/java/org/example/controller/WebController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-service/src/main/java/org/example/WebServiceApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/web-service/src/main/java/org/example/WebServiceApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-service/src/main/java/org/example/dto/RecipeDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/web-service/src/main/java/org/example/dto/RecipeDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-service/src/main/java/org/example/dto/RoleDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/web-service/src/main/java/org/example/dto/RateRecipeDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-service/src/main/java/org/example/dto/UserDto.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-service/src/main/java/org/example/dto/VoteDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/web-service/src/main/java/org/example/dto/VoteDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web-service/src/main/java/org/example/service/RecipesService.java" beforeDir="false" afterPath="$PROJECT_DIR$/web-service/src/main/java/org/example/service/RecipesService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/web-service/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/web-service/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web-service/src/main/resources/public/js/pdf.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web-service/src/main/resources/public/js/site.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web-service/src/main/resources/public/js/stars.js" beforeDir="false" afterPath="$PROJECT_DIR$/web-service/src/main/resources/public/js/stars.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web-service/src/main/resources/templates/details.html" beforeDir="false" afterPath="$PROJECT_DIR$/web-service/src/main/resources/templates/details.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web-service/src/main/resources/templates/empty.html" beforeDir="false" afterPath="$PROJECT_DIR$/web-service/src/main/resources/templates/empty.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web-service/src/main/resources/templates/error.html" beforeDir="false" afterPath="$PROJECT_DIR$/web-service/src/main/resources/templates/error.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web-service/src/main/resources/templates/head.html" beforeDir="false" afterPath="$PROJECT_DIR$/web-service/src/main/resources/templates/head.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web-service/src/main/resources/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/web-service/src/main/resources/templates/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web-service/target/classes/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/web-service/target/classes/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web-service/target/classes/org/example/controller/WebRecipesController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web-service/target/classes/org/example/service/RecipesService.class" beforeDir="false" afterPath="$PROJECT_DIR$/web-service/target/classes/org/example/service/RecipesService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web-service/target/classes/public/js/pdf.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web-service/target/classes/public/js/site.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web-service/target/classes/public/js/stars.js" beforeDir="false" afterPath="$PROJECT_DIR$/web-service/target/classes/public/js/stars.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web-service/target/classes/templates/details.html" beforeDir="false" afterPath="$PROJECT_DIR$/web-service/target/classes/templates/details.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web-service/target/classes/templates/empty.html" beforeDir="false" afterPath="$PROJECT_DIR$/web-service/target/classes/templates/empty.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web-service/target/classes/templates/error.html" beforeDir="false" afterPath="$PROJECT_DIR$/web-service/target/classes/templates/error.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web-service/target/classes/templates/head.html" beforeDir="false" afterPath="$PROJECT_DIR$/web-service/target/classes/templates/head.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web-service/target/classes/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/web-service/target/classes/templates/index.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -172,7 +114,7 @@
     "ignore.virus.scanning.warn.message": "true",
     "jdk.selected.JAVA_MODULE": "corretto-17",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/funko/Documents/Coding/modelowanie-i-implementacja-aplikacji-biznesowych/projekt/cudanawidelcu/web-service/src/main/java/org/example",
+    "last_opened_file_path": "C:/Users/funko/Documents/Coding/modelowanie-i-implementacja-aplikacji-biznesowych/projekt/cudanawidelcu",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -214,7 +156,7 @@
       </set>
     </option>
   </component>
-  <component name="RunManager" selected="Spring Boot.EurekaServerApplication">
+  <component name="RunManager" selected="Spring Boot.WebServiceApplication">
     <configuration default="true" type="AZURE_FUNCTION_SUPPORT" factoryName="Run Functions">
       <option name="appName" />
       <option name="appServicePlanName" />
@@ -254,6 +196,13 @@
     <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
       <module name="cuda-na-widelcu" />
       <option name="filePath" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ApplicationGateway" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="application-gateway" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="org.example.ApplicationGateway" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -305,6 +254,7 @@
       </method>
     </configuration>
     <list>
+      <item itemvalue="Spring Boot.ApplicationGateway" />
       <item itemvalue="Spring Boot.TestServiceApplication" />
       <item itemvalue="Spring Boot.WebServiceApplication" />
       <item itemvalue="Spring Boot.EurekaServerApplication" />
@@ -312,8 +262,8 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Spring Boot.RecipesServiceApplication" />
         <item itemvalue="Spring Boot.WebServiceApplication" />
+        <item itemvalue="Spring Boot.RecipesServiceApplication" />
         <item itemvalue="Spring Boot.EurekaServerApplication" />
       </list>
     </recent_temporary>
@@ -342,7 +292,8 @@
       <workItem from="1715782780708" duration="87000" />
       <workItem from="1715828335314" duration="86000" />
       <workItem from="1715828432302" duration="41000" />
-      <workItem from="1715828482571" duration="3152000" />
+      <workItem from="1715828482571" duration="3782000" />
+      <workItem from="1715832284099" duration="9156000" />
     </task>
     <servers />
   </component>
@@ -351,14 +302,26 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+    <MESSAGE value="heheeeee dziala web service" />
+    <option name="LAST_COMMIT_MESSAGE" value="heheeeee dziala web service" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/recipes-service/src/main/java/org/example/controller/RecipeController.java</url>
-          <line>58</line>
+          <line>59</line>
           <option name="timeStamp" value="2" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/recipes-service/src/main/java/org/example/controller/RecipeController.java</url>
+          <line>58</line>
+          <option name="timeStamp" value="6" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/web-service/src/main/java/org/example/service/RecipesService.java</url>
+          <line>95</line>
+          <option name="timeStamp" value="13" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

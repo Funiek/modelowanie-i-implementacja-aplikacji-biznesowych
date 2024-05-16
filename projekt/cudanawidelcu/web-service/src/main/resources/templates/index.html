@@ -2,10 +2,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:th="http://www.thymeleaf.org">
 
-<head th:replace="head :: copy"></head>
+<head th:replace="~{head :: copy}"></head>
 
 <body>
-	<header th:replace="header :: copy"></header>
+	<header th:replace="~{header :: copy}"></header>
 	<div class="container">
 		<main role="main" class="pb-3">
 			<h1>Lista przepisów</h1>
@@ -34,6 +34,6 @@
 		</main>
 	</div>
 
-	<footer th:replace="footer :: copy"></footer>
+	<footer th:replace="~{footer :: copy}"></footer>
 </body>
 </html>
