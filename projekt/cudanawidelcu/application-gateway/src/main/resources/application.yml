@@ -8,3 +8,9 @@ spring:
             - Path=/recipes-service/**
           filters:
             - StripPrefix=1
+        - id: test-service
+          uri: lb://test-service
+          predicates:
+            - Path=/test-service/**
+          filters:
+            - StripPrefix=1

@@ -5,51 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="bdadf3cf-7676-41a1-af01-9ce8cef14cc3" name="Changes" comment="heheeeee dziala web service">
-      <change afterPath="$PROJECT_DIR$/application-gateway/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/application-gateway/src/main/java/org/example/ApplicationGateway.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/application-gateway/src/main/resources/application.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/application-gateway/src/main/resources/application.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/recipes-service/src/main/java/org/example/controller/RecipeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/recipes-service/src/main/java/org/example/controller/RecipeController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/recipes-service/src/main/java/org/example/model/Product.java" beforeDir="false" afterPath="$PROJECT_DIR$/recipes-service/src/main/java/org/example/model/Product.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/recipes-service/src/main/java/org/example/model/Recipe.java" beforeDir="false" afterPath="$PROJECT_DIR$/recipes-service/src/main/java/org/example/model/Recipe.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/recipes-service/src/main/java/org/example/model/Vote.java" beforeDir="false" afterPath="$PROJECT_DIR$/recipes-service/src/main/java/org/example/model/Vote.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/recipes-service/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/recipes-service/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/recipes-service/src/main/resources/data.sql" beforeDir="false" afterPath="$PROJECT_DIR$/recipes-service/src/main/resources/data.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/recipes-service/target/classes/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/recipes-service/target/classes/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/recipes-service/target/classes/data.sql" beforeDir="false" afterPath="$PROJECT_DIR$/recipes-service/target/classes/data.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/recipes-service/target/classes/org/example/model/Product$ProductBuilder.class" beforeDir="false" afterPath="$PROJECT_DIR$/recipes-service/target/classes/org/example/model/Product$ProductBuilder.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/recipes-service/target/classes/org/example/model/Product.class" beforeDir="false" afterPath="$PROJECT_DIR$/recipes-service/target/classes/org/example/model/Product.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/recipes-service/target/classes/org/example/model/Recipe$RecipeBuilder.class" beforeDir="false" afterPath="$PROJECT_DIR$/recipes-service/target/classes/org/example/model/Recipe$RecipeBuilder.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/recipes-service/target/classes/org/example/model/Recipe.class" beforeDir="false" afterPath="$PROJECT_DIR$/recipes-service/target/classes/org/example/model/Recipe.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/recipes-service/target/classes/org/example/model/Vote$VoteBuilder.class" beforeDir="false" afterPath="$PROJECT_DIR$/recipes-service/target/classes/org/example/model/Vote$VoteBuilder.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/recipes-service/target/classes/org/example/model/Vote.class" beforeDir="false" afterPath="$PROJECT_DIR$/recipes-service/target/classes/org/example/model/Vote.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application-gateway/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/application-gateway/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application-gateway/src/main/java/org/example/ApplicationGateway.java" beforeDir="false" afterPath="$PROJECT_DIR$/application-gateway/src/main/java/org/example/ApplicationGateway.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application-gateway/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/application-gateway/src/main/resources/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application-gateway/target/classes/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/application-gateway/target/classes/application.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/test-service/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/test-service/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/web-service/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-service/src/main/java/org/example/service/RecipesService.java" beforeDir="false" afterPath="$PROJECT_DIR$/web-service/src/main/java/org/example/service/RecipesService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test-service/target/classes/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/test-service/target/classes/application.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/web-service/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/web-service/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-service/src/main/resources/public/js/pdf.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-service/src/main/resources/public/js/site.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-service/src/main/resources/public/js/stars.js" beforeDir="false" afterPath="$PROJECT_DIR$/web-service/src/main/resources/public/js/stars.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-service/src/main/resources/templates/details.html" beforeDir="false" afterPath="$PROJECT_DIR$/web-service/src/main/resources/templates/details.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-service/src/main/resources/templates/empty.html" beforeDir="false" afterPath="$PROJECT_DIR$/web-service/src/main/resources/templates/empty.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-service/src/main/resources/templates/error.html" beforeDir="false" afterPath="$PROJECT_DIR$/web-service/src/main/resources/templates/error.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-service/src/main/resources/templates/head.html" beforeDir="false" afterPath="$PROJECT_DIR$/web-service/src/main/resources/templates/head.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-service/src/main/resources/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/web-service/src/main/resources/templates/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-service/target/classes/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/web-service/target/classes/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-service/target/classes/org/example/controller/WebRecipesController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-service/target/classes/org/example/service/RecipesService.class" beforeDir="false" afterPath="$PROJECT_DIR$/web-service/target/classes/org/example/service/RecipesService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-service/target/classes/public/js/pdf.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-service/target/classes/public/js/site.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-service/target/classes/public/js/stars.js" beforeDir="false" afterPath="$PROJECT_DIR$/web-service/target/classes/public/js/stars.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-service/target/classes/templates/details.html" beforeDir="false" afterPath="$PROJECT_DIR$/web-service/target/classes/templates/details.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-service/target/classes/templates/empty.html" beforeDir="false" afterPath="$PROJECT_DIR$/web-service/target/classes/templates/empty.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-service/target/classes/templates/error.html" beforeDir="false" afterPath="$PROJECT_DIR$/web-service/target/classes/templates/error.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-service/target/classes/templates/head.html" beforeDir="false" afterPath="$PROJECT_DIR$/web-service/target/classes/templates/head.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-service/target/classes/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/web-service/target/classes/templates/index.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -97,36 +60,36 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_ADD_EXTERNAL_FILES": "true",
-    "RequestMappingsPanelOrder0": "0",
-    "RequestMappingsPanelOrder1": "1",
-    "RequestMappingsPanelWidth0": "75",
-    "RequestMappingsPanelWidth1": "75",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "Spring Boot.EurekaServerApplication.executor": "Run",
-    "WebServerToolWindowFactoryState": "false",
-    "aspect.path.notification.shown": "true",
-    "git-widget-placeholder": "main",
-    "ignore.virus.scanning.warn.message": "true",
-    "jdk.selected.JAVA_MODULE": "corretto-17",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/funko/Documents/Coding/modelowanie-i-implementacja-aplikacji-biznesowych/projekt/cudanawidelcu",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.0",
-    "run.configurations.included.in.services": "true",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
+    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
+    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
+    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;Spring Boot.EurekaServerApplication.executor&quot;: &quot;Run&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;aspect.path.notification.shown&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;jdk.selected.JAVA_MODULE&quot;: &quot;corretto-17&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/funko/Documents/Coding/modelowanie-i-implementacja-aplikacji-biznesowych/projekt/cudanawidelcu&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
+    &quot;run.configurations.included.in.services&quot;: &quot;true&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="ReactorSettings">
     <option name="notificationShown" value="true" />
   </component>
@@ -294,6 +257,7 @@
       <workItem from="1715828432302" duration="41000" />
       <workItem from="1715828482571" duration="3782000" />
       <workItem from="1715832284099" duration="9156000" />
+      <workItem from="1715843770120" duration="923000" />
     </task>
     <servers />
   </component>
