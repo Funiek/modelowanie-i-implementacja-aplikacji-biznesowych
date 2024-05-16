@@ -1,27 +1,28 @@
-package org.example;
+package org.example.controller;
 
+import org.example.dto.RecipeDto;
+import org.example.request.RateRecipeRequest;
+import org.example.request.UpdateRatingRequest;
+import org.example.response.UpdateRatingResponse;
+import org.example.service.RecipesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import pl.cudanawidelcu.microservices.services.web.Request.RateRecipeRequest;
-import pl.cudanawidelcu.microservices.services.web.Request.UpdateRatingRequest;
-import pl.cudanawidelcu.microservices.services.web.Response.UpdateRatingResponse;
-import pl.cudanawidelcu.microservices.services.web.dto.RecipeDto;
-
 import java.util.List;
 import java.util.logging.Logger;
 
 @Controller
 public class WebRecipesController {
-    @Autowired
-    protected WebRecipesService recipesService;
+
+    private final RecipesService recipesService;
 
     protected Logger logger = Logger.getLogger(WebRecipesController.class.getName());
 
-    public WebRecipesController(WebRecipesService recipesService) {
+    public WebRecipesController(RecipesService recipesService) {
         this.recipesService = recipesService;
     }
+
 
     @RequestMapping("/")
     public String index(Model model) {

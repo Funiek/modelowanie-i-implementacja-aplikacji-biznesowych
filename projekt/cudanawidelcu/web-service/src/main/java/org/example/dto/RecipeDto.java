@@ -1,7 +1,7 @@
 package org.example.dto;
 
 import lombok.Data;
-import pl.cudanawidelcu.microservices.recipes.model.Category;
+import org.example.model.Category;
 
 import java.util.List;
 
