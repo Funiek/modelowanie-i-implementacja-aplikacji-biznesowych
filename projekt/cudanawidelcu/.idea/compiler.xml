@@ -14,11 +14,13 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="cuda-na-widelcu" target="11" />
       <module name="reactivetest" target="17" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="cudanawidelcu" options="" />
       <module name="reactivetest" options="-parameters" />
     </option>
   </component>

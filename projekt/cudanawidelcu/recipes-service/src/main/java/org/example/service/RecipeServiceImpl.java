@@ -81,6 +81,8 @@ public class RecipeServiceImpl implements RecipeService {
         Vote newVote = new Vote();
         newVote.setRating((double) vote);
         newVote.setRecipe(recipe);
+        voteRepository.save(newVote);
+
         votes.add(newVote);
 
         recipe.setVotes(votes);

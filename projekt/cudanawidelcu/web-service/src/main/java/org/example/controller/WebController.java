@@ -5,7 +5,6 @@ import org.example.request.RateRecipeRequest;
 import org.example.request.UpdateRatingRequest;
 import org.example.response.UpdateRatingResponse;
 import org.example.service.RecipesService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -13,13 +12,13 @@ import java.util.List;
 import java.util.logging.Logger;
 
 @Controller
-public class WebRecipesController {
+public class WebController {
 
     private final RecipesService recipesService;
 
-    protected Logger logger = Logger.getLogger(WebRecipesController.class.getName());
+    protected Logger logger = Logger.getLogger(WebController.class.getName());
 
-    public WebRecipesController(RecipesService recipesService) {
+    public WebController(RecipesService recipesService) {
         this.recipesService = recipesService;
     }
 

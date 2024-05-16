@@ -1,7 +1,6 @@
 package org.example.dto;
 
 import lombok.Data;
-import org.example.model.Category;
 
 import java.util.List;
 
@@ -11,7 +10,7 @@ public class RecipeDto {
     private String description;
     private Double rating;
     private int countVotes;
-    private Category category;
+    private CategoryDto category;
     private List<ProductDto> products;
     private List<VoteDto> votes;
 }

@@ -4,6 +4,7 @@ package org.example.controller;
 import org.example.dto.RateRecipeDto;
 import org.example.dto.RecipeDto;
 import org.example.model.Recipe;
+import org.example.model.Vote;
 import org.example.service.RecipeService;
 import org.example.util.RecipeMapper;
 import org.springframework.web.bind.annotation.*;

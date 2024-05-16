@@ -1,4 +1,4 @@
-package pl.cudanawidelcu.microservices.services.web.Response;
+package org.example.response;
 
 import lombok.Data;
 

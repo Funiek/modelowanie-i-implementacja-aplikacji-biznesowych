@@ -2,9 +2,11 @@ package org.example.util;
 
 
 
+import org.example.dto.CategoryDto;
 import org.example.dto.ProductDto;
 import org.example.dto.RecipeDto;
 import org.example.dto.VoteDto;
+import org.example.model.Category;
 import org.example.model.Product;
 import org.example.model.Recipe;
 import org.example.model.Vote;
@@ -19,7 +21,7 @@ public class RecipeMapper {
         recipeDto.setDescription(recipe.getDescription());
         recipeDto.setRating(recipe.getRating());
         recipeDto.setCountVotes(recipe.getCountVotes());
-        recipeDto.setCategory(recipe.getCategory());
+        recipeDto.setCategory(CategoryDto.fromCategory(recipe.getCategory()));
         recipeDto.setProducts(RecipeMapper.convertProductListToProductDtoList(recipe.getProducts()));
         recipeDto.setVotes(RecipeMapper.convertVoteListToVoteDtoList(recipe.getVotes()));
 
@@ -74,7 +76,7 @@ public class RecipeMapper {
         recipe.setDescription(recipeDto.getDescription());
         recipe.setRating(recipeDto.getRating());
         recipe.setCountVotes(recipeDto.getCountVotes());
-        recipe.setCategory(recipeDto.getCategory());
+        recipe.setCategory(Category.fromCategoryDto(recipeDto.getCategory()));
         recipe.setProducts(RecipeMapper.convertProductDtoListToProductList(recipeDto.getProducts()));
 
         List<Vote> votes = RecipeMapper.convertVoteDtoListToVoteList(recipeDto.getVotes());

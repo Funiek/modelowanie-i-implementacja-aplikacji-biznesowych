@@ -1,4 +1,4 @@
-package pl.cudanawidelcu.microservices.services.web.Request;
+package org.example.request;
 
 import lombok.Data;
 
