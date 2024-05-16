@@ -15,7 +15,8 @@
 		<module>recipes-service</module>
 		<module>web-service</module>
 		<module>application-gateway</module>
-	</modules>
+        <module>account-service</module>
+    </modules>
 
 	<properties>
 		<java.version>17</java.version>

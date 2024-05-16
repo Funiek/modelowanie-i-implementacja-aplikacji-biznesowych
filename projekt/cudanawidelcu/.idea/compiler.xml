@@ -9,6 +9,7 @@
         <outputRelativeToContentRoot value="true" />
         <module name="test-service" />
         <module name="recipes-service" />
+        <module name="account-service" />
         <module name="eureka-server" />
         <module name="web-service" />
         <module name="application-gateway" />
