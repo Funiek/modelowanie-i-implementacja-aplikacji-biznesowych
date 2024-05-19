@@ -30,9 +30,9 @@ public class WebController {
         return "index";
     }
 
-    @RequestMapping("/details/{recipeName}")
-    public String details(@PathVariable("recipeName") String recipeName, Model model) {
-        RecipeDto recipeDto = recipesService.getByName(recipeName);
+    @RequestMapping("/details/{id}")
+    public String details(@PathVariable("id") Long id, Model model) {
+        RecipeDto recipeDto = recipesService.get(id);
         model.addAttribute("recipeDto", recipeDto);
         return "details";
     }
@@ -46,7 +46,7 @@ public class WebController {
     @RequestMapping(value = "/updaterating", method = RequestMethod.POST, headers = "Accept=application/json")
     @ResponseBody
     public UpdateRatingResponse rate(@RequestBody UpdateRatingRequest updateRatingRequest) {
-        RecipeDto recipeDto = recipesService.getByName(updateRatingRequest.getName());
+        RecipeDto recipeDto = recipesService.get(updateRatingRequest.getId());
 
         UpdateRatingResponse updateRatingResponse = new UpdateRatingResponse();
         updateRatingResponse.setRating(recipeDto.getRating());

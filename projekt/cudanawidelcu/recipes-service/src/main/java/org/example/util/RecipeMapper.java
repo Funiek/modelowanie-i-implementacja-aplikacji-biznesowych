@@ -54,6 +54,7 @@ public class RecipeMapper {
 
     public static VoteDto convertVoteToVoteDto(Vote vote) {
         VoteDto voteDto = new VoteDto();
+        voteDto.setId(vote.getId());
         voteDto.setRating(vote.getRating());
 
         return voteDto;

@@ -49,14 +49,14 @@ public class RecipesService {
 		return (recipeDtos == null || recipeDtos.length == 0) ? null : Arrays.asList(recipeDtos);
 	}
 
-	public RecipeDto getByName(String name) {
+	public RecipeDto get(Long id) {
 		RecipeDto recipeDto = null;
 
 		try {
-			recipeDto = restTemplate.getForObject(RECIPES_SERVICE_URL + "/api/v1/recipes/" + name, RecipeDto.class);
+			recipeDto = restTemplate.getForObject(RECIPES_SERVICE_URL + "/api/v1/recipes/" + id, RecipeDto.class);
 		}
 		catch (HttpClientErrorException e) {
-			logger.throwing(this.getClass().getSimpleName(), "getByName", e);
+			logger.throwing(this.getClass().getSimpleName(), "get", e);
 		}
 
 		return recipeDto;
@@ -68,6 +68,7 @@ public class RecipesService {
 
 		JSONObject rateRecipeJsonObject = new JSONObject();
 		try {
+			rateRecipeJsonObject.put("id", rateRecipeRequest.getId());
 			rateRecipeJsonObject.put("name", rateRecipeRequest.getName());
 			rateRecipeJsonObject.put("vote", rateRecipeRequest.getVote());
 		} catch (JSONException e) {

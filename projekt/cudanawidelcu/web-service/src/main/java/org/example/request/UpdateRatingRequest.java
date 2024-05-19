@@ -4,5 +4,5 @@ import lombok.Data;
 
 @Data
 public class UpdateRatingRequest {
-    private String name;
+    private Long id;
 }

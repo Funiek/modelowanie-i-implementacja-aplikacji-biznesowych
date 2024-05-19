@@ -65,7 +65,7 @@ public class RecipeController {
         Recipe recipe;
 
         try {
-            recipe = recipeService.rateRecipe((long) rateRecipeDto.getId(), rateRecipeDto.getVote());
+            recipe = recipeService.rateRecipe(rateRecipeDto.getId(), rateRecipeDto.getVote());
         } catch (NullPointerException e) {
             throw new RecipeNotFoundException(rateRecipeDto.getName());
         }

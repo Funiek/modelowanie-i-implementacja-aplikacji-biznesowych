@@ -5,16 +5,49 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="bdadf3cf-7676-41a1-af01-9ce8cef14cc3" name="Changes" comment="heheeeee dziala web service">
+      <change afterPath="$PROJECT_DIR$/application-gateway/src/main/java/org/example/aspect/LoggingAspect.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/identity-service/src/main/java/org/example/aspect/LoggingAspect.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/recipes-service/src/main/java/org/example/aspect/LoggingAspect.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web-service/src/main/java/org/example/aspect/LoggingAspect.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../cudanawidelcu-old/cudanawidelcu/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../cudanawidelcu-old/cudanawidelcu/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application-gateway/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/application-gateway/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/eureka-server/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/eureka-server/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/identity-service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/identity-service/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/recipes-service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/recipes-service/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/recipes-service/src/main/java/org/example/controller/RecipeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/recipes-service/src/main/java/org/example/controller/RecipeController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/recipes-service/src/main/java/org/example/dto/ProductDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/recipes-service/src/main/java/org/example/dto/ProductDto.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/recipes-service/src/main/java/org/example/dto/RateRecipeDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/recipes-service/src/main/java/org/example/dto/RateRecipeDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/recipes-service/src/main/java/org/example/dto/RecipeDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/recipes-service/src/main/java/org/example/dto/RecipeDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/recipes-service/src/main/java/org/example/dto/VoteDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/recipes-service/src/main/java/org/example/dto/VoteDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/recipes-service/src/main/java/org/example/repository/RecipeRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/recipes-service/src/main/java/org/example/repository/RecipeRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/recipes-service/src/main/java/org/example/service/RecipeService.java" beforeDir="false" afterPath="$PROJECT_DIR$/recipes-service/src/main/java/org/example/service/RecipeService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/recipes-service/src/main/java/org/example/service/RecipeServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/recipes-service/src/main/java/org/example/service/RecipeServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/recipes-service/src/main/java/org/example/util/RecipeMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/recipes-service/src/main/java/org/example/util/RecipeMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/recipes-service/target/classes/org/example/controller/RecipeController.class" beforeDir="false" afterPath="$PROJECT_DIR$/recipes-service/target/classes/org/example/controller/RecipeController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/recipes-service/target/classes/org/example/dto/RateRecipeDto.class" beforeDir="false" afterPath="$PROJECT_DIR$/recipes-service/target/classes/org/example/dto/RateRecipeDto.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/recipes-service/target/classes/org/example/util/RecipeMapper.class" beforeDir="false" afterPath="$PROJECT_DIR$/recipes-service/target/classes/org/example/util/RecipeMapper.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test-service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/test-service/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web-service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/web-service/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web-service/src/main/java/org/example/controller/WebController.java" beforeDir="false" afterPath="$PROJECT_DIR$/web-service/src/main/java/org/example/controller/WebController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web-service/src/main/java/org/example/dto/ProductDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/web-service/src/main/java/org/example/dto/ProductDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web-service/src/main/java/org/example/dto/RateRecipeDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/web-service/src/main/java/org/example/dto/RateRecipeDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web-service/src/main/java/org/example/dto/RecipeDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/web-service/src/main/java/org/example/dto/RecipeDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web-service/src/main/java/org/example/dto/VoteDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/web-service/src/main/java/org/example/dto/VoteDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web-service/src/main/java/org/example/request/RateRecipeRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/web-service/src/main/java/org/example/request/RateRecipeRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web-service/src/main/java/org/example/request/UpdateRatingRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/web-service/src/main/java/org/example/request/UpdateRatingRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web-service/src/main/java/org/example/service/RecipesService.java" beforeDir="false" afterPath="$PROJECT_DIR$/web-service/src/main/java/org/example/service/RecipesService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web-service/src/main/resources/public/js/stars.js" beforeDir="false" afterPath="$PROJECT_DIR$/web-service/src/main/resources/public/js/stars.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web-service/src/main/resources/templates/details.html" beforeDir="false" afterPath="$PROJECT_DIR$/web-service/src/main/resources/templates/details.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web-service/src/main/resources/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/web-service/src/main/resources/templates/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web-service/target/classes/org/example/controller/WebController.class" beforeDir="false" afterPath="$PROJECT_DIR$/web-service/target/classes/org/example/controller/WebController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web-service/target/classes/org/example/dto/ProductDto.class" beforeDir="false" afterPath="$PROJECT_DIR$/web-service/target/classes/org/example/dto/ProductDto.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web-service/target/classes/org/example/dto/RateRecipeDto.class" beforeDir="false" afterPath="$PROJECT_DIR$/web-service/target/classes/org/example/dto/RateRecipeDto.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web-service/target/classes/org/example/dto/RecipeDto.class" beforeDir="false" afterPath="$PROJECT_DIR$/web-service/target/classes/org/example/dto/RecipeDto.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web-service/target/classes/org/example/dto/VoteDto.class" beforeDir="false" afterPath="$PROJECT_DIR$/web-service/target/classes/org/example/dto/VoteDto.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web-service/target/classes/org/example/request/RateRecipeRequest.class" beforeDir="false" afterPath="$PROJECT_DIR$/web-service/target/classes/org/example/request/RateRecipeRequest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web-service/target/classes/org/example/request/UpdateRatingRequest.class" beforeDir="false" afterPath="$PROJECT_DIR$/web-service/target/classes/org/example/request/UpdateRatingRequest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web-service/target/classes/org/example/service/RecipesService.class" beforeDir="false" afterPath="$PROJECT_DIR$/web-service/target/classes/org/example/service/RecipesService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web-service/target/classes/public/js/stars.js" beforeDir="false" afterPath="$PROJECT_DIR$/web-service/target/classes/public/js/stars.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web-service/target/classes/templates/details.html" beforeDir="false" afterPath="$PROJECT_DIR$/web-service/target/classes/templates/details.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web-service/target/classes/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/web-service/target/classes/templates/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../zad2/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../zad2/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../zad3/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../zad3/.idea/misc.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -78,11 +111,11 @@
     "Spring Boot.UserServiceApplication.executor": "Run",
     "WebServerToolWindowFactoryState": "false",
     "aspect.path.notification.shown": "true",
-    "git-widget-placeholder": "main",
+    "git-widget-placeholder": "sequential",
     "ignore.virus.scanning.warn.message": "true",
     "jdk.selected.JAVA_MODULE": "corretto-17",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/funko/Documents/Coding/modelowanie-i-implementacja-aplikacji-biznesowych/projekt/cudanawidelcu/identity-service/src/main/resources",
+    "last_opened_file_path": "C:/Users/funko/Documents/Coding/modelowanie-i-implementacja-aplikacji-biznesowych/projekt/cudanawidelcu",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -100,11 +133,11 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\funko\Documents\Coding\modelowanie-i-implementacja-aplikacji-biznesowych\projekt\cudanawidelcu\identity-service\src\main\resources" />
-      <recent name="C:\Users\krzys\Documents\Coding\modelowanie-i-implementacja-aplikacji-biznesowych\projekt\cudanawidelcu\user-service\src\main\resources" />
-      <recent name="C:\Users\krzys\Documents\Coding\modelowanie-i-implementacja-aplikacji-biznesowych\projekt\cudanawidelcu\user-service\src\main\java\org\example" />
-      <recent name="C:\Users\funko\Documents\Coding\modelowanie-i-implementacja-aplikacji-biznesowych\projekt\cudanawidelcu\account-service\src\main\resources" />
+      <recent name="C:\Users\funko\Documents\Coding\modelowanie-i-implementacja-aplikacji-biznesowych\projekt\cudanawidelcu" />
       <recent name="C:\Users\funko\Documents\Coding\modelowanie-i-implementacja-aplikacji-biznesowych\projekt\cudanawidelcu\web-service\src\main\java\org\example" />
+      <recent name="C:\Users\funko\Documents\Coding\modelowanie-i-implementacja-aplikacji-biznesowych\projekt\cudanawidelcu\identity-service\src\main\java\org\example" />
+      <recent name="C:\Users\funko\Documents\Coding\modelowanie-i-implementacja-aplikacji-biznesowych\projekt\cudanawidelcu\application-gateway\src\main\java\org\example" />
+      <recent name="C:\Users\funko\Documents\Coding\modelowanie-i-implementacja-aplikacji-biznesowych\projekt\cudanawidelcu\recipes-service\src\main\java\org\example\aspect" />
     </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
       <recent name="com.example.reactivetest" />
@@ -245,10 +278,10 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Spring Boot.RecipesServiceApplication" />
         <item itemvalue="Spring Boot.EurekaServerApplication" />
-        <item itemvalue="Spring Boot.IdentityServiceApplication" />
+        <item itemvalue="Spring Boot.RecipesServiceApplication" />
         <item itemvalue="Spring Boot.WebServiceApplication" />
+        <item itemvalue="Spring Boot.IdentityServiceApplication" />
       </list>
     </recent_temporary>
   </component>
@@ -283,6 +316,7 @@
       <workItem from="1716006937375" duration="10480000" />
       <workItem from="1716018469168" duration="3066000" />
       <workItem from="1716093648634" duration="17304000" />
+      <workItem from="1716120687758" duration="2112000" />
     </task>
     <servers />
   </component>

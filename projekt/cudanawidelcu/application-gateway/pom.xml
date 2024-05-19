@@ -3,6 +3,7 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
+    <packaging>jar</packaging>
     <parent>
         <groupId>com.example</groupId>
         <artifactId>cudanawidelcu</artifactId>
@@ -11,6 +12,7 @@
 
     <groupId>org.example</groupId>
     <artifactId>application-gateway</artifactId>
+    <version>1.0.0.RELEASE</version>
 
     <properties>
         <maven.compiler.source>17</maven.compiler.source>
@@ -61,6 +63,17 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <mainClass>org.example.ApplicationGateway</mainClass>
+                    <layout>JAR</layout>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>repackage</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>

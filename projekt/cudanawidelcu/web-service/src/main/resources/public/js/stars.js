@@ -62,6 +62,7 @@ submitButton.addEventListener("click", () => {
     let activeElements = document.getElementsByClassName("active");
 
     let postData = {
+        id: recipeId,
         name: recipeName,
         vote: activeElements.length
     }

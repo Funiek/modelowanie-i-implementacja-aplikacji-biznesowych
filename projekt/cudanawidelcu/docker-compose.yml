@@ -1,0 +1,94 @@
+version: '3'
+
+services:
+  cudanawidelcu_eureka:
+    image: openjdk:17-oracle
+    ports:
+      - "1111:1111"
+    networks:
+      cudanawidelcu-network:
+        ipv4_address: 172.16.238.10
+    volumes:
+      - ./eureka-server/target/eureka-server-1.0.0.RELEASE.jar:/app.jar
+    entrypoint: ["java", "-jar", "/app.jar"]
+  cudanawidelcu_api_gateway:
+    image: openjdk:17-oracle
+    ports:
+      - "4444:4444"
+    networks:
+      cudanawidelcu-network:
+        ipv4_address: 172.16.238.11
+    volumes:
+      - ./application-gateway/target/application-gateway-1.0.0.RELEASE.jar:/app.jar
+    depends_on:
+      - cudanawidelcu_eureka
+    entrypoint: [ "java", "-jar", "/app.jar" ]
+  cudanawidelcu_identity_service:
+    image: openjdk:17-oracle
+    ports:
+      - "6666:6666"
+    networks:
+      cudanawidelcu-network:
+        ipv4_address: 172.16.238.12
+    volumes:
+      - ./identity-service/target/identity-service-1.0.0.RELEASE.jar:/app.jar
+    depends_on:
+      - cudanawidelcu_api_gateway
+    entrypoint: [ "java", "-jar", "/app.jar" ]
+  cudanawidelcu_recipes_service:
+    image: openjdk:17-oracle
+    ports:
+      - "2222:2222"
+    networks:
+      cudanawidelcu-network:
+        ipv4_address: 172.16.238.13
+    volumes:
+      - ./recipes-service/target/recipes-service-1.0.0.RELEASE.jar:/app.jar
+    depends_on:
+      - cudanawidelcu_api_gateway
+    entrypoint: [ "java", "-jar", "/app.jar" ]
+  cudanawidelcu_web:
+    image: openjdk:17-oracle
+    ports:
+      - "80:80"
+    networks:
+      cudanawidelcu-network:
+        ipv4_address: 172.16.238.14
+    volumes:
+      - ./web-service/target/web-service-1.0.0.RELEASE.jar:/app.jar
+    depends_on:
+      - cudanawidelcu_api_gateway
+    entrypoint: [ "java", "-jar", "/app.jar" ]
+#
+#  cudanawidelcu_recipes:
+#    image: openjdk:11-jre
+#    environment:
+#      SERVICE_ENV: recipes
+#    ports:
+#      - "2222:2222"
+#    networks:
+#      cudanawidelcu-network:
+#        ipv4_address: 172.16.238.11
+#    volumes:
+#      - ./target/cudanawidelcu-1.0.0.RELEASE.jar:/app.jar
+#    entrypoint: ["java", "-jar", "/app.jar"]
+#
+#  cudanawidelcu_web:
+#    image: openjdk:11-jre
+#    environment:
+#      SERVICE_ENV: web
+#    ports:
+#      - "3333:3333"
+#    networks:
+#      cudanawidelcu-network:
+#        ipv4_address: 172.16.238.12
+#    volumes:
+#      - ./target/cudanawidelcu-1.0.0.RELEASE.jar:/app.jar
+#    entrypoint: ["java", "-jar", "/app.jar"]
+
+networks:
+  cudanawidelcu-network:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.16.238.0/24
