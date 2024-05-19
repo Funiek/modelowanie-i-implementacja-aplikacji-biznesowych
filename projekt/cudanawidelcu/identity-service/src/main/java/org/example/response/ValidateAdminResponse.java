@@ -10,5 +10,5 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Builder
 public class ValidateAdminResponse {
-    boolean isValid;
+    Boolean isValid;
 }

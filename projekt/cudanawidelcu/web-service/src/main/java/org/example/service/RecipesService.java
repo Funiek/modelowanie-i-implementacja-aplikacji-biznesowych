@@ -20,9 +20,8 @@ import java.util.logging.Logger;
 
 @Service
 public class RecipesService {
-	protected final RestTemplate restTemplate;
-
-	protected final String RECIPES_SERVICE_URL = "http://APPLICATION-GATEWAY/recipes-service";
+	private final RestTemplate restTemplate;
+	private final String RECIPES_SERVICE_URL = "http://APPLICATION-GATEWAY/recipes-service";
 
 	protected Logger logger = Logger.getLogger(RecipesService.class
 			.getName());

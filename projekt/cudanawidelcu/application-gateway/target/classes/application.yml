@@ -2,6 +2,14 @@ spring:
   cloud:
     gateway:
       routes:
+        - id: recipes-create
+          uri: lb://recipes-service
+          predicates:
+            - Path=/recipes-service/api/v1/recipes
+            - Method=POST
+          filters:
+            - StripPrefix=1
+            - RoleCheck=ADMIN
         - id: recipes-service
           uri: lb://recipes-service
           predicates:
@@ -12,5 +20,11 @@ spring:
           uri: lb://test-service
           predicates:
             - Path=/test-service/**
+          filters:
+            - StripPrefix=1
+        - id: identity-service
+          uri: lb://identity-service
+          predicates:
+            - Path=/identity-service/**
           filters:
             - StripPrefix=1
