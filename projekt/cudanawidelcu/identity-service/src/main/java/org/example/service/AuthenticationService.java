@@ -5,7 +5,9 @@ import org.example.model.User;
 import org.example.repository.UserRepository;
 import org.example.request.AuthenticationRequest;
 import org.example.request.RegisterRequest;
+import org.example.request.ValidateAdminRequest;
 import org.example.response.AuthenticationResponse;
+import org.example.response.ValidateAdminResponse;
 import org.example.security.JwtService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -46,7 +48,7 @@ public class AuthenticationService {
     public AuthenticationResponse authenticate(AuthenticationRequest request) {
         authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
-                        request.getPassword(),
+                        request.getUsername(),
                         request.getPassword()
                 )
         );
@@ -56,6 +58,14 @@ public class AuthenticationService {
 
         return AuthenticationResponse.builder()
                 .token(jwtToken)
+                .build();
+    }
+
+    public ValidateAdminResponse validateAdmin(String token) {
+        boolean isValidAdmin = jwtService.validateAdmin(token);
+
+        return ValidateAdminResponse.builder()
+                .isValid(isValidAdmin)
                 .build();
     }
 }

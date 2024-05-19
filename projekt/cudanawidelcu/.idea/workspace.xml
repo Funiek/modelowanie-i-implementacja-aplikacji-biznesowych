@@ -5,32 +5,27 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="bdadf3cf-7676-41a1-af01-9ce8cef14cc3" name="Changes" comment="heheeeee dziala web service">
-      <change afterPath="$PROJECT_DIR$/identity-service/src/main/java/org/example/config/PasswordConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/identity-service/src/main/java/org/example/controller/AuthController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/identity-service/src/main/java/org/example/controller/HelloController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/identity-service/src/main/java/org/example/model/Role.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/identity-service/src/main/java/org/example/model/User.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/identity-service/src/main/java/org/example/request/RegisterRequest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/identity-service/src/main/java/org/example/service/AuthenticationService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/identity-service/src/main/resources/application.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/identity-service/src/main/java/org/example/config/DataInitializer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/identity-service/src/main/java/org/example/request/ValidateAdminRequest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/identity-service/src/main/java/org/example/response/ValidateAdminResponse.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/user-service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/identity-service/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/user-service/src/main/java/org/example/UserServiceApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/identity-service/src/main/java/org/example/IdentityServiceApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/user-service/src/main/java/org/example/config/EncoderConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/identity-service/src/main/java/org/example/config/IdentityServiceConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/user-service/src/main/java/org/example/config/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/identity-service/src/main/java/org/example/config/SecurityConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/user-service/src/main/java/org/example/controller/AuthController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/user-service/src/main/java/org/example/model/User.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/user-service/src/main/java/org/example/repository/UserRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/identity-service/src/main/java/org/example/repository/UserRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/user-service/src/main/java/org/example/request/AuthenticationRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/identity-service/src/main/java/org/example/request/AuthenticationRequest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/user-service/src/main/java/org/example/response/AuthenticationResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/identity-service/src/main/java/org/example/response/AuthenticationResponse.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/user-service/src/main/java/org/example/security/CustomAuthenticationProvider.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/user-service/src/main/java/org/example/security/JwtRequestFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/identity-service/src/main/java/org/example/security/JwtRequestFilter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/user-service/src/main/java/org/example/security/JwtUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/identity-service/src/main/java/org/example/security/JwtService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/user-service/src/main/java/org/example/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/identity-service/src/main/java/org/example/service/UserService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/user-service/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/account-service/user-service/target/classes/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/account-service/user-service/target/classes/application.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/application-gateway/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/application-gateway/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application-gateway/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/application-gateway/src/main/resources/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/identity-service/src/main/java/org/example/config/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/identity-service/src/main/java/org/example/config/SecurityConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/identity-service/src/main/java/org/example/controller/AuthController.java" beforeDir="false" afterPath="$PROJECT_DIR$/identity-service/src/main/java/org/example/controller/AuthController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/identity-service/src/main/java/org/example/security/JwtService.java" beforeDir="false" afterPath="$PROJECT_DIR$/identity-service/src/main/java/org/example/security/JwtService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/identity-service/src/main/java/org/example/service/AuthenticationService.java" beforeDir="false" afterPath="$PROJECT_DIR$/identity-service/src/main/java/org/example/service/AuthenticationService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/identity-service/src/main/java/org/example/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/identity-service/src/main/java/org/example/service/UserService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/identity-service/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/identity-service/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/identity-service/target/classes/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/identity-service/target/classes/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/identity-service/target/classes/org/example/config/SecurityConfig.class" beforeDir="false" afterPath="$PROJECT_DIR$/identity-service/target/classes/org/example/config/SecurityConfig.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/identity-service/target/classes/org/example/controller/AuthController.class" beforeDir="false" afterPath="$PROJECT_DIR$/identity-service/target/classes/org/example/controller/AuthController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/identity-service/target/classes/org/example/security/JwtService.class" beforeDir="false" afterPath="$PROJECT_DIR$/identity-service/target/classes/org/example/security/JwtService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/identity-service/target/classes/org/example/service/AuthenticationService.class" beforeDir="false" afterPath="$PROJECT_DIR$/identity-service/target/classes/org/example/service/AuthenticationService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/identity-service/target/classes/org/example/service/UserService.class" beforeDir="false" afterPath="$PROJECT_DIR$/identity-service/target/classes/org/example/service/UserService.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -98,7 +93,7 @@
     "ignore.virus.scanning.warn.message": "true",
     "jdk.selected.JAVA_MODULE": "corretto-17",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/krzys/Documents/Coding/modelowanie-i-implementacja-aplikacji-biznesowych/projekt/cudanawidelcu/user-service/src/main/resources",
+    "last_opened_file_path": "C:/Users/funko/Documents/Coding/modelowanie-i-implementacja-aplikacji-biznesowych/projekt/cudanawidelcu/identity-service/src/main/resources",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -116,11 +111,11 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\funko\Documents\Coding\modelowanie-i-implementacja-aplikacji-biznesowych\projekt\cudanawidelcu\identity-service\src\main\resources" />
       <recent name="C:\Users\krzys\Documents\Coding\modelowanie-i-implementacja-aplikacji-biznesowych\projekt\cudanawidelcu\user-service\src\main\resources" />
       <recent name="C:\Users\krzys\Documents\Coding\modelowanie-i-implementacja-aplikacji-biznesowych\projekt\cudanawidelcu\user-service\src\main\java\org\example" />
       <recent name="C:\Users\funko\Documents\Coding\modelowanie-i-implementacja-aplikacji-biznesowych\projekt\cudanawidelcu\account-service\src\main\resources" />
       <recent name="C:\Users\funko\Documents\Coding\modelowanie-i-implementacja-aplikacji-biznesowych\projekt\cudanawidelcu\web-service\src\main\java\org\example" />
-      <recent name="C:\Users\funko\Documents\Coding\modelowanie-i-implementacja-aplikacji-biznesowych\projekt\cudanawidelcu\web-service\src\main\resources" />
     </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
       <recent name="com.example.reactivetest" />
@@ -298,6 +293,7 @@
       <workItem from="1715850159163" duration="514000" />
       <workItem from="1716006937375" duration="10480000" />
       <workItem from="1716018469168" duration="3066000" />
+      <workItem from="1716093648634" duration="9425000" />
     </task>
     <servers />
   </component>
@@ -326,6 +322,11 @@
           <url>file://$PROJECT_DIR$/web-service/src/main/java/org/example/service/RecipesService.java</url>
           <line>95</line>
           <option name="timeStamp" value="13" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/identity-service/src/main/java/org/example/security/JwtService.java</url>
+          <line>90</line>
+          <option name="timeStamp" value="18" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

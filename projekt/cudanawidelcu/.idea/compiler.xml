@@ -16,6 +16,7 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="account-service" target="17" />
       <module name="cuda-na-widelcu" target="11" />
       <module name="reactivetest" target="17" />
     </bytecodeTargetLevel>

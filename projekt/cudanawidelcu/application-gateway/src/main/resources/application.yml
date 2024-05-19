@@ -14,3 +14,9 @@ spring:
             - Path=/test-service/**
           filters:
             - StripPrefix=1
+        - id: identity-service
+          uri: lb://identity-service
+          predicates:
+            - Path=/identity-service/**
+          filters:
+            - StripPrefix=1
