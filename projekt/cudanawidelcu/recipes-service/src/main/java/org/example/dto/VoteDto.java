@@ -4,6 +4,6 @@ import lombok.Data;
 
 @Data
 public class VoteDto {
+    private Long id;
     private Double rating;
-//    private RecipeDto recipe;
 }

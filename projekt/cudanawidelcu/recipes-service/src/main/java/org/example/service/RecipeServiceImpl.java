@@ -14,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.logging.Logger;
 
 @Service
@@ -36,8 +37,8 @@ public class RecipeServiceImpl implements RecipeService {
     }
 
     @Override
-    public Recipe getRecipeByName(String name) {
-        return recipeRepository.findFirstByName(name).get(0);
+    public Recipe getRecipe(Long id) {
+        return recipeRepository.findById(id).orElse(null);
     }
 
     @Override
@@ -47,27 +48,20 @@ public class RecipeServiceImpl implements RecipeService {
 
     @Override
     public Recipe updateRecipe(String name, Recipe recipe) throws RecipeNotFoundException {
-        List<Recipe> potentialRecipes = recipeRepository.findFirstByName(name);
-        if (!potentialRecipes.isEmpty()) {
-            Recipe existingRecipe = potentialRecipes.get(0);
-            BeanUtils.copyProperties(recipe, existingRecipe, "id", "votes", "products");
-
-            return recipeRepository.save(existingRecipe);
-        }
-
-        throw new RecipeNotFoundException(name);
+        Recipe existingRecipe = recipeRepository.findById(recipe.getId()).orElseThrow(() -> new RecipeNotFoundException(name));
+        BeanUtils.copyProperties(recipe, existingRecipe, "id", "votes", "products");
+        return recipeRepository.save(existingRecipe);
     }
 
     @Override
     @Transactional
-    public Recipe rateRecipe(String name, int vote) throws RecipeNotFoundException {
+    public Recipe rateRecipe(Long id, int vote) throws NullPointerException {
         Recipe recipe = null;
         try {
-            recipe = recipeRepository.findFirstByName(name).get(0);
-            recipe = recipeRepository.findById(recipe.getId()).orElse(null);
+            recipe = recipeRepository.findById(id).orElse(null);
         }
         catch (Exception e) {
-            throw new RecipeNotFoundException(name);
+            throw new NullPointerException();
         }
 
         if(recipe == null) return null;
@@ -99,13 +93,13 @@ public class RecipeServiceImpl implements RecipeService {
         return recipe;
     }
 
-    @Override
-    public List<Recipe> getRecipesByCategory(Category category) {
-        return recipeRepository.findRecipesByCategory(category);
-    }
+//    @Override
+//    public List<Recipe> getRecipesByCategory(Category category) {
+//        return recipeRepository.findRecipesByCategory(category);
+//    }
 
     @Override
-    public void deleteRecipeByName(String name) {
-        recipeRepository.deleteByName(name);
+    public void deleteRecipe(Long id) {
+        recipeRepository.deleteById(id);
     }
 }

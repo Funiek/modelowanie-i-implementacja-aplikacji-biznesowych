@@ -9,7 +9,4 @@ import java.util.List;
 
 @Repository
 public interface RecipeRepository extends JpaRepository<Recipe, Long> {
-    List<Recipe> findFirstByName(String name);
-    List<Recipe> findRecipesByCategory(Category category);
-    void deleteByName(String name);
 }

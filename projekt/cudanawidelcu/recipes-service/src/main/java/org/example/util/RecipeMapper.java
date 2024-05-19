@@ -17,6 +17,7 @@ import java.util.List;
 public class RecipeMapper {
     public static RecipeDto convertRecipeToRecipeDto(Recipe recipe) {
         RecipeDto recipeDto = new RecipeDto();
+        recipeDto.setId(recipe.getId());
         recipeDto.setName(recipe.getName());
         recipeDto.setDescription(recipe.getDescription());
         recipeDto.setRating(recipe.getRating());
@@ -30,6 +31,7 @@ public class RecipeMapper {
 
     public static ProductDto convertProductToProductDto(Product product) {
         ProductDto productDto = new ProductDto();
+        productDto.setId(product.getId());
         productDto.setName(product.getName());
         productDto.setQty(product.getQty());
         productDto.setMeasure(product.getMeasure());
@@ -53,7 +55,6 @@ public class RecipeMapper {
     public static VoteDto convertVoteToVoteDto(Vote vote) {
         VoteDto voteDto = new VoteDto();
         voteDto.setRating(vote.getRating());
-//        voteDto.setRecipe(RecipeMapper.convertRecipeToRecipeDto(vote.getRecipe()));
 
         return voteDto;
     }
@@ -72,6 +73,7 @@ public class RecipeMapper {
 
     public static Recipe convertRecipeDtoToRecipe(RecipeDto recipeDto) {
         Recipe recipe = new Recipe();
+        recipe.setId(recipeDto.getId());
         recipe.setName(recipeDto.getName());
         recipe.setDescription(recipeDto.getDescription());
         recipe.setRating(recipeDto.getRating());
@@ -88,6 +90,7 @@ public class RecipeMapper {
 
     public static Product convertProductDtoToProduct(ProductDto productDto) {
         Product product = new Product();
+        product.setId(productDto.getId());
         product.setName(productDto.getName());
         product.setQty(productDto.getQty());
         product.setMeasure(productDto.getMeasure());
@@ -109,11 +112,8 @@ public class RecipeMapper {
 
     public static Vote convertVoteDtoToVote(VoteDto voteDto) {
         Vote vote = new Vote();
+        vote.setId(voteDto.getId());
         vote.setRating(voteDto.getRating());
-
-//        if (voteDto.getRecipe() != null) {
-//            vote.setRecipe(RecipeMapper.convertRecipeDtoToRecipe(voteDto.getRecipe()));
-//        }
 
         return vote;
     }

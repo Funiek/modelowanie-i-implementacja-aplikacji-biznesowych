@@ -3,6 +3,7 @@ package org.example.controller;
 
 import org.example.dto.RateRecipeDto;
 import org.example.dto.RecipeDto;
+import org.example.exceptions.RecipeNotFoundException;
 import org.example.model.Recipe;
 import org.example.model.Vote;
 import org.example.service.RecipeService;
@@ -34,12 +35,17 @@ public class RecipeController {
                 .collect(Collectors.toList());
     }
 
-    @GetMapping("/{recipeName}")
-    public RecipeDto getByName(@PathVariable("recipeName") String recipeName) {
-        Recipe recipe = recipeService.getRecipeByName(recipeName);
+//    @GetMapping("/{recipeName}")
+//    public RecipeDto getByName(@PathVariable("recipeName") String recipeName) {
+//        Recipe recipe = recipeService.getRecipeByName(recipeName);
+//        return RecipeMapper.convertRecipeToRecipeDto(recipe);
+//    }
+
+    @GetMapping("/{recipeId}")
+    public RecipeDto get(@PathVariable("recipeId") Long recipeId) {
+        Recipe recipe = recipeService.getRecipe(recipeId);
         return RecipeMapper.convertRecipeToRecipeDto(recipe);
     }
-
     @PostMapping
     public RecipeDto create(@RequestBody RecipeDto recipeDto) {
         Recipe recipe = RecipeMapper.convertRecipeDtoToRecipe(recipeDto);
@@ -56,7 +62,14 @@ public class RecipeController {
 
     @PostMapping("/rate")
     public RecipeDto rate(@RequestBody RateRecipeDto rateRecipeDto) {
-        Recipe recipe = recipeService.rateRecipe(rateRecipeDto.getName(), rateRecipeDto.getVote());
+        Recipe recipe;
+
+        try {
+            recipe = recipeService.rateRecipe((long) rateRecipeDto.getId(), rateRecipeDto.getVote());
+        } catch (NullPointerException e) {
+            throw new RecipeNotFoundException(rateRecipeDto.getName());
+        }
+
         return RecipeMapper.convertRecipeToRecipeDto(recipe);
     }
 }
