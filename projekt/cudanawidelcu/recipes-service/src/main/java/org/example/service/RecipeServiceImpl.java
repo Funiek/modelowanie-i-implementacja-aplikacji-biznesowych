@@ -11,6 +11,8 @@ import org.example.repository.VoteRepository;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,65 +34,113 @@ public class RecipeServiceImpl implements RecipeService {
     }
 
     @Override
-    public List<Recipe> getRecipes() {
+    public Flux<Recipe> getRecipes() {
         return recipeRepository.findAll();
     }
 
     @Override
-    public Recipe getRecipe(Long id) {
-        return recipeRepository.findById(id).orElse(null);
+    public Mono<Recipe> getRecipe(Long id) {
+        return recipeRepository.findById(id);
     }
 
     @Override
-    public Recipe createRecipe(Recipe recipe) {
+    public Mono<Recipe> createRecipe(Recipe recipe) {
         return recipeRepository.save(recipe);
     }
 
     @Override
-    public Recipe updateRecipe(String name, Recipe recipe) throws RecipeNotFoundException {
-        Recipe existingRecipe = recipeRepository.findById(recipe.getId()).orElseThrow(() -> new RecipeNotFoundException(name));
-        BeanUtils.copyProperties(recipe, existingRecipe, "id", "votes", "products");
-        return recipeRepository.save(existingRecipe);
+    public Mono<Recipe> updateRecipe(String name, Recipe recipe) throws RecipeNotFoundException {
+        return recipeRepository.existsById(recipe.getId())
+                .flatMap(exists -> {
+                    if (exists) {
+                        return recipeRepository.findById(recipe.getId())
+                                .flatMap(existingRecipe -> {
+                                    BeanUtils.copyProperties(recipe, existingRecipe, "id", "votes", "products");
+                                    return recipeRepository.save(existingRecipe);
+                                });
+                    }
+                    else {
+                        return Mono.error(new RecipeNotFoundException(name));
+                    }
+                });
     }
 
     @Override
     @Transactional
-    public Recipe rateRecipe(Long id, int vote) throws NullPointerException {
-        Recipe recipe = null;
-        try {
-            recipe = recipeRepository.findById(id).orElse(null);
-        }
-        catch (Exception e) {
-            throw new NullPointerException();
-        }
+    public Mono<Recipe> rateRecipe(Long id, int vote) throws NullPointerException {
+        return recipeRepository.existsById(id)
+                .flatMap(exists -> {
+                    if (exists) {
+                        return recipeRepository.findById(id)
+                                .flatMap(recipe -> {
+                                    int countVotes = recipe.getCountVotes() + 1;
+                                    recipe.setCountVotes(countVotes);
 
-        if(recipe == null) return null;
+                                    Vote newVote = new Vote();
+                                    newVote.setRating((double) vote);
+                                    newVote.setRecipe(recipe);
 
-        int countVotes = recipe.getCountVotes() + 1;
-        recipe.setCountVotes(countVotes);
+                                    return voteRepository.save(newVote)
+                                            .flatMap(savedVote -> {
+                                                List<Vote> votes = recipe.getVotes();
+                                                if (votes == null) {
+                                                    votes = new ArrayList<>();
+                                                }
+                                                votes.add(savedVote);
+                                                recipe.setVotes(votes);
 
-        List<Vote> votes = recipe.getVotes();
-        if (votes == null) votes = new ArrayList<>();
+                                                Double newRating = 0.0;
 
-        Vote newVote = new Vote();
-        newVote.setRating((double) vote);
-        newVote.setRecipe(recipe);
-        voteRepository.save(newVote);
+                                                for(Vote v: recipe.getVotes()) {
+                                                    newRating += v.getRating();
+                                                }
+                                                newRating = newRating / countVotes;
 
-        votes.add(newVote);
+                                                recipe.setRating(newRating);
 
-        recipe.setVotes(votes);
-
-        Double newRating = 0.0;
-        for(Vote v: recipe.getVotes()) {
-            newRating += v.getRating();
-        }
-        newRating = newRating / countVotes;
-
-        recipe.setRating(newRating);
-        recipeRepository.save(recipe);
-
-        return recipe;
+                                                return recipeRepository.save(recipe);
+                                            });
+                                });
+                    }
+                    else {
+                        return Mono.error(new NullPointerException());
+                    }
+                });
+//        Recipe recipe = null;
+//        try {
+//            recipe = recipeRepository.findById(id).orElse(null);
+//        }
+//        catch (Exception e) {
+//            throw new NullPointerException();
+//        }
+//
+//        if(recipe == null) return null;
+//
+//        int countVotes = recipe.getCountVotes() + 1;
+//        recipe.setCountVotes(countVotes);
+//
+//        List<Vote> votes = recipe.getVotes();
+//        if (votes == null) votes = new ArrayList<>();
+//
+//        Vote newVote = new Vote();
+//        newVote.setRating((double) vote);
+//        newVote.setRecipe(recipe);
+//        voteRepository.save(newVote);
+//
+//        votes.add(newVote);
+//
+//        recipe.setVotes(votes);
+//
+//        Double newRating = 0.0;
+//        for(Vote v: recipe.getVotes()) {
+//            newRating += v.getRating();
+//        }
+//        newRating = newRating / countVotes;
+//
+//        recipe.setRating(newRating);
+//        recipeRepository.save(recipe);
+//
+//        return recipe;
     }
 
 //    @Override
@@ -99,7 +149,7 @@ public class RecipeServiceImpl implements RecipeService {
 //    }
 
     @Override
-    public void deleteRecipe(Long id) {
-        recipeRepository.deleteById(id);
+    public Mono<Void> deleteRecipe(Long id) {
+        return recipeRepository.deleteById(id);
     }
 }

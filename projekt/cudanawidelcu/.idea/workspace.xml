@@ -6,15 +6,18 @@
   <component name="ChangeListManager">
     <list default="true" id="bdadf3cf-7676-41a1-af01-9ce8cef14cc3" name="Changes" comment="heheeeee dziala web service">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/recipes-service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/recipes-service/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/recipes-service/src/main/java/org/example/RecipesServiceApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/recipes-service/src/main/java/org/example/RecipesServiceApplication.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/recipes-service/src/main/java/org/example/controller/RecipeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/recipes-service/src/main/java/org/example/controller/RecipeController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/recipes-service/src/main/java/org/example/dto/ProductDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/recipes-service/src/main/java/org/example/dto/ProductDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/recipes-service/src/main/java/org/example/dto/RateRecipeDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/recipes-service/src/main/java/org/example/dto/RateRecipeDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/recipes-service/src/main/java/org/example/dto/RecipeDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/recipes-service/src/main/java/org/example/dto/RecipeDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/recipes-service/src/main/java/org/example/dto/VoteDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/recipes-service/src/main/java/org/example/dto/VoteDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/recipes-service/src/main/java/org/example/model/Product.java" beforeDir="false" afterPath="$PROJECT_DIR$/recipes-service/src/main/java/org/example/model/Product.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/recipes-service/src/main/java/org/example/model/Recipe.java" beforeDir="false" afterPath="$PROJECT_DIR$/recipes-service/src/main/java/org/example/model/Recipe.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/recipes-service/src/main/java/org/example/model/Vote.java" beforeDir="false" afterPath="$PROJECT_DIR$/recipes-service/src/main/java/org/example/model/Vote.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/recipes-service/src/main/java/org/example/repository/ProductRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/recipes-service/src/main/java/org/example/repository/ProductRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/recipes-service/src/main/java/org/example/repository/RecipeRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/recipes-service/src/main/java/org/example/repository/RecipeRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/recipes-service/src/main/java/org/example/repository/VoteRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/recipes-service/src/main/java/org/example/repository/VoteRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/recipes-service/src/main/java/org/example/service/RecipeService.java" beforeDir="false" afterPath="$PROJECT_DIR$/recipes-service/src/main/java/org/example/service/RecipeService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/recipes-service/src/main/java/org/example/service/RecipeServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/recipes-service/src/main/java/org/example/service/RecipeServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/recipes-service/src/main/java/org/example/util/RecipeMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/recipes-service/src/main/java/org/example/util/RecipeMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/recipes-service/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/recipes-service/src/main/resources/application.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -282,7 +285,7 @@
       <workItem from="1715850159163" duration="514000" />
       <workItem from="1716006937375" duration="10480000" />
       <workItem from="1716018469168" duration="3066000" />
-      <workItem from="1716093648634" duration="17304000" />
+      <workItem from="1716093648634" duration="21883000" />
     </task>
     <servers />
   </component>

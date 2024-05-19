@@ -9,6 +9,8 @@ import org.example.model.Vote;
 import org.example.service.RecipeService;
 import org.example.util.RecipeMapper;
 import org.springframework.web.bind.annotation.*;
+import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 
 import java.util.List;
 import java.util.logging.Logger;
@@ -20,19 +22,16 @@ import java.util.stream.Collectors;
 public class RecipeController {
     final
     RecipeService recipeService;
-    protected Logger logger = Logger.getLogger(RecipeController.class.getName());
 
     public RecipeController(RecipeService recipeService) {
         this.recipeService = recipeService;
     }
 
     @GetMapping
-    public List<RecipeDto> getAll() {
-        List<Recipe> recipes = recipeService.getRecipes();
+    public Flux<RecipeDto> getAll() {
+        Flux<Recipe> recipes = recipeService.getRecipes();
 
-        return recipes.stream()
-                .map(RecipeMapper::convertRecipeToRecipeDto)
-                .collect(Collectors.toList());
+        return recipes.map(RecipeMapper::convertRecipeToRecipeDto);
     }
 
 //    @GetMapping("/{recipeName}")
@@ -42,34 +41,26 @@ public class RecipeController {
 //    }
 
     @GetMapping("/{recipeId}")
-    public RecipeDto get(@PathVariable("recipeId") Long recipeId) {
-        Recipe recipe = recipeService.getRecipe(recipeId);
-        return RecipeMapper.convertRecipeToRecipeDto(recipe);
+    public Mono<RecipeDto> get(@PathVariable("recipeId") Long recipeId) {
+        return recipeService.getRecipe(recipeId).map(RecipeMapper::convertRecipeToRecipeDto);
     }
     @PostMapping
-    public RecipeDto create(@RequestBody RecipeDto recipeDto) {
+    public Mono<RecipeDto> create(@RequestBody RecipeDto recipeDto) {
         Recipe recipe = RecipeMapper.convertRecipeDtoToRecipe(recipeDto);
-        Recipe createdRecipe = recipeService.createRecipe(recipe);
-        return RecipeMapper.convertRecipeToRecipeDto(createdRecipe);
+        return recipeService.createRecipe(recipe)
+                .map(RecipeMapper::convertRecipeToRecipeDto);
     }
 
     @PutMapping("/{recipeName}")
-    public RecipeDto update(@PathVariable("recipeName") String recipeName, @RequestBody RecipeDto recipeDto) {
+    public Mono<RecipeDto> update(@PathVariable("recipeName") String recipeName, @RequestBody RecipeDto recipeDto) {
         Recipe recipe = RecipeMapper.convertRecipeDtoToRecipe(recipeDto);
-        Recipe createdRecipe = recipeService.updateRecipe(recipeName, recipe);
-        return RecipeMapper.convertRecipeToRecipeDto(createdRecipe);
+        return recipeService.updateRecipe(recipeName, recipe).map(RecipeMapper::convertRecipeToRecipeDto);
     }
 
     @PostMapping("/rate")
-    public RecipeDto rate(@RequestBody RateRecipeDto rateRecipeDto) {
-        Recipe recipe;
-
-        try {
-            recipe = recipeService.rateRecipe((long) rateRecipeDto.getId(), rateRecipeDto.getVote());
-        } catch (NullPointerException e) {
-            throw new RecipeNotFoundException(rateRecipeDto.getName());
-        }
-
-        return RecipeMapper.convertRecipeToRecipeDto(recipe);
+    public Mono<RecipeDto> rate(@RequestBody RateRecipeDto rateRecipeDto) {
+        return recipeService.rateRecipe((long) rateRecipeDto.getId(), rateRecipeDto.getVote())
+                .map(RecipeMapper::convertRecipeToRecipeDto)
+                .onErrorMap(NullPointerException.class, e -> new RecipeNotFoundException(rateRecipeDto.getName()));
     }
 }
