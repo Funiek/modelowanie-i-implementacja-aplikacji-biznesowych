@@ -93,10 +93,10 @@ public class RecipeServiceImpl implements RecipeService {
         return recipe;
     }
 
-//    @Override
-//    public List<Recipe> getRecipesByCategory(Category category) {
-//        return recipeRepository.findRecipesByCategory(category);
-//    }
+    @Override
+    public List<Recipe> getRecipesByCategory(Category category) {
+        return recipeRepository.findRecipesByCategory(category);
+    }
 
     @Override
     public void deleteRecipe(Long id) {

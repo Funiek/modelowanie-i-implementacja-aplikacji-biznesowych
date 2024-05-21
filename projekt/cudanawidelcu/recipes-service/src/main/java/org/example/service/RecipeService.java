@@ -14,5 +14,6 @@ public interface RecipeService {
     Recipe updateRecipe(String name, Recipe recipe);
     void deleteRecipe(Long id);
     Recipe rateRecipe(Long id, int vote) throws NullPointerException;
-//    List<Recipe> getRecipesByCategory(Category category);
+
+    List<Recipe> getRecipesByCategory(Category category);
 }

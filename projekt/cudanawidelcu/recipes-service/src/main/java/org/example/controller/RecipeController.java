@@ -4,6 +4,7 @@ package org.example.controller;
 import org.example.dto.RateRecipeDto;
 import org.example.dto.RecipeDto;
 import org.example.exceptions.RecipeNotFoundException;
+import org.example.model.Category;
 import org.example.model.Recipe;
 import org.example.model.Vote;
 import org.example.service.RecipeService;
@@ -46,6 +47,17 @@ public class RecipeController {
         Recipe recipe = recipeService.getRecipe(recipeId);
         return RecipeMapper.convertRecipeToRecipeDto(recipe);
     }
+
+    @GetMapping("/category/{categoryName}")
+    public List<RecipeDto> getByCategory(@PathVariable("categoryName") String categoryName) {
+        Category category = Category.valueOf(categoryName.toUpperCase());
+
+        List<Recipe> recipes = recipeService.getRecipesByCategory(category);
+        return recipes.stream()
+                .map(RecipeMapper::convertRecipeToRecipeDto)
+                .collect(Collectors.toList());
+    }
+
     @PostMapping
     public RecipeDto create(@RequestBody RecipeDto recipeDto) {
         Recipe recipe = RecipeMapper.convertRecipeDtoToRecipe(recipeDto);

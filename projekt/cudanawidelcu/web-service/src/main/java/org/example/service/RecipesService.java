@@ -49,6 +49,20 @@ public class RecipesService {
 		return (recipeDtos == null || recipeDtos.length == 0) ? null : Arrays.asList(recipeDtos);
 	}
 
+	public List<RecipeDto> getByCategory(String categoryName) {
+		RecipeDto[] recipeDtos = null;
+
+		try {
+			String url = RECIPES_SERVICE_URL + "/api/v1/recipes/category/" + categoryName;
+			recipeDtos = restTemplate.getForObject(url, RecipeDto[].class);
+		}
+		catch (HttpClientErrorException e) {
+			logger.throwing(this.getClass().getSimpleName(), "getByCategory", e);
+		}
+
+		return (recipeDtos == null || recipeDtos.length == 0) ? null : Arrays.asList(recipeDtos);
+	}
+
 	public RecipeDto get(Long id) {
 		RecipeDto recipeDto = null;
 

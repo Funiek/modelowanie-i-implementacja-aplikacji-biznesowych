@@ -30,6 +30,13 @@ public class WebController {
         return "index";
     }
 
+    @RequestMapping("/category/{categoryName}")
+    public String getByCategory(@PathVariable("categoryName") String categoryName, Model model) {
+        List<RecipeDto> recipeDtos = recipesService.getByCategory(categoryName);
+        model.addAttribute("recipeDtos", recipeDtos);
+        return "index";
+    }
+
     @RequestMapping("/details/{id}")
     public String details(@PathVariable("id") Long id, Model model) {
         RecipeDto recipeDto = recipesService.get(id);

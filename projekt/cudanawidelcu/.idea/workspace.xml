@@ -5,49 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="bdadf3cf-7676-41a1-af01-9ce8cef14cc3" name="Changes" comment="heheeeee dziala web service">
-      <change afterPath="$PROJECT_DIR$/application-gateway/src/main/java/org/example/aspect/LoggingAspect.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/identity-service/src/main/java/org/example/aspect/LoggingAspect.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/recipes-service/src/main/java/org/example/aspect/LoggingAspect.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web-service/src/main/java/org/example/aspect/LoggingAspect.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../cudanawidelcu-old/cudanawidelcu/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../cudanawidelcu-old/cudanawidelcu/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application-gateway/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/application-gateway/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/eureka-server/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/eureka-server/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/identity-service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/identity-service/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/recipes-service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/recipes-service/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/recipes-service/src/main/java/org/example/controller/RecipeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/recipes-service/src/main/java/org/example/controller/RecipeController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/recipes-service/src/main/java/org/example/dto/RateRecipeDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/recipes-service/src/main/java/org/example/dto/RateRecipeDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/recipes-service/src/main/java/org/example/util/RecipeMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/recipes-service/src/main/java/org/example/util/RecipeMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/recipes-service/target/classes/org/example/controller/RecipeController.class" beforeDir="false" afterPath="$PROJECT_DIR$/recipes-service/target/classes/org/example/controller/RecipeController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/recipes-service/target/classes/org/example/dto/RateRecipeDto.class" beforeDir="false" afterPath="$PROJECT_DIR$/recipes-service/target/classes/org/example/dto/RateRecipeDto.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/recipes-service/target/classes/org/example/util/RecipeMapper.class" beforeDir="false" afterPath="$PROJECT_DIR$/recipes-service/target/classes/org/example/util/RecipeMapper.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test-service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/test-service/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/web-service/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/recipes-service/src/main/java/org/example/repository/RecipeRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/recipes-service/src/main/java/org/example/repository/RecipeRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/recipes-service/src/main/java/org/example/service/RecipeService.java" beforeDir="false" afterPath="$PROJECT_DIR$/recipes-service/src/main/java/org/example/service/RecipeService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/recipes-service/src/main/java/org/example/service/RecipeServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/recipes-service/src/main/java/org/example/service/RecipeServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/web-service/src/main/java/org/example/controller/WebController.java" beforeDir="false" afterPath="$PROJECT_DIR$/web-service/src/main/java/org/example/controller/WebController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-service/src/main/java/org/example/dto/ProductDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/web-service/src/main/java/org/example/dto/ProductDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-service/src/main/java/org/example/dto/RateRecipeDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/web-service/src/main/java/org/example/dto/RateRecipeDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-service/src/main/java/org/example/dto/RecipeDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/web-service/src/main/java/org/example/dto/RecipeDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-service/src/main/java/org/example/dto/VoteDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/web-service/src/main/java/org/example/dto/VoteDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-service/src/main/java/org/example/request/RateRecipeRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/web-service/src/main/java/org/example/request/RateRecipeRequest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-service/src/main/java/org/example/request/UpdateRatingRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/web-service/src/main/java/org/example/request/UpdateRatingRequest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/web-service/src/main/java/org/example/service/RecipesService.java" beforeDir="false" afterPath="$PROJECT_DIR$/web-service/src/main/java/org/example/service/RecipesService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-service/src/main/resources/public/js/stars.js" beforeDir="false" afterPath="$PROJECT_DIR$/web-service/src/main/resources/public/js/stars.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-service/src/main/resources/templates/details.html" beforeDir="false" afterPath="$PROJECT_DIR$/web-service/src/main/resources/templates/details.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-service/src/main/resources/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/web-service/src/main/resources/templates/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-service/target/classes/org/example/controller/WebController.class" beforeDir="false" afterPath="$PROJECT_DIR$/web-service/target/classes/org/example/controller/WebController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-service/target/classes/org/example/dto/ProductDto.class" beforeDir="false" afterPath="$PROJECT_DIR$/web-service/target/classes/org/example/dto/ProductDto.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-service/target/classes/org/example/dto/RateRecipeDto.class" beforeDir="false" afterPath="$PROJECT_DIR$/web-service/target/classes/org/example/dto/RateRecipeDto.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-service/target/classes/org/example/dto/RecipeDto.class" beforeDir="false" afterPath="$PROJECT_DIR$/web-service/target/classes/org/example/dto/RecipeDto.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-service/target/classes/org/example/dto/VoteDto.class" beforeDir="false" afterPath="$PROJECT_DIR$/web-service/target/classes/org/example/dto/VoteDto.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-service/target/classes/org/example/request/RateRecipeRequest.class" beforeDir="false" afterPath="$PROJECT_DIR$/web-service/target/classes/org/example/request/RateRecipeRequest.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-service/target/classes/org/example/request/UpdateRatingRequest.class" beforeDir="false" afterPath="$PROJECT_DIR$/web-service/target/classes/org/example/request/UpdateRatingRequest.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-service/target/classes/org/example/service/RecipesService.class" beforeDir="false" afterPath="$PROJECT_DIR$/web-service/target/classes/org/example/service/RecipesService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-service/target/classes/public/js/stars.js" beforeDir="false" afterPath="$PROJECT_DIR$/web-service/target/classes/public/js/stars.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-service/target/classes/templates/details.html" beforeDir="false" afterPath="$PROJECT_DIR$/web-service/target/classes/templates/details.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-service/target/classes/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/web-service/target/classes/templates/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../zad2/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../zad2/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../zad3/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../zad3/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web-service/src/main/resources/templates/header.html" beforeDir="false" afterPath="$PROJECT_DIR$/web-service/src/main/resources/templates/header.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -106,9 +71,12 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "Spring Boot.ApplicationGateway.executor": "Run",
     "Spring Boot.EurekaServerApplication.executor": "Run",
     "Spring Boot.IdentityServiceApplication.executor": "Run",
+    "Spring Boot.RecipesServiceApplication.executor": "Run",
     "Spring Boot.UserServiceApplication.executor": "Run",
+    "Spring Boot.WebServiceApplication.executor": "Run",
     "WebServerToolWindowFactoryState": "false",
     "aspect.path.notification.shown": "true",
     "git-widget-placeholder": "sequential",
@@ -278,10 +246,10 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Spring Boot.EurekaServerApplication" />
-        <item itemvalue="Spring Boot.RecipesServiceApplication" />
         <item itemvalue="Spring Boot.WebServiceApplication" />
+        <item itemvalue="Spring Boot.RecipesServiceApplication" />
         <item itemvalue="Spring Boot.IdentityServiceApplication" />
+        <item itemvalue="Spring Boot.EurekaServerApplication" />
       </list>
     </recent_temporary>
   </component>
@@ -317,11 +285,23 @@
       <workItem from="1716018469168" duration="3066000" />
       <workItem from="1716093648634" duration="17304000" />
       <workItem from="1716120687758" duration="2112000" />
+      <workItem from="1716273242045" duration="5045000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
@@ -332,24 +312,14 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/identity-service/src/main/java/org/example/security/JwtService.java</url>
-          <line>90</line>
-          <option name="timeStamp" value="18" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/identity-service/src/main/java/org/example/controller/AuthController.java</url>
-          <line>35</line>
+          <line>34</line>
           <option name="timeStamp" value="27" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/identity-service/src/main/java/org/example/controller/AuthController.java</url>
-          <line>40</line>
+          <line>42</line>
           <option name="timeStamp" value="28" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/identity-service/src/main/java/org/example/controller/HelloController.java</url>
-          <line>12</line>
-          <option name="timeStamp" value="29" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
