@@ -98,20 +98,13 @@ public class IdentityService {
         return authenticationResponse;
     }
 
-    public ValidateAdminResponse validateAdmin(ValidateAdminRequest validateAdminRequest, String auth) throws RuntimeException {
+    public ValidateAdminResponse validateAdmin(String token) throws RuntimeException {
         ValidateAdminResponse validateAdminResponse = null;
-
-        JSONObject validateAdminJsonObject = new JSONObject();
-        try {
-            validateAdminJsonObject.put("token", validateAdminRequest.getToken());
-        } catch (JSONException e) {
-            throw new RuntimeException(e);
-        }
 
         try {
             HttpHeaders headers = new HttpHeaders();
-            headers.setBearerAuth(auth.substring(7));
-            HttpEntity<String> requestEntity = new HttpEntity<>(validateAdminJsonObject.toString(), headers);
+            headers.setBearerAuth(token);
+            HttpEntity<String> requestEntity = new HttpEntity<>(headers);
 
 
             ResponseEntity<ValidateAdminResponse> responseEntity = restTemplate.exchange(
