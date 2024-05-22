@@ -1,0 +1,47 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+
+<header th:fragment="copy">
+	<nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3 navbar-color">
+		<div class="container-fluid">
+			<a class="navbar-brand navbar-item-text" href="/">Cuda Na Widelcu</a>
+			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+					aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+				<ul class="navbar-nav flex-grow-1">
+					<li class="nav-item">
+						<a class="nav-link navbar-item-text" href="/">Strona główna</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link navbar-item-text" href="/category/BREAKFAST">Śniadanie</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link navbar-item-text" href="/category/LUNCH">Obiad</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link navbar-item-text" href="/category/DINNER">Kolacja</a>
+					</li>
+				</ul>
+				<ul class="navbar-nav">
+					<li class="nav-item" id="login-item">
+						<a class="nav-link navbar-item-text" href="/login">Zaloguj</a>
+					</li>
+					<li class="nav-item" id="register-item">
+						<a class="nav-link navbar-item-text" href="/register">Zarejestruj</a>
+					</li>
+					<li class="nav-item" id="create-recipe-item" style="display:none;">
+						<a class="nav-link navbar-item-text" href="/manage/create-recipe">Stwórz przepis</a>
+					</li>
+					<li class="nav-item" id="logout-item" style="display:none;">
+						<a class="nav-link navbar-item-text" href="/logout">Wyloguj</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+</header>
+
+</html>
