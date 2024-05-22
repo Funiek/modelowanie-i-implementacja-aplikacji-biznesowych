@@ -5,17 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="bdadf3cf-7676-41a1-af01-9ce8cef14cc3" name="Changes" comment="heheeeee dziala web service">
-      <change afterPath="$PROJECT_DIR$/web-service/src/main/java/org/example/request/AuthenticationRequest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web-service/src/main/java/org/example/request/RegisterRequest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web-service/src/main/java/org/example/request/ValidateAdminRequest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web-service/src/main/java/org/example/response/AuthenticationResponse.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web-service/src/main/java/org/example/response/ValidateAdminResponse.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web-service/src/main/java/org/example/service/IdentityService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web-service/src/main/resources/public/js/switchLoginRegisterLogout.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web-service/src/main/resources/templates/login.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web-service/src/main/resources/templates/register.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-service/src/main/java/org/example/service/RecipesService.java" beforeDir="false" afterPath="$PROJECT_DIR$/web-service/src/main/java/org/example/service/RecipesService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-service/src/main/resources/templates/head.html" beforeDir="false" afterPath="$PROJECT_DIR$/web-service/src/main/resources/templates/head.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-service/src/main/resources/templates/header.html" beforeDir="false" afterPath="$PROJECT_DIR$/web-service/src/main/resources/templates/header.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web-service/src/main/java/org/example/controller/WebController.java" beforeDir="false" afterPath="$PROJECT_DIR$/web-service/src/main/java/org/example/controller/WebController.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -29,6 +22,7 @@
         <option value="Enum" />
         <option value="Class" />
         <option value="JavaScript File" />
+        <option value="HTML File" />
       </list>
     </option>
   </component>
@@ -73,6 +67,7 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "ASKED_ADD_EXTERNAL_FILES": "true",
+    "DefaultHtmlFileTemplate": "HTML File",
     "RequestMappingsPanelOrder0": "0",
     "RequestMappingsPanelOrder1": "1",
     "RequestMappingsPanelWidth0": "75",

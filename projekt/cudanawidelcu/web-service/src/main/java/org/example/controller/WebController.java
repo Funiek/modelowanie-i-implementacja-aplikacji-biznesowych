@@ -1,6 +1,7 @@
 package org.example.controller;
 
 import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.example.dto.RecipeDto;
 import org.example.request.RateRecipeRequest;
@@ -72,5 +73,39 @@ public class WebController {
         cookie.setMaxAge(0);
         response.addCookie(cookie);
         return "redirect:/";
+    }
+
+    @GetMapping("/login")
+    public String login() {
+        return "login";
+    }
+
+    @PostMapping("/login")
+    public String performLogin(HttpServletRequest request, Model model) {
+        String username = request.getParameter("username");
+        String password = request.getParameter("password");
+
+        try {
+
+
+            return "redirect:/";
+        } catch (Exception e) {
+            model.addAttribute("error", "Invalid username or password.");
+            return "login";
+        }
+    }
+
+    @GetMapping("/register")
+    public String register() {
+        return "register";
+    }
+
+    @PostMapping("/register")
+    public String registerUser(HttpServletRequest request, Model model) {
+        String username = request.getParameter("username");
+        String password = request.getParameter("password");
+
+
+        return "redirect:/login";
     }
 }
