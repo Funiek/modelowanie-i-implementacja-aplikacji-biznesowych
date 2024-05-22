@@ -10,7 +10,7 @@ public interface RecipeService {
     Recipe getRecipe(Long id);
 //    Recipe getRecipeByName(String name);
     Recipe createRecipe(Recipe recipe);
-    Recipe updateRecipe(String name, Recipe recipe);
+    Recipe updateRecipe(Long id, Recipe recipe);
     void deleteRecipe(Long id);
     Recipe rateRecipe(Long id, int vote) throws NullPointerException;
 

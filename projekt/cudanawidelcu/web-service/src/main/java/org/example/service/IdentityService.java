@@ -1,11 +1,10 @@
 package org.example.service;
 
 import jakarta.annotation.PostConstruct;
-import org.example.dto.ValidateAdminDto;
 import org.example.request.AuthenticationRequest;
 import org.example.request.RegisterRequest;
-import org.example.request.ValidateAdminRequest;
 import org.example.response.AuthenticationResponse;
+import org.example.response.UserResponse;
 import org.example.response.ValidateAdminResponse;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -13,8 +12,9 @@ import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
-import reactor.core.publisher.Mono;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.logging.Logger;
 
 @Service
@@ -120,5 +120,36 @@ public class IdentityService {
         }
 
         return validateAdminResponse;
+    }
+
+    public void delete(Long id, String token) {
+        HttpHeaders headers = new HttpHeaders();
+        headers.setBearerAuth(token);
+        HttpEntity<String> requestEntity = new HttpEntity<>(headers);
+
+        restTemplate.exchange(
+                IDENTITY_SERVICE_URL + "/api/v1/users/" + id,
+                HttpMethod.DELETE,
+                requestEntity,
+                ValidateAdminResponse.class
+        );
+    }
+
+    public List<UserResponse> getAll(String token) {
+        UserResponse[] userDtos = null;
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setBearerAuth(token);
+        HttpEntity<String> requestEntity = new HttpEntity<>(headers);
+
+        ResponseEntity<UserResponse[]> response = restTemplate.exchange(
+                IDENTITY_SERVICE_URL + "/api/v1/users",
+                HttpMethod.GET,
+                requestEntity,
+                UserResponse[].class
+        );
+
+        userDtos = response.getBody();
+        return (userDtos == null || userDtos.length == 0) ? null : Arrays.asList(userDtos);
     }
 }

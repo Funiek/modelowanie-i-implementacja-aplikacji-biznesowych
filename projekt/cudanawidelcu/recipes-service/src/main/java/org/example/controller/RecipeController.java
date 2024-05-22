@@ -58,10 +58,10 @@ public class RecipeController {
         return RecipeMapper.convertRecipeToRecipeDto(createdRecipe);
     }
 
-    @PutMapping("/{recipeName}")
-    public RecipeDto update(@PathVariable("recipeName") String recipeName, @RequestBody RecipeDto recipeDto) {
+    @PutMapping("/{id}")
+    public RecipeDto update(@PathVariable("id") Long id, @RequestBody RecipeDto recipeDto) {
         Recipe recipe = RecipeMapper.convertRecipeDtoToRecipe(recipeDto);
-        Recipe createdRecipe = recipeService.updateRecipe(recipeName, recipe);
+        Recipe createdRecipe = recipeService.updateRecipe(id, recipe);
         return RecipeMapper.convertRecipeToRecipeDto(createdRecipe);
     }
 
@@ -76,5 +76,10 @@ public class RecipeController {
         }
 
         return RecipeMapper.convertRecipeToRecipeDto(recipe);
+    }
+
+    @DeleteMapping("/{id}")
+    public void delete(@PathVariable("id") Long id) {
+        recipeService.deleteRecipe(id);
     }
 }

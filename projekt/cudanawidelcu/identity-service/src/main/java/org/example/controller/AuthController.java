@@ -46,18 +46,5 @@ public class AuthController {
     public ValidateAdminResponse validateAdmin(@RequestHeader("Authorization") String auth) {
         return authenticationService.validateAdmin(auth);
     }
-
-    @PostMapping("/users")
-    public List<UserResponse> userResponses(@RequestHeader("Authorization") String auth) {
-        ValidateAdminResponse validateAdminResponse = authenticationService.validateAdmin(auth);
-        if (validateAdminResponse.getIsValid()) {
-            List<User> users = authenticationService.getAll();
-            return users.stream()
-                    .map(UserMapper::convertUserToUserResponse)
-                    .collect(Collectors.toList());
-        }
-
-        throw new UserNotAdminException();
-    }
 }
 
