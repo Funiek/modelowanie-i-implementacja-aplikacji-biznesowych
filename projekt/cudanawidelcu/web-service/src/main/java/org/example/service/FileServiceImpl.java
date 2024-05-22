@@ -16,8 +16,7 @@ import java.util.logging.Logger;
 
 @Service
 public class FileServiceImpl implements FileService {
-    private static final String UPLOAD_DIR = "web-service/src/main/resources/public/img/";
-    private final String IMAGES_SERVICE_URL = "http://images-service";
+    private final String IMAGES_SERVICE_URL = "http://APPLICATION-GATEWAY/images-service";
     private final RestTemplate restTemplate;
     protected Logger logger = Logger.getLogger(FileServiceImpl.class.getName());
 
@@ -25,20 +24,6 @@ public class FileServiceImpl implements FileService {
         this.restTemplate = restTemplate;
     }
 
-    @Override
-    public boolean saveImage(byte[] imageBytes, String name) {
-        try {
-            String fileName = name + ".jpeg";
-            File file = new File(UPLOAD_DIR + fileName);
-            FileOutputStream fos = new FileOutputStream(file);
-            fos.write(imageBytes);
-            fos.close();
-            return true;
-        } catch (IOException e) {
-            logger.throwing(this.getClass().getSimpleName(), "saveImage", e);
-            return false;
-        }
-    }
 
     public void sendImage(MultipartFile file, String name) throws IOException {
         ByteArrayResource resource = new ByteArrayResource(file.getBytes()) {
@@ -49,30 +34,20 @@ public class FileServiceImpl implements FileService {
         };
 
         MultiValueMap<String, Object> parts = new LinkedMultiValueMap<>();
-        parts.add("photo", resource);
+        parts.add("image", resource);
 
-//        HttpHeaders headers = new HttpHeaders();
-//        headers.setContentType(MediaType.MULTIPART_FORM_DATA);
-
-//        HttpEntity<MultiValueMap<String, Object>> requestEntity = new HttpEntity<>(parts, headers);
-
-//        ResponseEntity<String> response = restTemplate.exchange(
-//                IMAGES_SERVICE_URL + "/upload",
-//                HttpMethod.POST,
-//                requestEntity,
-//                String.class
-//        );
         HttpHeaders headers = new HttpHeaders();
-        headers.set("Accept", "application/json");
+        headers.setContentType(MediaType.MULTIPART_FORM_DATA);
 
-        // Create an entity with headers
-        HttpEntity<String> entity = new HttpEntity<>(headers);
+        HttpEntity<MultiValueMap<String, Object>> requestEntity = new HttpEntity<>(parts, headers);
+
         ResponseEntity<String> response = restTemplate.exchange(
-                IMAGES_SERVICE_URL,
-                HttpMethod.GET,
-                entity,
+                IMAGES_SERVICE_URL + "/api/v1/images",
+                HttpMethod.POST,
+                requestEntity,
                 String.class
         );
+
 
         if (response.getStatusCode() == HttpStatus.OK) {
             System.out.println("Image uploaded successfully");
