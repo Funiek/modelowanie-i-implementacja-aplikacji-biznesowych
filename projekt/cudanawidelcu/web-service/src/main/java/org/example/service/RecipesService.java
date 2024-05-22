@@ -4,6 +4,7 @@ import jakarta.annotation.PostConstruct;
 import org.example.dto.RecipeDto;
 import org.example.request.CreateRecipeRequest;
 import org.example.request.RateRecipeRequest;
+import org.example.response.ValidateAdminResponse;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
@@ -142,5 +143,18 @@ public class RecipesService {
 		}
 
 		return recipeDto;
+	}
+
+	public void delete(Long id, String token) {
+		HttpHeaders headers = new HttpHeaders();
+		headers.setBearerAuth(token);
+		HttpEntity<String> requestEntity = new HttpEntity<>(headers);
+
+		restTemplate.exchange(
+				RECIPES_SERVICE_URL + "/api/v1/recipes/" + id,
+				HttpMethod.DELETE,
+				requestEntity,
+				ValidateAdminResponse.class
+		);
 	}
 }

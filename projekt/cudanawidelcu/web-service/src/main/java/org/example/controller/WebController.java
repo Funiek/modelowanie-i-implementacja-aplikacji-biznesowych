@@ -48,7 +48,7 @@ public class WebController {
         return "index";
     }
 
-    @RequestMapping("/details/{id}")
+    @RequestMapping("/recipes/details/{id}")
     public String details(@PathVariable("id") Long id, Model model) {
         RecipeDto recipeDto = recipesService.get(id);
         model.addAttribute("recipeDto", recipeDto);
