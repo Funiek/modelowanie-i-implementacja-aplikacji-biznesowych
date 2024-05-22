@@ -1,26 +1,24 @@
 package org.example.service;
 
 import org.springframework.core.io.ByteArrayResource;
+import org.springframework.core.io.Resource;
 import org.springframework.http.*;
-import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.stereotype.Service;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.logging.Logger;
 
 @Service
-public class FileServiceImpl implements FileService {
+public class ImageService {
     private final String IMAGES_SERVICE_URL = "http://APPLICATION-GATEWAY/images-service";
     private final RestTemplate restTemplate;
-    protected Logger logger = Logger.getLogger(FileServiceImpl.class.getName());
+    protected Logger logger = Logger.getLogger(ImageService.class.getName());
 
-    public FileServiceImpl(RestTemplate restTemplate) {
+    public ImageService(RestTemplate restTemplate) {
         this.restTemplate = restTemplate;
     }
 
@@ -56,4 +54,7 @@ public class FileServiceImpl implements FileService {
         }
     }
 
+    public ResponseEntity<Resource> getImage(String name) {
+        return restTemplate.getForEntity(IMAGES_SERVICE_URL + "/api/v1/images/" + name, Resource.class);
+    }
 }

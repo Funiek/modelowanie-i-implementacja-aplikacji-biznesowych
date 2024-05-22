@@ -7,13 +7,10 @@ import org.example.dto.RecipeDto;
 import org.example.request.*;
 import org.example.response.AuthenticationResponse;
 import org.example.response.UpdateRatingResponse;
-import org.example.service.FileService;
 import org.example.service.IdentityService;
+import org.example.service.ImageService;
 import org.example.service.RecipesService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
-import org.springframework.core.io.ResourceLoader;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -29,16 +26,13 @@ public class WebController {
 
     private final RecipesService recipesService;
     private final IdentityService identityService;
-    private final FileService fileService;
-    private final ResourceLoader resourceLoader;
-
+    private final ImageService imageService;
     protected Logger logger = Logger.getLogger(WebController.class.getName());
 
-    public WebController(RecipesService recipesService, IdentityService identityService, FileService fileService, ResourceLoader resourceLoader) {
+    public WebController(RecipesService recipesService, IdentityService identityService, ImageService imageService) {
         this.recipesService = recipesService;
         this.identityService = identityService;
-        this.fileService = fileService;
-        this.resourceLoader = resourceLoader;
+        this.imageService = imageService;
     }
 
 
@@ -94,9 +88,7 @@ public class WebController {
         recipeDto.setRating(0D);
         recipeDto.setCountVotes(0);
         if (!imageFile.isEmpty()) {
-            fileService.sendImage(imageFile, recipeDto.getName());
-//            byte[] imageBytes = imageFile.getBytes();
-//            fileService.saveImage(imageBytes, recipeDto.getName());
+            imageService.sendImage(imageFile, recipeDto.getName());
         }
         RecipeDto newRecipeDto = recipesService.createRecipe(recipeDto, jwtToken);
         return "redirect:/";
@@ -166,13 +158,10 @@ public class WebController {
 
         return "redirect:/";
     }
-//
-//    // TODO potem trzeba to przerzucic czytanie img z azurea/cdna/ciul wie
-//    @GetMapping("/img/{imageName}")
-//    public ResponseEntity<Resource> getImage(@PathVariable String imageName) {
-//        Resource image = resourceLoader.getResource("classpath:/static/images/" + imageName);
-//        return ResponseEntity.ok()
-//                .contentType(MediaType.IMAGE_JPEG)
-//                .body(image);
-//    }
+
+    @GetMapping("/img/{imageName}")
+    public ResponseEntity<Resource> getImage(@PathVariable("imageName") String imageName) {
+        logger.info("ZDJECIE DO POBRANIA: " + imageName);
+        return imageService.getImage(imageName);
+    }
 }
