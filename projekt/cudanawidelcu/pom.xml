@@ -16,6 +16,8 @@
 		<module>web-service</module>
 		<module>application-gateway</module>
 		<module>identity-service</module>
+        <module>images-service</module>
+		<module>images-service</module>
 	</modules>
 
 	<properties>

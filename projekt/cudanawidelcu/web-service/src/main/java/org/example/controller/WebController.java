@@ -94,8 +94,9 @@ public class WebController {
         recipeDto.setRating(0D);
         recipeDto.setCountVotes(0);
         if (!imageFile.isEmpty()) {
-            byte[] imageBytes = imageFile.getBytes();
-            fileService.saveImage(imageBytes, recipeDto.getName());
+            fileService.sendImage(imageFile, recipeDto.getName());
+//            byte[] imageBytes = imageFile.getBytes();
+//            fileService.saveImage(imageBytes, recipeDto.getName());
         }
         RecipeDto newRecipeDto = recipesService.createRecipe(recipeDto, jwtToken);
         return "redirect:/";
@@ -117,7 +118,7 @@ public class WebController {
     }
 
     @PostMapping("/login")
-    public String performLogin(HttpServletRequest request, HttpServletResponse response, Model model) {
+    public String login(HttpServletRequest request, HttpServletResponse response, Model model) {
         String username = request.getParameter("username");
         String password = request.getParameter("password");
         AuthenticationRequest authenticationRequest = new AuthenticationRequest(username, password);
@@ -145,7 +146,7 @@ public class WebController {
     }
 
     @PostMapping("/register")
-    public String registerUser(HttpServletRequest request, HttpServletResponse response, Model model) {
+    public String register(HttpServletRequest request, HttpServletResponse response, Model model) {
         String username = request.getParameter("username");
         String password = request.getParameter("password");
         RegisterRequest registerRequest = new RegisterRequest(username, password);
@@ -165,4 +166,13 @@ public class WebController {
 
         return "redirect:/";
     }
+//
+//    // TODO potem trzeba to przerzucic czytanie img z azurea/cdna/ciul wie
+//    @GetMapping("/img/{imageName}")
+//    public ResponseEntity<Resource> getImage(@PathVariable String imageName) {
+//        Resource image = resourceLoader.getResource("classpath:/static/images/" + imageName);
+//        return ResponseEntity.ok()
+//                .contentType(MediaType.IMAGE_JPEG)
+//                .body(image);
+//    }
 }

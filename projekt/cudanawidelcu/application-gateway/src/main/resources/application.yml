@@ -28,3 +28,9 @@ spring:
             - Path=/identity-service/**
           filters:
             - StripPrefix=1
+        - id: images-service
+          uri: lb://images-service
+          predicates:
+            - Path=/images-service/**
+          filters:
+            - StripPrefix=1
