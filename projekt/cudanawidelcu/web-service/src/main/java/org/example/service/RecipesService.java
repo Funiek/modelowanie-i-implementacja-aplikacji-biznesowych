@@ -2,6 +2,7 @@ package org.example.service;
 
 import jakarta.annotation.PostConstruct;
 import org.example.dto.RecipeDto;
+import org.example.request.CreateRecipeRequest;
 import org.example.request.RateRecipeRequest;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -58,6 +59,42 @@ public class RecipesService {
 		}
 
 		return (recipeDtos == null || recipeDtos.length == 0) ? null : Arrays.asList(recipeDtos);
+	}
+
+	public RecipeDto createRecipe(RecipeDto recipeDto, String jwtToken) {
+		RecipeDto newRecipeDto = null;
+
+		JSONObject newRecipeJsonObject = new JSONObject();
+		try {
+			newRecipeJsonObject.put("name", recipeDto.getName());
+			newRecipeJsonObject.put("vote", recipeDto.getDescription());
+			newRecipeJsonObject.put("category", recipeDto.getCategory());
+			newRecipeJsonObject.put("rating", recipeDto.getRating());
+			newRecipeJsonObject.put("countVotes", recipeDto.getCountVotes());
+		} catch (JSONException e) {
+			throw new RuntimeException(e);
+		}
+
+		try {
+			HttpHeaders headers = new HttpHeaders();
+			headers.setContentType(MediaType.APPLICATION_JSON);
+			headers.setBearerAuth(jwtToken);
+
+			HttpEntity<String> requestEntity = new HttpEntity<>(newRecipeJsonObject.toString(), headers);
+
+			ResponseEntity<RecipeDto> responseEntity = restTemplate.exchange(
+					RECIPES_SERVICE_URL + "/api/v1/recipes",
+					HttpMethod.POST,
+					requestEntity,
+					RecipeDto.class
+			);
+
+			newRecipeDto = responseEntity.getBody();
+		} catch (Exception e) {
+			throw new RuntimeException("Błąd podczas wysyłania zapytania POST: " + e.getMessage(), e);
+		}
+
+		return newRecipeDto;
 	}
 
 	public RecipeDto get(Long id) {

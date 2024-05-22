@@ -5,10 +5,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="bdadf3cf-7676-41a1-af01-9ce8cef14cc3" name="Changes" comment="heheeeee dziala web service">
-      <change afterPath="$PROJECT_DIR$/web-service/src/main/resources/templates/login.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web-service/src/main/resources/templates/register.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web-service/src/main/java/org/example/request/CreateRecipeRequest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web-service/src/main/java/org/example/service/FileService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web-service/src/main/java/org/example/service/FileServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web-service/src/main/resources/templates/createRecipe.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/web-service/src/main/java/org/example/controller/WebController.java" beforeDir="false" afterPath="$PROJECT_DIR$/web-service/src/main/java/org/example/controller/WebController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web-service/src/main/java/org/example/request/AuthenticationRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/web-service/src/main/java/org/example/request/AuthenticationRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web-service/src/main/java/org/example/service/IdentityService.java" beforeDir="false" afterPath="$PROJECT_DIR$/web-service/src/main/java/org/example/service/IdentityService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web-service/src/main/java/org/example/service/RecipesService.java" beforeDir="false" afterPath="$PROJECT_DIR$/web-service/src/main/java/org/example/service/RecipesService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web-service/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/web-service/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web-service/src/main/resources/public/js/switchLoginRegisterLogout.js" beforeDir="false" afterPath="$PROJECT_DIR$/web-service/src/main/resources/public/js/switchLoginRegisterLogout.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web-service/src/main/resources/templates/header.html" beforeDir="false" afterPath="$PROJECT_DIR$/web-service/src/main/resources/templates/header.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -18,11 +26,11 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Interface" />
         <option value="Enum" />
-        <option value="Class" />
         <option value="JavaScript File" />
         <option value="HTML File" />
+        <option value="Interface" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -87,7 +95,7 @@
     "ignore.virus.scanning.warn.message": "true",
     "jdk.selected.JAVA_MODULE": "corretto-17",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/funko/Documents/Coding/modelowanie-i-implementacja-aplikacji-biznesowych/projekt/cudanawidelcu/web-service/src/main/java/org/example/request",
+    "last_opened_file_path": "C:/Users/funko/Documents/Coding/modelowanie-i-implementacja-aplikacji-biznesowych/projekt/cudanawidelcu/web-service/src/main/resources/static/images",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -105,18 +113,19 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\funko\Documents\Coding\modelowanie-i-implementacja-aplikacji-biznesowych\projekt\cudanawidelcu\web-service\src\main\resources\static\images" />
       <recent name="C:\Users\funko\Documents\Coding\modelowanie-i-implementacja-aplikacji-biznesowych\projekt\cudanawidelcu\web-service\src\main\java\org\example\request" />
       <recent name="C:\Users\funko\Documents\Coding\modelowanie-i-implementacja-aplikacji-biznesowych\projekt\cudanawidelcu\web-service\src\main\java\org\example\response" />
       <recent name="C:\Users\funko\Documents\Coding\modelowanie-i-implementacja-aplikacji-biznesowych\projekt\cudanawidelcu" />
       <recent name="C:\Users\funko\Documents\Coding\modelowanie-i-implementacja-aplikacji-biznesowych\projekt\cudanawidelcu\web-service\src\main\java\org\example" />
-      <recent name="C:\Users\funko\Documents\Coding\modelowanie-i-implementacja-aplikacji-biznesowych\projekt\cudanawidelcu\identity-service\src\main\java\org\example" />
     </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
       <recent name="com.example.reactivetest" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
-      <recent name="org.example.security" />
+      <recent name="org.example.request" />
       <recent name="org.example.dto" />
+      <recent name="org.example.security" />
       <recent name="org.example.service" />
       <recent name="org.example.controller" />
     </key>
@@ -243,8 +252,8 @@
     <list>
       <item itemvalue="Spring Boot.ApplicationGateway" />
       <item itemvalue="Spring Boot.TestServiceApplication" />
-      <item itemvalue="Spring Boot.IdentityServiceApplication" />
       <item itemvalue="Spring Boot.WebServiceApplication" />
+      <item itemvalue="Spring Boot.IdentityServiceApplication" />
       <item itemvalue="Spring Boot.EurekaServerApplication" />
       <item itemvalue="Spring Boot.RecipesServiceApplication" />
     </list>
@@ -252,8 +261,8 @@
       <list>
         <item itemvalue="Spring Boot.WebServiceApplication" />
         <item itemvalue="Spring Boot.RecipesServiceApplication" />
-        <item itemvalue="Spring Boot.EurekaServerApplication" />
         <item itemvalue="Spring Boot.IdentityServiceApplication" />
+        <item itemvalue="Spring Boot.EurekaServerApplication" />
       </list>
     </recent_temporary>
   </component>
@@ -290,6 +299,7 @@
       <workItem from="1716093648634" duration="17304000" />
       <workItem from="1716120687758" duration="2112000" />
       <workItem from="1716273242045" duration="5045000" />
+      <workItem from="1716352490674" duration="9420000" />
     </task>
     <servers />
   </component>
@@ -324,6 +334,36 @@
           <url>file://$PROJECT_DIR$/identity-service/src/main/java/org/example/controller/AuthController.java</url>
           <line>42</line>
           <option name="timeStamp" value="28" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/recipes-service/src/main/java/org/example/controller/RecipeController.java</url>
+          <line>63</line>
+          <option name="timeStamp" value="35" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/recipes-service/src/main/java/org/example/controller/RecipeController.java</url>
+          <line>62</line>
+          <option name="timeStamp" value="36" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/recipes-service/src/main/java/org/example/controller/RecipeController.java</url>
+          <line>64</line>
+          <option name="timeStamp" value="37" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/web-service/src/main/java/org/example/service/FileServiceImpl.java</url>
+          <line>21</line>
+          <option name="timeStamp" value="39" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/web-service/src/main/java/org/example/service/FileServiceImpl.java</url>
+          <line>24</line>
+          <option name="timeStamp" value="40" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/web-service/src/main/java/org/example/service/FileServiceImpl.java</url>
+          <line>18</line>
+          <option name="timeStamp" value="41" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

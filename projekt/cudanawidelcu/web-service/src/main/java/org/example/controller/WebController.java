@@ -4,13 +4,23 @@ import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.example.dto.RecipeDto;
-import org.example.request.RateRecipeRequest;
-import org.example.request.UpdateRatingRequest;
+import org.example.request.*;
+import org.example.response.AuthenticationResponse;
 import org.example.response.UpdateRatingResponse;
+import org.example.service.FileService;
+import org.example.service.IdentityService;
 import org.example.service.RecipesService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.ResourceLoader;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.IOException;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -18,11 +28,17 @@ import java.util.logging.Logger;
 public class WebController {
 
     private final RecipesService recipesService;
+    private final IdentityService identityService;
+    private final FileService fileService;
+    private final ResourceLoader resourceLoader;
 
     protected Logger logger = Logger.getLogger(WebController.class.getName());
 
-    public WebController(RecipesService recipesService) {
+    public WebController(RecipesService recipesService, IdentityService identityService, FileService fileService, ResourceLoader resourceLoader) {
         this.recipesService = recipesService;
+        this.identityService = identityService;
+        this.fileService = fileService;
+        this.resourceLoader = resourceLoader;
     }
 
 
@@ -65,6 +81,26 @@ public class WebController {
         return updateRatingResponse;
     }
 
+    @GetMapping("/manage/create-recipe")
+    public String createRecipe(Model model) {
+        model.addAttribute("recipeDto", new RecipeDto());
+        return "createRecipe";
+    }
+
+    @PostMapping("/manage/create-recipe")
+    public String createRecipe(@ModelAttribute RecipeDto recipeDto,
+                               @RequestParam("imageFile") MultipartFile imageFile,
+                               @CookieValue("jwtToken") String jwtToken) throws IOException {
+        recipeDto.setRating(0D);
+        recipeDto.setCountVotes(0);
+        if (!imageFile.isEmpty()) {
+            byte[] imageBytes = imageFile.getBytes();
+            fileService.saveImage(imageBytes, recipeDto.getName());
+        }
+        RecipeDto newRecipeDto = recipesService.createRecipe(recipeDto, jwtToken);
+        return "redirect:/";
+    }
+
     @GetMapping("/logout")
     public String logout(HttpServletResponse response) {
         Cookie cookie = new Cookie("jwtToken", null);
@@ -81,18 +117,26 @@ public class WebController {
     }
 
     @PostMapping("/login")
-    public String performLogin(HttpServletRequest request, Model model) {
+    public String performLogin(HttpServletRequest request, HttpServletResponse response, Model model) {
         String username = request.getParameter("username");
         String password = request.getParameter("password");
+        AuthenticationRequest authenticationRequest = new AuthenticationRequest(username, password);
 
         try {
+            AuthenticationResponse authenticationResponse = identityService.authenticate(authenticationRequest);
 
-
-            return "redirect:/";
+            Cookie cookie = new Cookie("jwtToken", authenticationResponse.getToken());
+            cookie.setPath("/");
+            // TODO trzeba sie dowiedziec czy mozna tego uzyc w tym przypadku i jak
+//        cookie.setHttpOnly(true);
+            cookie.setMaxAge(60 * 5);
+            response.addCookie(cookie);
         } catch (Exception e) {
-            model.addAttribute("error", "Invalid username or password.");
+            model.addAttribute("error", "Invalid username or password");
             return "login";
         }
+
+        return "redirect:/";
     }
 
     @GetMapping("/register")
@@ -101,11 +145,24 @@ public class WebController {
     }
 
     @PostMapping("/register")
-    public String registerUser(HttpServletRequest request, Model model) {
+    public String registerUser(HttpServletRequest request, HttpServletResponse response, Model model) {
         String username = request.getParameter("username");
         String password = request.getParameter("password");
+        RegisterRequest registerRequest = new RegisterRequest(username, password);
+        try {
+            AuthenticationResponse authenticationResponse = identityService.register(registerRequest);
 
+            Cookie cookie = new Cookie("jwtToken", authenticationResponse.getToken());
+            cookie.setPath("/");
+            // TODO trzeba sie dowiedziec czy mozna tego uzyc w tym przypadku i jak
+//        cookie.setHttpOnly(true);
+            cookie.setMaxAge(60 * 5);
+            response.addCookie(cookie);
+        } catch (Exception e) {
+            model.addAttribute("error", "User already exists");
+            return "login";
+        }
 
-        return "redirect:/login";
+        return "redirect:/";
     }
 }

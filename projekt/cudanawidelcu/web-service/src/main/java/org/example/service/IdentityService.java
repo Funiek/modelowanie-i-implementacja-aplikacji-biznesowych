@@ -8,9 +8,11 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.http.*;
+import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import java.util.logging.Logger;
 
+@Service
 public class IdentityService {
     private final RestTemplate restTemplate;
     private final String IDENTITY_SERVICE_URL = "http://APPLICATION-GATEWAY/identity-service";
@@ -27,7 +29,7 @@ public class IdentityService {
         logger.warning("The RestTemplate request factory is " + restTemplate.getRequestFactory().getClass());
     }
 
-    public AuthenticationResponse register(RegisterRequest registerRequest) {
+    public AuthenticationResponse register(RegisterRequest registerRequest) throws RuntimeException {
         AuthenticationResponse authenticationResponse = null;
 
         JSONObject registerJsonObject = new JSONObject();
@@ -59,7 +61,7 @@ public class IdentityService {
         return authenticationResponse;
     }
 
-    public AuthenticationResponse authenticate(AuthenticationRequest authenticationRequest) {
+    public AuthenticationResponse authenticate(AuthenticationRequest authenticationRequest) throws RuntimeException {
         AuthenticationResponse authenticationResponse = null;
 
         JSONObject registerJsonObject = new JSONObject();
