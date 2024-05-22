@@ -16,11 +16,13 @@ document.addEventListener('DOMContentLoaded', function () {
         document.getElementById('login-item').style.display = 'none';
         document.getElementById('register-item').style.display = 'none';
         document.getElementById('create-recipe-item').style.display = 'block';
+        document.getElementById('admin-panel-item').style.display = 'block';
         document.getElementById('logout-item').style.display = 'block';
     } else {
         document.getElementById('login-item').style.display = 'block';
         document.getElementById('register-item').style.display = 'block';
         document.getElementById('create-recipe-item').style.display = 'none';
+        document.getElementById('admin-panel-item').style.display = 'none';
         document.getElementById('logout-item').style.display = 'none';
     }
 });

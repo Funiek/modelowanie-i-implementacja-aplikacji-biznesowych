@@ -9,7 +9,7 @@
 <div class="container">
     <main role="main" class="pb-3">
         <h1>Dodaj nowy przepis</h1>
-        <form th:action="@{/manage/create-recipe}" method="post" enctype="multipart/form-data">
+        <form th:action="@{/recipes/create}" method="post" enctype="multipart/form-data">
             <div class="form-group">
                 <label for="name">Nazwa</label>
                 <input type="text" id="name" name="name" class="form-control" required>

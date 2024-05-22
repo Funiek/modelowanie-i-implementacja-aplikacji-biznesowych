@@ -69,7 +69,7 @@ submitButton.addEventListener("click", () => {
 
     $.ajax({
         type: "POST",
-        url: window.location.protocol + "//" + window.location.host + "/rate",
+        url: window.location.protocol + "//" + window.location.host + "/recipes/rate",
         contentType: "application/json",
         data: JSON.stringify(postData),
         success: function(data, status) {

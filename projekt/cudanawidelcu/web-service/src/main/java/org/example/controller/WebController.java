@@ -55,15 +55,16 @@ public class WebController {
         return "details";
     }
 
-    @RequestMapping(value = "/rate", method = RequestMethod.POST, headers = "Accept=application/json")
+    @RequestMapping(value = "/recipes/rate", method = RequestMethod.POST, headers = "Accept=application/json")
     @ResponseBody
     public RecipeDto rate(@RequestBody RateRecipeRequest rateRecipeRequest) {
         return recipesService.rate(rateRecipeRequest);
     }
 
-    @RequestMapping(value = "/updaterating", method = RequestMethod.POST, headers = "Accept=application/json")
+    // TODO sprawdzić czy to jest teraz w ogóle używane XD
+    @RequestMapping(value = "/recipes/update-rating", method = RequestMethod.POST, headers = "Accept=application/json")
     @ResponseBody
-    public UpdateRatingResponse rate(@RequestBody UpdateRatingRequest updateRatingRequest) {
+    public UpdateRatingResponse updateRating(@RequestBody UpdateRatingRequest updateRatingRequest) {
         RecipeDto recipeDto = recipesService.get(updateRatingRequest.getId());
 
         UpdateRatingResponse updateRatingResponse = new UpdateRatingResponse();
@@ -73,13 +74,13 @@ public class WebController {
         return updateRatingResponse;
     }
 
-    @GetMapping("/manage/create-recipe")
+    @GetMapping("/recipes/create")
     public String createRecipe(Model model) {
         model.addAttribute("recipeDto", new RecipeDto());
         return "createRecipe";
     }
 
-    @PostMapping("/manage/create-recipe")
+    @PostMapping("/recipes/create")
     public String createRecipe(@ModelAttribute RecipeDto recipeDto,
                                @RequestParam("imageFile") MultipartFile imageFile,
                                @CookieValue("jwtToken") String jwtToken) throws IOException {

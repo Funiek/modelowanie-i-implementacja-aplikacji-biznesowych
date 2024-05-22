@@ -1,7 +1,7 @@
 package org.example.service;
 
 
-import org.example.exceptions.RecipeNotFoundException;
+import org.example.exception.RecipeNotFoundException;
 import org.example.model.Category;
 import org.example.model.Recipe;
 import org.example.model.Vote;
@@ -14,7 +14,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 import java.util.logging.Logger;
 
 @Service

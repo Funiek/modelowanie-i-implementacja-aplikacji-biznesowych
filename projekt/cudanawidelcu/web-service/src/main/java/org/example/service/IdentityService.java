@@ -1,15 +1,20 @@
 package org.example.service;
 
 import jakarta.annotation.PostConstruct;
+import org.example.dto.ValidateAdminDto;
 import org.example.request.AuthenticationRequest;
 import org.example.request.RegisterRequest;
+import org.example.request.ValidateAdminRequest;
 import org.example.response.AuthenticationResponse;
+import org.example.response.ValidateAdminResponse;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
+import reactor.core.publisher.Mono;
+
 import java.util.logging.Logger;
 
 @Service
@@ -91,5 +96,36 @@ public class IdentityService {
         }
 
         return authenticationResponse;
+    }
+
+    public ValidateAdminResponse validateAdmin(ValidateAdminRequest validateAdminRequest, String auth) throws RuntimeException {
+        ValidateAdminResponse validateAdminResponse = null;
+
+        JSONObject validateAdminJsonObject = new JSONObject();
+        try {
+            validateAdminJsonObject.put("token", validateAdminRequest.getToken());
+        } catch (JSONException e) {
+            throw new RuntimeException(e);
+        }
+
+        try {
+            HttpHeaders headers = new HttpHeaders();
+            headers.setBearerAuth(auth.substring(7));
+            HttpEntity<String> requestEntity = new HttpEntity<>(validateAdminJsonObject.toString(), headers);
+
+
+            ResponseEntity<ValidateAdminResponse> responseEntity = restTemplate.exchange(
+                    IDENTITY_SERVICE_URL + "/api/v1/auth/validate-admin",
+                    HttpMethod.POST,
+                    requestEntity,
+                    ValidateAdminResponse.class
+            );
+
+            validateAdminResponse = responseEntity.getBody();
+        } catch (Exception e) {
+            throw new RuntimeException("Błąd podczas wysyłania zapytania POST: " + e.getMessage(), e);
+        }
+
+        return validateAdminResponse;
     }
 }

@@ -15,6 +15,8 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class AuthenticationService {
     private final UserRepository userRepository;
@@ -67,5 +69,9 @@ public class AuthenticationService {
         return ValidateAdminResponse.builder()
                 .isValid(isValidAdmin)
                 .build();
+    }
+
+    public List<User> getAll() {
+        return userRepository.findAll();
     }
 }

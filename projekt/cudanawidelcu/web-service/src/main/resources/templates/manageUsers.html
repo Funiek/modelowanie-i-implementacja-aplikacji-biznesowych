@@ -1,10 +1,32 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
 
+<head th:replace="~{head :: copy}"></head>
+
+<body>
+<header th:replace="~{header :: copy}"></header>
+<div class="container">
+    <main role="main" class="pb-3">
+        <h1>Lista Użytkowników</h1>
+        <table class="table" th:if="${userDtos}">
+            <thead>
+            <tr>
+                <th>Nazwa Użytkownika</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="user : ${userDtos}">
+                <td th:text="${user.username}"></td>
+                <td>
+                    <a class="index-detail-btn" th:href="@{'/admin/users/delete/' + ${user.id}}">Usuń</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </main>
+</div>
+<footer th:replace="~{footer :: copy}"></footer>
 </body>
 </html>

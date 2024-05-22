@@ -3,10 +3,9 @@ package org.example.controller;
 
 import org.example.dto.RateRecipeDto;
 import org.example.dto.RecipeDto;
-import org.example.exceptions.RecipeNotFoundException;
+import org.example.exception.RecipeNotFoundException;
 import org.example.model.Category;
 import org.example.model.Recipe;
-import org.example.model.Vote;
 import org.example.service.RecipeService;
 import org.example.util.RecipeMapper;
 import org.springframework.web.bind.annotation.*;
@@ -35,12 +34,6 @@ public class RecipeController {
                 .map(RecipeMapper::convertRecipeToRecipeDto)
                 .collect(Collectors.toList());
     }
-
-//    @GetMapping("/{recipeName}")
-//    public RecipeDto getByName(@PathVariable("recipeName") String recipeName) {
-//        Recipe recipe = recipeService.getRecipeByName(recipeName);
-//        return RecipeMapper.convertRecipeToRecipeDto(recipe);
-//    }
 
     @GetMapping("/{recipeId}")
     public RecipeDto get(@PathVariable("recipeId") Long recipeId) {

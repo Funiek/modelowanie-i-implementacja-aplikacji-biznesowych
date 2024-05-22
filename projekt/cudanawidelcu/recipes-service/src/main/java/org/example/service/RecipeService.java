@@ -1,6 +1,5 @@
 package org.example.service;
 
-import org.example.exceptions.RecipeNotFoundException;
 import org.example.model.Category;
 import org.example.model.Recipe;
 

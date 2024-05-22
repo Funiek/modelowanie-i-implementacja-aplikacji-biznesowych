@@ -17,15 +17,15 @@ public class AdminController {
     public String adminPanel() {
         return "adminPanel";
     }
-    @GetMapping("/manage-users")
+    @GetMapping("/users/manage")
     public String manageUsers() {
         return "manageUsers";
     }
-    @GetMapping("/manage-recipes")
+    @GetMapping("/recipes/manage")
     public String manageProducts() {
         return "manageRecipes";
     }
-    @GetMapping("/edit-recipe/{id}")
+    @GetMapping("/recipes/edit/{id}")
     public String manageProducts(@PathVariable("id") Long id) {
         return "editRecipe";
     }
