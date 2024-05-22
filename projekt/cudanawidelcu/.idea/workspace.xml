@@ -5,13 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="bdadf3cf-7676-41a1-af01-9ce8cef14cc3" name="Changes" comment="heheeeee dziala web service">
+      <change afterPath="$PROJECT_DIR$/web-service/src/main/java/org/example/request/AuthenticationRequest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web-service/src/main/java/org/example/request/RegisterRequest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web-service/src/main/java/org/example/request/ValidateAdminRequest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web-service/src/main/java/org/example/response/AuthenticationResponse.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web-service/src/main/java/org/example/response/ValidateAdminResponse.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web-service/src/main/java/org/example/service/IdentityService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web-service/src/main/resources/public/js/switchLoginRegisterLogout.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/recipes-service/src/main/java/org/example/controller/RecipeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/recipes-service/src/main/java/org/example/controller/RecipeController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/recipes-service/src/main/java/org/example/repository/RecipeRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/recipes-service/src/main/java/org/example/repository/RecipeRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/recipes-service/src/main/java/org/example/service/RecipeService.java" beforeDir="false" afterPath="$PROJECT_DIR$/recipes-service/src/main/java/org/example/service/RecipeService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/recipes-service/src/main/java/org/example/service/RecipeServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/recipes-service/src/main/java/org/example/service/RecipeServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-service/src/main/java/org/example/controller/WebController.java" beforeDir="false" afterPath="$PROJECT_DIR$/web-service/src/main/java/org/example/controller/WebController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/web-service/src/main/java/org/example/service/RecipesService.java" beforeDir="false" afterPath="$PROJECT_DIR$/web-service/src/main/java/org/example/service/RecipesService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web-service/src/main/resources/templates/head.html" beforeDir="false" afterPath="$PROJECT_DIR$/web-service/src/main/resources/templates/head.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/web-service/src/main/resources/templates/header.html" beforeDir="false" afterPath="$PROJECT_DIR$/web-service/src/main/resources/templates/header.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -25,10 +28,16 @@
         <option value="Interface" />
         <option value="Enum" />
         <option value="Class" />
+        <option value="JavaScript File" />
       </list>
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$/../.." value="main" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
   </component>
   <component name="GitToolBoxStore">
@@ -83,7 +92,7 @@
     "ignore.virus.scanning.warn.message": "true",
     "jdk.selected.JAVA_MODULE": "corretto-17",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/funko/Documents/Coding/modelowanie-i-implementacja-aplikacji-biznesowych/projekt/cudanawidelcu",
+    "last_opened_file_path": "C:/Users/funko/Documents/Coding/modelowanie-i-implementacja-aplikacji-biznesowych/projekt/cudanawidelcu/web-service/src/main/java/org/example/request",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -101,11 +110,11 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\funko\Documents\Coding\modelowanie-i-implementacja-aplikacji-biznesowych\projekt\cudanawidelcu\web-service\src\main\java\org\example\request" />
+      <recent name="C:\Users\funko\Documents\Coding\modelowanie-i-implementacja-aplikacji-biznesowych\projekt\cudanawidelcu\web-service\src\main\java\org\example\response" />
       <recent name="C:\Users\funko\Documents\Coding\modelowanie-i-implementacja-aplikacji-biznesowych\projekt\cudanawidelcu" />
       <recent name="C:\Users\funko\Documents\Coding\modelowanie-i-implementacja-aplikacji-biznesowych\projekt\cudanawidelcu\web-service\src\main\java\org\example" />
       <recent name="C:\Users\funko\Documents\Coding\modelowanie-i-implementacja-aplikacji-biznesowych\projekt\cudanawidelcu\identity-service\src\main\java\org\example" />
-      <recent name="C:\Users\funko\Documents\Coding\modelowanie-i-implementacja-aplikacji-biznesowych\projekt\cudanawidelcu\application-gateway\src\main\java\org\example" />
-      <recent name="C:\Users\funko\Documents\Coding\modelowanie-i-implementacja-aplikacji-biznesowych\projekt\cudanawidelcu\recipes-service\src\main\java\org\example\aspect" />
     </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
       <recent name="com.example.reactivetest" />
@@ -248,8 +257,8 @@
       <list>
         <item itemvalue="Spring Boot.WebServiceApplication" />
         <item itemvalue="Spring Boot.RecipesServiceApplication" />
-        <item itemvalue="Spring Boot.IdentityServiceApplication" />
         <item itemvalue="Spring Boot.EurekaServerApplication" />
+        <item itemvalue="Spring Boot.IdentityServiceApplication" />
       </list>
     </recent_temporary>
   </component>

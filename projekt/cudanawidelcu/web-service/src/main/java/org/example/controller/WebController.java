@@ -1,5 +1,7 @@
 package org.example.controller;
 
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletResponse;
 import org.example.dto.RecipeDto;
 import org.example.request.RateRecipeRequest;
 import org.example.request.UpdateRatingRequest;
@@ -60,5 +62,15 @@ public class WebController {
         updateRatingResponse.setCountVotes(recipeDto.getCountVotes());
 
         return updateRatingResponse;
+    }
+
+    @GetMapping("/logout")
+    public String logout(HttpServletResponse response) {
+        Cookie cookie = new Cookie("jwtToken", null);
+        cookie.setPath("/");
+        cookie.setHttpOnly(true);
+        cookie.setMaxAge(0);
+        response.addCookie(cookie);
+        return "redirect:/";
     }
 }
