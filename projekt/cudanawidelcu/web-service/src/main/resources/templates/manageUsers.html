@@ -9,18 +9,20 @@
 <div class="container">
     <main role="main" class="pb-3">
         <h1>Lista Użytkowników</h1>
-        <table class="table" th:if="${userDtos}">
+        <table class="table" th:if="${userResponses}">
             <thead>
             <tr>
                 <th>Nazwa Użytkownika</th>
+                <th>Rola</th>
                 <th></th>
             </tr>
             </thead>
             <tbody>
-            <tr th:each="user : ${userDtos}">
+            <tr th:each="user : ${userResponses}">
                 <td th:text="${user.username}"></td>
+                <td th:text="${user.roleResponse}"></td>
                 <td>
-                    <a class="index-detail-btn" th:href="@{'/admin/users/delete/' + ${user.id}}">Usuń</a>
+                    <a class="index-detail-btn" th:if="${user.roleResponse.toString() != 'ADMIN'}" th:href="@{'/admin/users/delete/' + ${user.id}}">Usuń</a>
                 </td>
             </tr>
             </tbody>

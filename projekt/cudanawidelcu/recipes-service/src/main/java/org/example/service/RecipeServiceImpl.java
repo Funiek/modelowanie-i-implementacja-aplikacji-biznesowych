@@ -46,8 +46,8 @@ public class RecipeServiceImpl implements RecipeService {
     }
 
     @Override
-    public Recipe updateRecipe(String name, Recipe recipe) throws RecipeNotFoundException {
-        Recipe existingRecipe = recipeRepository.findById(recipe.getId()).orElseThrow(() -> new RecipeNotFoundException(name));
+    public Recipe updateRecipe(Long id, Recipe recipe) throws RecipeNotFoundException {
+        Recipe existingRecipe = recipeRepository.findById(id).orElseThrow(() -> new RecipeNotFoundException(recipe.getName()));
         BeanUtils.copyProperties(recipe, existingRecipe, "id", "votes", "products");
         return recipeRepository.save(existingRecipe);
     }

@@ -16,7 +16,9 @@ document.addEventListener('DOMContentLoaded', function () {
         document.getElementById('login-item').style.display = 'none';
         document.getElementById('register-item').style.display = 'none';
         document.getElementById('create-recipe-item').style.display = 'block';
-        document.getElementById('admin-panel-item').style.display = 'block';
+        if (isUserAdmin()) {
+            document.getElementById('admin-panel-item').style.display = 'block';
+        }
         document.getElementById('logout-item').style.display = 'block';
     } else {
         document.getElementById('login-item').style.display = 'block';
@@ -26,3 +28,4 @@ document.addEventListener('DOMContentLoaded', function () {
         document.getElementById('logout-item').style.display = 'none';
     }
 });
+
