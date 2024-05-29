@@ -62,9 +62,11 @@ public class AdminController {
         return "redirect:/";
     }
     @GetMapping("/recipes/edit/{id}")
-    public String manageProducts(@PathVariable("id") Long id, @CookieValue("jwtToken") String jwtToken) {
+    public String manageProducts(@PathVariable("id") Long id, @CookieValue("jwtToken") String jwtToken, Model model) {
         ValidateAdminResponse validateAdminResponse = identityService.validateAdmin(jwtToken);
         if (validateAdminResponse.getIsValid()) {
+            RecipeDto recipeDto = recipesService.get(id);
+            model.addAttribute("recipeDto", recipeDto);
             return "editRecipe";
         }
 

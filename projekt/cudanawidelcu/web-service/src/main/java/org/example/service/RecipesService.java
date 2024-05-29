@@ -157,4 +157,30 @@ public class RecipesService {
 				ValidateAdminResponse.class
 		);
 	}
+
+	public void update(Long id, String token, RecipeDto recipeDtoToUpdate) {
+		RecipeDto recipeDto = null;
+
+		JSONObject updateRecipeJsonObject = new JSONObject();
+		try {
+			updateRecipeJsonObject.put("id", recipeDtoToUpdate.getId());
+			updateRecipeJsonObject.put("name", recipeDtoToUpdate.getName());
+			updateRecipeJsonObject.put("description", recipeDtoToUpdate.getDescription());
+		} catch (JSONException e) {
+			throw new RuntimeException(e);
+		}
+
+		HttpHeaders headers = new HttpHeaders();
+		headers.setBearerAuth(token);
+		HttpEntity<String> requestEntity = new HttpEntity<>(headers);
+
+
+
+		restTemplate.exchange(
+				RECIPES_SERVICE_URL + "/api/v1/recipes/" + id,
+				HttpMethod.PUT,
+				requestEntity,
+				ValidateAdminResponse.class
+		);
+	}
 }

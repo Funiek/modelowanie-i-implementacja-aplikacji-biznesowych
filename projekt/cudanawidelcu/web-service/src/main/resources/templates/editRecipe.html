@@ -1,10 +1,59 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
 
+<head th:replace="~{head :: copy}"></head>
+
+<body>
+<header th:replace="~{header :: copy}"></header>
+<div class="container">
+    <main role="main" class="pb-3">
+        <h1>Edytuj Przepis</h1>
+
+        <form th:action="@{/recipes/edit}" th:object="${recipeDto}" method="post">
+            <div class="form-group">
+                <label for="name">Nazwa</label>
+                <input type="text" class="form-control" id="name" th:field="*{name}" placeholder="Nazwa przepisu" required/>
+            </div>
+
+            <div class="form-group">
+                <label for="description">Opis</label>
+                <textarea class="form-control" id="description" th:field="*{description}" placeholder="Opis przepisu" rows="5"></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="category">Kategoria</label>
+                <select class="form-control" id="category" th:field="*{category}">
+                    <option th:each="category : ${T(org.example.dto.CategoryDto).values()}"
+                            th:value="${category}"
+                            th:text="${category}">Kategoria</option>
+                </select>
+            </div>
+
+<!--            <div class="form-group">-->
+<!--                <label>Produkty</label>-->
+<!--                <div th:each="product, iterStat : ${recipeDto.products}">-->
+<!--                    <div class="form-group">-->
+<!--                        <label for="product-name" th:text="'Produkt ' + (iterStat.index + 1)"></label>-->
+<!--                        <input type="text" class="form-control" th:field="*{products[__${iterStat.index}__].name}" placeholder="Nazwa produktu" required/>-->
+<!--                    </div>-->
+<!--                    <div class="form-group">-->
+<!--                        <label for="product-measure">Miara</label>-->
+<!--                        <input type="text" class="form-control" th:field="*{products[__${iterStat.index}__].measure}" placeholder="Miara produktu" required/>-->
+<!--                    </div>-->
+<!--                    <div class="form-group">-->
+<!--                        <label for="product-qty">Ilość</label>-->
+<!--                        <input type="number" step="0.01" class="form-control" th:field="*{products[__${iterStat.index}__].qty}" placeholder="Ilość produktu" required/>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+
+            <button type="submit" class="btn btn-primary">Zapisz</button>
+            <a th:href="@{/recipes}" class="btn btn-secondary">Anuluj</a>
+        </form>
+    </main>
+</div>
+
+<footer th:replace="~{footer :: copy}"></footer>
 </body>
 </html>
