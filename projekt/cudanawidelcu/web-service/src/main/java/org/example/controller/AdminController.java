@@ -1,9 +1,11 @@
 package org.example.controller;
 
 import org.example.dto.RecipeDto;
+import org.example.request.ChangeFileNameRequest;
 import org.example.response.UserResponse;
 import org.example.response.ValidateAdminResponse;
 import org.example.service.IdentityService;
+import org.example.service.ImageService;
 import org.example.service.RecipesService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,10 +19,12 @@ public class AdminController {
     private final IdentityService identityService;
 
     private final RecipesService recipesService;
+    private final ImageService imageService;
 
-    public AdminController(IdentityService identityService, RecipesService recipesService) {
+    public AdminController(IdentityService identityService, RecipesService recipesService, ImageService imageService) {
         this.identityService = identityService;
         this.recipesService = recipesService;
+        this.imageService = imageService;
     }
 
     @GetMapping("/panel")
@@ -62,12 +66,29 @@ public class AdminController {
         return "redirect:/";
     }
     @GetMapping("/recipes/edit/{id}")
-    public String manageProducts(@PathVariable("id") Long id, @CookieValue("jwtToken") String jwtToken, Model model) {
+    public String updateProducts(@PathVariable("id") Long id, @CookieValue("jwtToken") String jwtToken, Model model) {
         ValidateAdminResponse validateAdminResponse = identityService.validateAdmin(jwtToken);
         if (validateAdminResponse.getIsValid()) {
             RecipeDto recipeDto = recipesService.get(id);
             model.addAttribute("recipeDto", recipeDto);
             return "editRecipe";
+        }
+
+        return "redirect:/";
+    }
+
+    @PostMapping(path = "/recipes/edit", consumes = "application/x-www-form-urlencoded")
+    public String updateProducts(@CookieValue("jwtToken") String jwtToken, @ModelAttribute RecipeDto recipeDto) {
+        ValidateAdminResponse validateAdminResponse = identityService.validateAdmin(jwtToken);
+        if (validateAdminResponse.getIsValid()) {
+            RecipeDto oldRecipe = recipesService.get(recipeDto.getId());
+            recipesService.update(recipeDto.getId(), jwtToken, recipeDto);
+            ChangeFileNameRequest changeFileNameRequest = ChangeFileNameRequest.builder()
+                    .oldName(oldRecipe.getName() + ".jpeg")
+                    .newName(recipeDto.getName() + ".jpeg")
+                    .build();
+            imageService.renameImage(jwtToken, changeFileNameRequest);
+            return "redirect:/admin/recipes/manage";
         }
 
         return "redirect:/";

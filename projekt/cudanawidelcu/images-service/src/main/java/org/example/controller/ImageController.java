@@ -1,6 +1,7 @@
 package org.example.controller;
 
 import jakarta.servlet.http.HttpServletResponse;
+import org.example.request.ChangeFileNameRequest;
 import org.example.service.ImageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -44,5 +45,12 @@ public class ImageController {
     public ResponseEntity<String> uploadImage(@RequestParam("image") MultipartFile image) throws IOException {
         imageService.uploadImage(image);
         return new ResponseEntity<>("File uploaded", HttpStatus.OK);
+    }
+
+    @PostMapping(value = "/rename")
+    public ResponseEntity<Resource> renameImage(@RequestBody ChangeFileNameRequest changeFileNameRequest) throws IOException {
+        imageService.renameImage(changeFileNameRequest.getOldName(), changeFileNameRequest.getNewName());
+
+        return null;
     }
 }

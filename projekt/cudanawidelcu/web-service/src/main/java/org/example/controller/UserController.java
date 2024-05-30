@@ -43,12 +43,11 @@ public class UserController {
 
         try {
             AuthenticationResponse authenticationResponse = identityService.authenticate(authenticationRequest);
+            int cookieTime = identityService.getTimeForCookie(authenticationResponse.getToken());
 
             Cookie cookie = new Cookie("jwtToken", authenticationResponse.getToken());
             cookie.setPath("/");
-            // TODO trzeba sie dowiedziec czy mozna tego uzyc w tym przypadku i jak
-//        cookie.setHttpOnly(true);
-            cookie.setMaxAge(60 * 5);
+            cookie.setMaxAge(cookieTime);
             response.addCookie(cookie);
         } catch (Exception e) {
             model.addAttribute("error", "Invalid username or password");
@@ -70,12 +69,11 @@ public class UserController {
         RegisterRequest registerRequest = new RegisterRequest(username, password);
         try {
             AuthenticationResponse authenticationResponse = identityService.register(registerRequest);
+            int cookieTime = identityService.getTimeForCookie(authenticationResponse.getToken());
 
             Cookie cookie = new Cookie("jwtToken", authenticationResponse.getToken());
             cookie.setPath("/");
-            // TODO trzeba sie dowiedziec czy mozna tego uzyc w tym przypadku i jak
-//        cookie.setHttpOnly(true);
-            cookie.setMaxAge(60 * 5);
+            cookie.setMaxAge(cookieTime);
             response.addCookie(cookie);
         } catch (Exception e) {
             model.addAttribute("error", "User already exists");

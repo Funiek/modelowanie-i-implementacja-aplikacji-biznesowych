@@ -9,4 +9,5 @@ import java.io.InputStream;
 public interface ImageService {
     InputStream getImage(String fileName) throws FileNotFoundException;
     void uploadImage(MultipartFile file) throws IOException;
+    void renameImage(String oldFileName, String newFileName) throws IOException;
 }
