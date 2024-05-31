@@ -37,8 +37,8 @@ public class ImageServiceImpl implements ImageService {
         if (newFile.exists()) {
             throw new IOException("File with the new name already exists: " + newFullPath);
         }
+        System.gc();
 
-        // TODO dziala tylko jak sie zmienia nazwe pierwszy raz podczas dzialania programu, a potem nie. Naprawic
         boolean success = oldFile.renameTo(newFile);
         if (!success) {
             throw new IOException("Failed to rename file: " + oldFullPath + " to " + newFullPath);
