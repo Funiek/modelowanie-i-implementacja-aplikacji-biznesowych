@@ -10,6 +10,14 @@ spring:
           filters:
             - StripPrefix=1
             - RoleCheck=ADMIN
+        - id: recipes-update
+          uri: lb://recipes-service
+          predicates:
+            - Path=/recipes-service/api/v1/recipes
+            - Method=PUT
+          filters:
+            - StripPrefix=1
+            - RoleCheck=ADMIN
         - id: recipes-service
           uri: lb://recipes-service
           predicates:
@@ -28,6 +36,13 @@ spring:
             - Path=/identity-service/**
           filters:
             - StripPrefix=1
+        - id: images-rename
+          uri: lb://images-service
+          predicates:
+            - Path=/images-service/api/v1/images/rename
+          filters:
+            - StripPrefix=1
+            - RoleCheck=ADMIN
         - id: images-service
           uri: lb://images-service
           predicates:

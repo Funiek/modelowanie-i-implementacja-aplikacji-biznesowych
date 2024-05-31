@@ -1,10 +1,13 @@
 package org.example.service;
 
 import jakarta.annotation.PostConstruct;
+import org.example.dto.ProductDto;
 import org.example.dto.RecipeDto;
+import org.example.dto.VoteDto;
 import org.example.request.CreateRecipeRequest;
 import org.example.request.RateRecipeRequest;
 import org.example.response.ValidateAdminResponse;
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
@@ -156,5 +159,58 @@ public class RecipesService {
 				requestEntity,
 				ValidateAdminResponse.class
 		);
+	}
+
+	public RecipeDto update(Long id, String token, RecipeDto recipeDtoToUpdate) {
+		RecipeDto recipeDto = null;
+
+		JSONObject updateRecipeJsonObject = new JSONObject();
+		try {
+			updateRecipeJsonObject.put("id", recipeDtoToUpdate.getId());
+			updateRecipeJsonObject.put("name", recipeDtoToUpdate.getName());
+			updateRecipeJsonObject.put("description", recipeDtoToUpdate.getDescription());
+			updateRecipeJsonObject.put("rating", recipeDtoToUpdate.getRating());
+			updateRecipeJsonObject.put("countVotes", recipeDtoToUpdate.getCountVotes());
+			updateRecipeJsonObject.put("category", recipeDtoToUpdate.getCategory().name());
+
+			JSONArray productsJsonArray = new JSONArray();
+			for (ProductDto product : recipeDtoToUpdate.getProducts()) {
+				JSONObject productJson = new JSONObject();
+				productJson.put("id", product.getId());
+				productJson.put("name", product.getName());
+				productJson.put("measure", product.getMeasure());
+				productJson.put("qty", product.getQty());
+				productsJsonArray.put(productJson);
+			}
+			updateRecipeJsonObject.put("products", productsJsonArray);
+
+			JSONArray votesJsonArray = new JSONArray();
+			for (VoteDto vote : recipeDtoToUpdate.getVotes()) {
+				JSONObject voteJson = new JSONObject();
+				voteJson.put("id", vote.getId());
+				voteJson.put("rating", vote.getRating());
+				votesJsonArray.put(voteJson);
+			}
+			updateRecipeJsonObject.put("votes", votesJsonArray);
+
+		} catch (JSONException e) {
+			throw new RuntimeException(e);
+		}
+
+		HttpHeaders headers = new HttpHeaders();
+		headers.setBearerAuth(token);
+		headers.setContentType(MediaType.APPLICATION_JSON);
+		HttpEntity<String> requestEntity = new HttpEntity<>(updateRecipeJsonObject.toString(), headers);
+
+		ResponseEntity<RecipeDto> responseEntity = restTemplate.exchange(
+				RECIPES_SERVICE_URL + "/api/v1/recipes/" + id,
+				HttpMethod.PUT,
+				requestEntity,
+				RecipeDto.class
+		);
+
+		recipeDto = responseEntity.getBody();
+
+		return recipeDto;
 	}
 }

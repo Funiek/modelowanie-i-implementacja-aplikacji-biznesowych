@@ -19,9 +19,6 @@ import java.util.function.Function;
 
 @Service
 public class JwtService {
-
-    // TODO secret trzeba przeniesc do properties
-//    private final Key SECRET = Keys.secretKeyFor(SignatureAlgorithm.HS256);
     @Value("${secret}")
     private String SECRET;
 
