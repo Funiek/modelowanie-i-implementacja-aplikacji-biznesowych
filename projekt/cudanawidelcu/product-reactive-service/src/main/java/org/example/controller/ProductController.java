@@ -7,6 +7,7 @@ import org.example.util.ProductMapper;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.reactive.config.EnableWebFlux;
 import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 
 @RestController
 @EnableWebFlux
@@ -25,4 +26,24 @@ public class ProductController {
         // TODO przy maperach zweryfikować czy lepiej jest korzystać z product.map czy całość zamknąć w convertProductListToProductDtoList.
         return products.map(ProductMapper::convertProductToProductDto);
     }
+
+    @GetMapping("/recipe/{recipeId}")
+    public Flux<ProductDto> findAllByRecipeId(@PathVariable("recipeId") Long recipeId) {
+        Flux<Product> products = productService.findAllByRecipe(recipeId);
+        return products.map(ProductMapper::convertProductToProductDto);
+    }
+
+    @PostMapping
+    public Mono<ProductDto> save(@RequestBody ProductDto productDto) {
+        // TODO pewnie do poprawienia żeby przyjmował parametr w MONO
+        Product product = ProductMapper.convertProductDtoToProduct(productDto);
+        Mono<Product> createProduct = productService.save(product);
+        return createProduct.map(ProductMapper::convertProductToProductDto);
+    }
+
+    @DeleteMapping("/recipe/{recipeId}")
+    public Mono<Void> deleteByRecipeId(@PathVariable("recipeId") Long recipeId) {
+        return productService.deleteAllByRecipeId(recipeId);
+    }
 }
+
