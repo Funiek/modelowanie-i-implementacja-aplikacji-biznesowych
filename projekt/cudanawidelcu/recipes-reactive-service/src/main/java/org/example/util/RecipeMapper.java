@@ -11,6 +11,7 @@ import org.example.model.Product;
 import org.example.model.Recipe;
 import org.example.model.Vote;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -81,6 +82,7 @@ public class RecipeMapper {
                 .category(Category.fromCategoryDto(recipeDto.getCategory()))
                 .products(RecipeMapper.convertProductDtoListToProductList(recipeDto.getProducts()))
                 .votes(RecipeMapper.convertVoteDtoListToVoteList(recipeDto.getVotes()))
+                .createdAt(LocalDateTime.now())
                 .build();
     }
 

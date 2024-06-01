@@ -18,6 +18,7 @@
 		<module>identity-service</module>
         <module>images-service</module>
 		<module>recipes-reactive-service</module>
+		<module>product-reactive-service</module>
 	</modules>
 
 	<properties>

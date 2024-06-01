@@ -20,7 +20,7 @@ public class RecipeController {
     }
 
     @GetMapping
-    public Flux<RecipeDto> getAll() {
+    public Flux<RecipeDto> findAll() {
         Flux<Recipe> recipes = recipeService.getRecipes();
 
         return recipes.map(RecipeMapper::convertRecipeToRecipeDto);
