@@ -49,3 +49,15 @@ spring:
             - Path=/images-service/**
           filters:
             - StripPrefix=1
+        - id: products-service
+          uri: lb://products-service
+          predicates:
+            - Path=/products-service/**
+          filters:
+            - StripPrefix=1
+        - id: votes-service
+          uri: lb://votes-service
+          predicates:
+            - Path=/votes-service/**
+          filters:
+            - StripPrefix=1

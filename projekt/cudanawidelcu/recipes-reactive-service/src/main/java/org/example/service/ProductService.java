@@ -1,15 +1,16 @@
 package org.example.service;
 
+import org.example.dto.ProductDto;
 import org.example.model.Product;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 public interface ProductService {
-    Flux<Product> findAll();
+    Flux<ProductDto> findAll();
 
-    Flux<Product> findAllByRecipe(Long recipeId);
+    Flux<ProductDto> findAllByRecipe(Long recipeId);
 
-    Mono<Product> save(Product product);
+    Mono<ProductDto> save(ProductDto productDto);
 
     Mono<Void> deleteAllByRecipeId(Long recipeId);
 }
