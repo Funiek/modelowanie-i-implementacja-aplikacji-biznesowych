@@ -19,7 +19,8 @@
         <module>images-service</module>
 		<module>recipes-reactive-service</module>
 		<module>product-reactive-service</module>
-	</modules>
+        <module>votes-reactive-service</module>
+    </modules>
 
 	<properties>
 		<java.version>17</java.version>
