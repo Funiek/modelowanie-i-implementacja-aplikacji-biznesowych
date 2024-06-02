@@ -1,15 +1,13 @@
 package org.example.service;
 
 import org.example.dto.ProductDto;
-import org.example.dto.VoteDto;
-import org.example.model.Product;
-import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
-import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
+
+import java.util.List;
 
 @Service
 public class ProductServiceImpl implements ProductService {
@@ -21,21 +19,23 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public Flux<ProductDto> findAll() {
+    public Mono<List<ProductDto>> findAll() {
         return builder.build()
                 .get()
                 .uri(PRODUCTS_SERVICE_URL + "/api/v1/products")
                 .retrieve()
-                .bodyToFlux(ProductDto.class);
+                .bodyToFlux(ProductDto.class)
+                .collectList();
     }
 
     @Override
-    public Flux<ProductDto> findAllByRecipe(Long recipeId) {
+    public Mono<List<ProductDto>> findAllByRecipe(Long recipeId) {
         return builder.build()
                 .get()
                 .uri(PRODUCTS_SERVICE_URL + "/api/v1/products/" + recipeId)
                 .retrieve()
-                .bodyToFlux(ProductDto.class);
+                .bodyToFlux(ProductDto.class)
+                .collectList();
     }
 
     @Override

@@ -10,6 +10,7 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class RecipeServiceImpl implements RecipeService {
@@ -25,9 +26,19 @@ public class RecipeServiceImpl implements RecipeService {
     public Flux<Recipe> getRecipes() {
         Flux<Recipe> recipeFlux = recipeRepository.findAll();
         return recipeFlux.flatMap(recipe -> {
-            Flux<ProductDto> productDtoFlux = productService.findAllByRecipe(recipe.getId());
-            Flux<Product> productFlux = productDtoFlux.map(RecipeMapper::convertProductDtoToProduct);
-            recipe.setProducts(productFlux);
+            Mono<List<ProductDto>> productListMono = productService.findAllByRecipe(recipe.getId());
+            // TODO poprawienie zaciagania produktow
+            List<ProductDto> productFlux = productListMono.block();
+            if (productFlux != null) {
+                recipe.setProducts(productFlux.stream().map(productDto -> Product.builder()
+                        .id(productDto.getId())
+                        .recipeId(productDto.getRecipeId())
+                        .measure(productDto.getMeasure())
+                        .qty(productDto.getQty())
+                        .name(productDto.getName())
+                        .build()
+                ).collect(Collectors.toList()));
+            }
             // TODO tu chyba trzeba zmienić return na coś innego. Pamiętać żeby poszukać
             return Mono.just(recipe);
         });

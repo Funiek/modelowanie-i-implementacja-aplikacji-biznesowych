@@ -28,7 +28,7 @@ public class Recipe {
     private LocalDateTime createdAt;
 
     @Transient
-    private Flux<Product> products;
+    private List<Product> products;
     @Transient
     private Flux<Vote> votes;
 }

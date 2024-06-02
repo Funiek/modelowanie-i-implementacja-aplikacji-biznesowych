@@ -17,6 +17,6 @@ public class RecipeDto {
     private Double rating;
     private int countVotes;
     private CategoryDto category;
-    private Flux<ProductDto> products;
+    private List<ProductDto> products;
     private Flux<VoteDto> votes;
 }

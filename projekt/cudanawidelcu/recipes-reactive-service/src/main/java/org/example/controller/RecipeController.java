@@ -23,6 +23,6 @@ public class RecipeController {
     public Flux<RecipeDto> findAll() {
         Flux<Recipe> recipes = recipeService.getRecipes();
 
-        return recipes.map(RecipeMapper::convertRecipeToRecipeDto);
+        return recipes.flatMap(RecipeMapper::convertRecipeToRecipeDto);
     }
 }

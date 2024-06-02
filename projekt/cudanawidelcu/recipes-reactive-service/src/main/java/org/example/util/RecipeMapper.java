@@ -10,46 +10,47 @@ import org.example.model.Category;
 import org.example.model.Product;
 import org.example.model.Recipe;
 import org.example.model.Vote;
+import org.reactivestreams.Publisher;
+import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class RecipeMapper {
-    public static RecipeDto convertRecipeToRecipeDto(Recipe recipe) {
-        return RecipeDto.builder()
-                .id(recipe.getId())
-                .name(recipe.getName())
-                .description(recipe.getDescription())
-                .rating(recipe.getRating())
-                .countVotes(recipe.getCountVotes())
-                .category(CategoryDto.fromCategory(recipe.getCategory()))
-                .products(RecipeMapper.convertProductListToProductDtoList(recipe.getProducts()))
-                .votes(RecipeMapper.convertVoteListToVoteDtoList(recipe.getVotes()))
-                .build();
+    public static Mono<RecipeDto> convertRecipeToRecipeDto(Recipe recipe) {
+        return Mono.just(
+                RecipeDto.builder()
+                        .id(recipe.getId())
+                        .name(recipe.getName())
+                        .description(recipe.getDescription())
+                        .rating(recipe.getRating())
+                        .countVotes(recipe.getCountVotes())
+                        .category(CategoryDto.fromCategory(recipe.getCategory()))
+                        .products(recipe.getProducts().stream().map(product -> ProductDto.builder()
+                                .id(product.getId())
+                                .recipeId(product.getRecipeId())
+                                .measure(product.getMeasure())
+                                .name(product.getName())
+                                .build()
+                        ).collect(Collectors.toList()))
+//                        .products(recipe.getProducts().flatMap(RecipeMapper::convertProductToProductDto))
+//                .votes(RecipeMapper.convertVoteListToVoteDtoList(recipe.getVotes()))
+                        .build()
+        );
     }
 
-    public static ProductDto convertProductToProductDto(Product product) {
-        return ProductDto.builder()
-                .id(product.getId())
-                .recipeId(product.getRecipeId())
-                .name(product.getName())
-                .qty(product.getQty())
-                .measure(product.getMeasure())
-                .build();
-    }
-
-    public static List<ProductDto> convertProductListToProductDtoList(List<Product> productList) {
-        List<ProductDto> productListDto = new ArrayList<>();
-
-        if (productList == null) {
-            return productListDto;
-        }
-
-        for (Product product : productList) {
-            productListDto.add(RecipeMapper.convertProductToProductDto(product));
-        }
-        return productListDto;
+    public static Mono<ProductDto> convertProductToProductDto(Product product) {
+        return Mono.just(
+                ProductDto.builder()
+                        .id(product.getId())
+                        .recipeId(product.getRecipeId())
+                        .qty(product.getQty())
+                        .measure(product.getMeasure())
+                        .name(product.getName())
+                        .build());
     }
 
     public static VoteDto convertVoteToVoteDto(Vote vote) {
@@ -60,18 +61,6 @@ public class RecipeMapper {
                 .build();
     }
 
-    public static List<VoteDto> convertVoteListToVoteDtoList(List<Vote> voteList) {
-        List<VoteDto> voteListDto = new ArrayList<>();
-        if (voteList == null) {
-            return voteListDto;
-        }
-
-        for (Vote vote : voteList) {
-            voteListDto.add(RecipeMapper.convertVoteToVoteDto(vote));
-        }
-        return voteListDto;
-    }
-
     public static Recipe convertRecipeDtoToRecipe(RecipeDto recipeDto) {
         return Recipe.builder()
                 .id(recipeDto.getId())
@@ -80,32 +69,30 @@ public class RecipeMapper {
                 .rating(recipeDto.getRating())
                 .countVotes(recipeDto.getCountVotes())
                 .category(Category.fromCategoryDto(recipeDto.getCategory()))
-                .products(RecipeMapper.convertProductDtoListToProductList(recipeDto.getProducts()))
-                .votes(RecipeMapper.convertVoteDtoListToVoteList(recipeDto.getVotes()))
+                .products(recipeDto.getProducts().stream().map(productDto -> Product.builder()
+                        .id(productDto.getId())
+                        .recipeId(productDto.getRecipeId())
+                        .name(productDto.getName())
+                        .measure(productDto.getMeasure())
+                        .qty(productDto.getQty())
+                        .build()
+                ).collect(Collectors.toList()))
+//                .products(recipeDto.getProducts().flatMap(RecipeMapper::convertProductDtoToProduct))
+//                .votes(RecipeMapper.convertVoteDtoListToVoteList(recipeDto.getVotes()))
                 .createdAt(LocalDateTime.now())
                 .build();
     }
 
-    public static Product convertProductDtoToProduct(ProductDto productDto) {
-        return Product.builder()
-                .id(productDto.getId())
-                .recipeId(productDto.getRecipeId())
-                .name(productDto.getName())
-                .qty(productDto.getQty())
-                .measure(productDto.getMeasure())
-                .build();
-    }
-
-    public static List<Product> convertProductDtoListToProductList(List<ProductDto> productDtoList) {
-        List<Product> productList = new ArrayList<>();
-        if (productDtoList == null) {
-            return productList;
-        }
-
-        for (ProductDto productDto : productDtoList) {
-            productList.add(RecipeMapper.convertProductDtoToProduct(productDto));
-        }
-        return productList;
+    public static Mono<Product> convertProductDtoToProduct(ProductDto productDto) {
+        return Mono.just(
+                Product.builder()
+                        .id(productDto.getId())
+                        .recipeId(productDto.getRecipeId())
+                        .name(productDto.getName())
+                        .qty(productDto.getQty())
+                        .measure(productDto.getMeasure())
+                        .build()
+        );
     }
 
     public static Vote convertVoteDtoToVote(VoteDto voteDto) {
@@ -117,15 +104,4 @@ public class RecipeMapper {
         return vote;
     }
 
-    public static List<Vote> convertVoteDtoListToVoteList(List<VoteDto> voteDtoList) {
-        List<Vote> voteList = new ArrayList<>();
-        if (voteDtoList == null) {
-            return voteList;
-        }
-
-        for (VoteDto voteDto : voteDtoList) {
-            voteList.add(RecipeMapper.convertVoteDtoToVote(voteDto));
-        }
-        return voteList;
-    }
 }
