@@ -30,5 +30,5 @@ public class Recipe {
     @Transient
     private List<Product> products;
     @Transient
-    private Flux<Vote> votes;
+    private List<Vote> votes;
 }

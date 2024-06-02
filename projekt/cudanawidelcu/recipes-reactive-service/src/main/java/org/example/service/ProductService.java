@@ -7,9 +7,9 @@ import reactor.core.publisher.Mono;
 import java.util.List;
 
 public interface ProductService {
-    Mono<List<ProductDto>> findAll();
+    Flux<ProductDto> findAll();
 
-    Mono<List<ProductDto>> findAllByRecipe(Long recipeId);
+    Flux<ProductDto> findAllByRecipe(Long recipeId);
 
     Mono<ProductDto> save(ProductDto productDto);
 

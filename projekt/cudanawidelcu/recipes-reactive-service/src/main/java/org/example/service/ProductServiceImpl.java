@@ -5,6 +5,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 import java.util.List;
@@ -19,23 +20,21 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public Mono<List<ProductDto>> findAll() {
+    public Flux<ProductDto> findAll() {
         return builder.build()
                 .get()
                 .uri(PRODUCTS_SERVICE_URL + "/api/v1/products")
                 .retrieve()
-                .bodyToFlux(ProductDto.class)
-                .collectList();
+                .bodyToFlux(ProductDto.class);
     }
 
     @Override
-    public Mono<List<ProductDto>> findAllByRecipe(Long recipeId) {
+    public Flux<ProductDto> findAllByRecipe(Long recipeId) {
         return builder.build()
                 .get()
-                .uri(PRODUCTS_SERVICE_URL + "/api/v1/products/" + recipeId)
+                .uri(PRODUCTS_SERVICE_URL + "/api/v1/products/recipe/" + recipeId)
                 .retrieve()
-                .bodyToFlux(ProductDto.class)
-                .collectList();
+                .bodyToFlux(ProductDto.class);
     }
 
     @Override

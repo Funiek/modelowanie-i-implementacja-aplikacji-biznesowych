@@ -21,36 +21,26 @@ import java.util.stream.Collectors;
 
 public class RecipeMapper {
     public static Mono<RecipeDto> convertRecipeToRecipeDto(Recipe recipe) {
-        return Mono.just(
-                RecipeDto.builder()
-                        .id(recipe.getId())
-                        .name(recipe.getName())
-                        .description(recipe.getDescription())
-                        .rating(recipe.getRating())
-                        .countVotes(recipe.getCountVotes())
-                        .category(CategoryDto.fromCategory(recipe.getCategory()))
-                        .products(recipe.getProducts().stream().map(product -> ProductDto.builder()
-                                .id(product.getId())
-                                .recipeId(product.getRecipeId())
-                                .measure(product.getMeasure())
-                                .name(product.getName())
-                                .build()
-                        ).collect(Collectors.toList()))
-//                        .products(recipe.getProducts().flatMap(RecipeMapper::convertProductToProductDto))
-//                .votes(RecipeMapper.convertVoteListToVoteDtoList(recipe.getVotes()))
-                        .build()
-        );
+        return Mono.just(RecipeDto.builder()
+                .id(recipe.getId())
+                .name(recipe.getName())
+                .description(recipe.getDescription())
+                .rating(recipe.getRating())
+                .countVotes(recipe.getCountVotes())
+                .category(CategoryDto.fromCategory(recipe.getCategory()))
+                .products(recipe.getProducts().stream().map(RecipeMapper::convertProductToProductDto).collect(Collectors.toList()))
+                .build());
     }
 
-    public static Mono<ProductDto> convertProductToProductDto(Product product) {
-        return Mono.just(
-                ProductDto.builder()
+
+    public static ProductDto convertProductToProductDto(Product product) {
+        return ProductDto.builder()
                         .id(product.getId())
                         .recipeId(product.getRecipeId())
                         .qty(product.getQty())
                         .measure(product.getMeasure())
                         .name(product.getName())
-                        .build());
+                        .build();
     }
 
     public static VoteDto convertVoteToVoteDto(Vote vote) {
@@ -69,30 +59,22 @@ public class RecipeMapper {
                 .rating(recipeDto.getRating())
                 .countVotes(recipeDto.getCountVotes())
                 .category(Category.fromCategoryDto(recipeDto.getCategory()))
-                .products(recipeDto.getProducts().stream().map(productDto -> Product.builder()
-                        .id(productDto.getId())
-                        .recipeId(productDto.getRecipeId())
-                        .name(productDto.getName())
-                        .measure(productDto.getMeasure())
-                        .qty(productDto.getQty())
-                        .build()
-                ).collect(Collectors.toList()))
-//                .products(recipeDto.getProducts().flatMap(RecipeMapper::convertProductDtoToProduct))
-//                .votes(RecipeMapper.convertVoteDtoListToVoteList(recipeDto.getVotes()))
+                .products(recipeDto.getProducts()
+                                    .stream()
+                                    .map(RecipeMapper::convertProductDtoToProduct)
+                                    .collect(Collectors.toList()))
                 .createdAt(LocalDateTime.now())
                 .build();
     }
 
-    public static Mono<Product> convertProductDtoToProduct(ProductDto productDto) {
-        return Mono.just(
-                Product.builder()
+    public static Product convertProductDtoToProduct(ProductDto productDto) {
+        return Product.builder()
                         .id(productDto.getId())
                         .recipeId(productDto.getRecipeId())
                         .name(productDto.getName())
                         .qty(productDto.getQty())
                         .measure(productDto.getMeasure())
-                        .build()
-        );
+                        .build();
     }
 
     public static Vote convertVoteDtoToVote(VoteDto voteDto) {

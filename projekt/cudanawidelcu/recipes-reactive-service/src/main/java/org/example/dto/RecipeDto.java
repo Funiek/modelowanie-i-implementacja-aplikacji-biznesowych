@@ -10,6 +10,8 @@ import java.util.List;
 
 @Data
 @Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class RecipeDto {
     private Long id;
     private String name;
@@ -18,5 +20,5 @@ public class RecipeDto {
     private int countVotes;
     private CategoryDto category;
     private List<ProductDto> products;
-    private Flux<VoteDto> votes;
+    private List<VoteDto> votes;
 }

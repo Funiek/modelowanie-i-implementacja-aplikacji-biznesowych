@@ -24,23 +24,17 @@ public class RecipeServiceImpl implements RecipeService {
 
     @Override
     public Flux<Recipe> getRecipes() {
-        Flux<Recipe> recipeFlux = recipeRepository.findAll();
-        return recipeFlux.flatMap(recipe -> {
-            Mono<List<ProductDto>> productListMono = productService.findAllByRecipe(recipe.getId());
-            // TODO poprawienie zaciagania produktow
-            List<ProductDto> productFlux = productListMono.block();
-            if (productFlux != null) {
-                recipe.setProducts(productFlux.stream().map(productDto -> Product.builder()
-                        .id(productDto.getId())
-                        .recipeId(productDto.getRecipeId())
-                        .measure(productDto.getMeasure())
-                        .qty(productDto.getQty())
-                        .name(productDto.getName())
-                        .build()
-                ).collect(Collectors.toList()));
-            }
-            // TODO tu chyba trzeba zmienić return na coś innego. Pamiętać żeby poszukać
-            return Mono.just(recipe);
-        });
+        return recipeRepository.findAll()
+                .flatMap(recipe -> productService.findAllByRecipe(recipe.getId())
+                        .collectList()
+                        .map(productDtos -> {
+                            List<Product> products = productDtos.stream()
+                                    .map(RecipeMapper::convertProductDtoToProduct)
+                                    .collect(Collectors.toList());
+                            recipe.setProducts(products);
+                            return recipe;
+                        })
+                );
     }
+
 }

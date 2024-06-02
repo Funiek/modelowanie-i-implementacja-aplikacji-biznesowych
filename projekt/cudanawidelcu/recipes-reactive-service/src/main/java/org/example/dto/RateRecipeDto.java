@@ -7,6 +7,8 @@ import lombok.NoArgsConstructor;
 
 @Data
 @Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class RateRecipeDto {
     private Long id;
     private String name;

@@ -9,6 +9,8 @@ import java.time.LocalDateTime;
 
 @Data
 @Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class ProductDto {
     private Long id;
     private Long recipeId;
