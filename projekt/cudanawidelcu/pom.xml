@@ -10,7 +10,6 @@
 	<name>cudanawidelcu</name>
 	<description>Cuda na widelcu</description>
 	<modules>
-		<module>test-service</module>
 		<module>eureka-server</module>
 		<module>recipes-service</module>
 		<module>web-service</module>
