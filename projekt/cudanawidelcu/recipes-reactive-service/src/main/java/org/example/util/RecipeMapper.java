@@ -29,7 +29,28 @@ public class RecipeMapper {
                 .countVotes(recipe.getCountVotes())
                 .category(CategoryDto.fromCategory(recipe.getCategory()))
                 .products(recipe.getProducts().stream().map(RecipeMapper::convertProductToProductDto).collect(Collectors.toList()))
+                .votes(recipe.getVotes().stream().map(RecipeMapper::convertVoteToVoteDto).collect(Collectors.toList()))
                 .build());
+    }
+
+    public static Recipe convertRecipeDtoToRecipe(RecipeDto recipeDto) {
+        return Recipe.builder()
+                .id(recipeDto.getId())
+                .name(recipeDto.getName())
+                .description(recipeDto.getDescription())
+                .rating(recipeDto.getRating())
+                .countVotes(recipeDto.getCountVotes())
+                .category(Category.fromCategoryDto(recipeDto.getCategory()))
+                .products(recipeDto.getProducts()
+                        .stream()
+                        .map(RecipeMapper::convertProductDtoToProduct)
+                        .collect(Collectors.toList()))
+                .votes(recipeDto.getVotes()
+                        .stream()
+                        .map(RecipeMapper::convertVoteDtoToVote)
+                        .collect(Collectors.toList()))
+                .createdAt(LocalDateTime.now())
+                .build();
     }
 
 
@@ -42,6 +63,15 @@ public class RecipeMapper {
                         .name(product.getName())
                         .build();
     }
+    public static Product convertProductDtoToProduct(ProductDto productDto) {
+        return Product.builder()
+                .id(productDto.getId())
+                .recipeId(productDto.getRecipeId())
+                .name(productDto.getName())
+                .qty(productDto.getQty())
+                .measure(productDto.getMeasure())
+                .build();
+    }
 
     public static VoteDto convertVoteToVoteDto(Vote vote) {
         return VoteDto.builder()
@@ -49,32 +79,6 @@ public class RecipeMapper {
                 .recipeId(vote.getRecipeId())
                 .rating(vote.getRating())
                 .build();
-    }
-
-    public static Recipe convertRecipeDtoToRecipe(RecipeDto recipeDto) {
-        return Recipe.builder()
-                .id(recipeDto.getId())
-                .name(recipeDto.getName())
-                .description(recipeDto.getDescription())
-                .rating(recipeDto.getRating())
-                .countVotes(recipeDto.getCountVotes())
-                .category(Category.fromCategoryDto(recipeDto.getCategory()))
-                .products(recipeDto.getProducts()
-                                    .stream()
-                                    .map(RecipeMapper::convertProductDtoToProduct)
-                                    .collect(Collectors.toList()))
-                .createdAt(LocalDateTime.now())
-                .build();
-    }
-
-    public static Product convertProductDtoToProduct(ProductDto productDto) {
-        return Product.builder()
-                        .id(productDto.getId())
-                        .recipeId(productDto.getRecipeId())
-                        .name(productDto.getName())
-                        .qty(productDto.getQty())
-                        .measure(productDto.getMeasure())
-                        .build();
     }
 
     public static Vote convertVoteDtoToVote(VoteDto voteDto) {

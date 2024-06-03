@@ -18,19 +18,6 @@ public class ProductMapper {
                 .build();
     }
 
-    public static List<ProductDto> convertProductListToProductDtoList(List<Product> productList) {
-        List<ProductDto> productListDto = new ArrayList<>();
-
-        if (productList == null) {
-            return productListDto;
-        }
-
-        for (Product product : productList) {
-            productListDto.add(ProductMapper.convertProductToProductDto(product));
-        }
-        return productListDto;
-    }
-
     public static Product convertProductDtoToProduct(ProductDto productDto) {
         return Product.builder()
                 .id(productDto.getId())
@@ -40,17 +27,5 @@ public class ProductMapper {
                 .measure(productDto.getMeasure())
                 .createdAt(LocalDateTime.now())
                 .build();
-    }
-
-    public static List<Product> convertProductDtoListToProductList(List<ProductDto> productDtoList) {
-        List<Product> productList = new ArrayList<>();
-        if (productDtoList == null) {
-            return productList;
-        }
-
-        for (ProductDto productDto : productDtoList) {
-            productList.add(ProductMapper.convertProductDtoToProduct(productDto));
-        }
-        return productList;
     }
 }
