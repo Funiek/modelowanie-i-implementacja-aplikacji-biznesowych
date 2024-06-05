@@ -34,7 +34,6 @@ public class ProductController {
 
     @PostMapping
     public Mono<ProductDto> save(@RequestBody ProductDto productDto) {
-        // TODO pewnie do poprawienia żeby przyjmował parametr w MONO
         Product product = ProductMapper.convertProductDtoToProduct(productDto);
         Mono<Product> createProduct = productService.save(product);
         return createProduct.map(ProductMapper::convertProductToProductDto);

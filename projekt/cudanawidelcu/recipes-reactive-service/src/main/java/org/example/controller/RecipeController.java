@@ -7,6 +7,7 @@ import org.example.util.RecipeMapper;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.reactive.config.EnableWebFlux;
 import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 
 @RestController
 @EnableWebFlux
@@ -21,8 +22,26 @@ public class RecipeController {
 
     @GetMapping
     public Flux<RecipeDto> findAll() {
-        Flux<Recipe> recipes = recipeService.getRecipes();
+        Flux<Recipe> recipes = recipeService.findAll();
+        return recipes.flatMap(recipe -> Mono.just(RecipeMapper.convertRecipeToRecipeDto(recipe)));
+    }
 
-        return recipes.flatMap(RecipeMapper::convertRecipeToRecipeDto);
+    @PostMapping
+    public Mono<RecipeDto> save(@RequestBody RecipeDto recipeDto) {
+        Recipe recipe = RecipeMapper.convertRecipeDtoToRecipe(recipeDto);
+        Mono<Recipe> createdRecipe = recipeService.save(recipe);
+        return createdRecipe.map(RecipeMapper::convertRecipeToRecipeDto);
+    }
+
+    @PutMapping("/{id}")
+    public Mono<RecipeDto> update(@PathVariable("id") Long id, @RequestBody RecipeDto recipeDto) {
+        Recipe recipe = RecipeMapper.convertRecipeDtoToRecipe(recipeDto);
+        Mono<Recipe> createdRecipe = recipeService.update(id, recipe);
+        return createdRecipe.map(RecipeMapper::convertRecipeToRecipeDto);
+    }
+
+    @DeleteMapping("/{id}")
+    public Mono<Void> deleteById(@PathVariable("id") Long id) {
+        return recipeService.deleteById(id);
     }
 }

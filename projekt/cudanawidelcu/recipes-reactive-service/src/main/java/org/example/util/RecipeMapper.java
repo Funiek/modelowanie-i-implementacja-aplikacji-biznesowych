@@ -20,8 +20,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class RecipeMapper {
-    public static Mono<RecipeDto> convertRecipeToRecipeDto(Recipe recipe) {
-        return Mono.just(RecipeDto.builder()
+    public static RecipeDto convertRecipeToRecipeDto(Recipe recipe) {
+        return RecipeDto.builder()
                 .id(recipe.getId())
                 .name(recipe.getName())
                 .description(recipe.getDescription())
@@ -30,7 +30,7 @@ public class RecipeMapper {
                 .category(CategoryDto.fromCategory(recipe.getCategory()))
                 .products(recipe.getProducts().stream().map(RecipeMapper::convertProductToProductDto).collect(Collectors.toList()))
                 .votes(recipe.getVotes().stream().map(RecipeMapper::convertVoteToVoteDto).collect(Collectors.toList()))
-                .build());
+                .build();
     }
 
     public static Recipe convertRecipeDtoToRecipe(RecipeDto recipeDto) {

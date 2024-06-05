@@ -7,6 +7,7 @@ import org.example.repository.RecipeRepository;
 import org.example.util.RecipeMapper;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -24,7 +25,7 @@ public class RecipeServiceImpl implements RecipeService {
     }
 
     @Override
-    public Flux<Recipe> getRecipes() {
+    public Flux<Recipe> findAll() {
         return recipeRepository.findAll()
                 .flatMap(recipe -> productService.findAllByRecipe(recipe.getId())
                         .collectList()
@@ -46,6 +47,21 @@ public class RecipeServiceImpl implements RecipeService {
                             return recipe;
                         })
                 );
+    }
+
+    @Override
+    public Mono<Recipe> save(Recipe recipe) {
+        return recipeRepository.save(recipe);
+    }
+
+    @Override
+    public Mono<Recipe> update(Long id, Recipe recipe) {
+        return null;
+    }
+
+    @Override
+    public Mono<Void> deleteById(Long id) {
+        return recipeRepository.deleteById(id);
     }
 
 }
