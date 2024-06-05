@@ -23,7 +23,6 @@ public class ProductController {
     @GetMapping
     public Flux<ProductDto> findAll() {
         Flux<Product> products = productService.findAll();
-        // TODO czy lepiej nie będzie zamienić na flatmap jeśli się da?
         return products.map(ProductMapper::convertProductToProductDto);
     }
 

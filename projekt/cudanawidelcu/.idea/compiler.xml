@@ -24,6 +24,7 @@
       <module name="cuda-na-widelcu" target="11" />
       <module name="products-service" target="17" />
       <module name="reactivetest" target="17" />
+      <module name="test-service" target="17" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
