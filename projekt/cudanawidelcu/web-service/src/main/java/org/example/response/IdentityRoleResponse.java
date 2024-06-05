@@ -1,6 +1,6 @@
 package org.example.response;
 
 
-public enum RoleResponse {
+public enum IdentityRoleResponse {
     USER, ADMIN;
 }

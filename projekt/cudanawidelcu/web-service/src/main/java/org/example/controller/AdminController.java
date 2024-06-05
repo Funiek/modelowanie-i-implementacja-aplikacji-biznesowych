@@ -1,9 +1,9 @@
 package org.example.controller;
 
 import org.example.dto.RecipeDto;
-import org.example.request.ChangeFileNameRequest;
-import org.example.response.UserResponse;
-import org.example.response.ValidateAdminResponse;
+import org.example.request.ImagesRenameRequest;
+import org.example.response.IdentityUserResponse;
+import org.example.response.IdentityValidateAdminResponse;
 import org.example.service.IdentityService;
 import org.example.service.ImageService;
 import org.example.service.RecipesService;
@@ -29,8 +29,8 @@ public class AdminController {
 
     @GetMapping("/panel")
     public String adminPanel(@CookieValue("jwtToken") String jwtToken) {
-        ValidateAdminResponse validateAdminResponse = identityService.validateAdmin(jwtToken);
-        if (validateAdminResponse.getIsValid()) {
+        IdentityValidateAdminResponse identityValidateAdminResponse = identityService.validateAdmin(jwtToken);
+        if (identityValidateAdminResponse.getIsValid()) {
             return "adminPanel";
         }
 
@@ -38,10 +38,10 @@ public class AdminController {
     }
     @GetMapping("/users/manage")
     public String manageUsers(@CookieValue("jwtToken") String jwtToken, Model model) {
-        ValidateAdminResponse validateAdminResponse = identityService.validateAdmin(jwtToken);
-        if (validateAdminResponse.getIsValid()) {
-            List<UserResponse> userResponses = identityService.getAll(jwtToken);
-            model.addAttribute("userResponses", userResponses);
+        IdentityValidateAdminResponse identityValidateAdminResponse = identityService.validateAdmin(jwtToken);
+        if (identityValidateAdminResponse.getIsValid()) {
+            List<IdentityUserResponse> identityUserRespons = identityService.getAll(jwtToken);
+            model.addAttribute("userResponses", identityUserRespons);
             return "manageUsers";
         }
 
@@ -56,8 +56,8 @@ public class AdminController {
     }
     @GetMapping("/recipes/manage")
     public String manageProducts(@CookieValue("jwtToken") String jwtToken, Model model) {
-        ValidateAdminResponse validateAdminResponse = identityService.validateAdmin(jwtToken);
-        if (validateAdminResponse.getIsValid()) {
+        IdentityValidateAdminResponse identityValidateAdminResponse = identityService.validateAdmin(jwtToken);
+        if (identityValidateAdminResponse.getIsValid()) {
             List<RecipeDto> recipeDtos = recipesService.getAll();
             model.addAttribute("recipeDtos", recipeDtos);
             return "manageRecipes";
@@ -67,8 +67,8 @@ public class AdminController {
     }
     @GetMapping("/recipes/edit/{id}")
     public String updateProducts(@PathVariable("id") Long id, @CookieValue("jwtToken") String jwtToken, Model model) {
-        ValidateAdminResponse validateAdminResponse = identityService.validateAdmin(jwtToken);
-        if (validateAdminResponse.getIsValid()) {
+        IdentityValidateAdminResponse identityValidateAdminResponse = identityService.validateAdmin(jwtToken);
+        if (identityValidateAdminResponse.getIsValid()) {
             RecipeDto recipeDto = recipesService.get(id);
             model.addAttribute("recipeDto", recipeDto);
             return "editRecipe";
@@ -79,15 +79,15 @@ public class AdminController {
 
     @PostMapping(path = "/recipes/edit", consumes = "application/x-www-form-urlencoded")
     public String updateProducts(@CookieValue("jwtToken") String jwtToken, @ModelAttribute RecipeDto recipeDto) {
-        ValidateAdminResponse validateAdminResponse = identityService.validateAdmin(jwtToken);
-        if (validateAdminResponse.getIsValid()) {
+        IdentityValidateAdminResponse identityValidateAdminResponse = identityService.validateAdmin(jwtToken);
+        if (identityValidateAdminResponse.getIsValid()) {
             RecipeDto oldRecipe = recipesService.get(recipeDto.getId());
             recipesService.update(recipeDto.getId(), jwtToken, recipeDto);
-            ChangeFileNameRequest changeFileNameRequest = ChangeFileNameRequest.builder()
+            ImagesRenameRequest imagesRenameRequest = ImagesRenameRequest.builder()
                     .oldName(oldRecipe.getName() + ".jpeg")
                     .newName(recipeDto.getName() + ".jpeg")
                     .build();
-            imageService.renameImage(jwtToken, changeFileNameRequest);
+            imageService.renameImage(jwtToken, imagesRenameRequest);
             return "redirect:/admin/recipes/manage";
         }
 
@@ -96,8 +96,8 @@ public class AdminController {
 
     @GetMapping("/recipes/delete/{id}")
     public String deleteRecipe(@PathVariable("id") Long id, @CookieValue("jwtToken") String jwtToken) {
-        ValidateAdminResponse validateAdminResponse = identityService.validateAdmin(jwtToken);
-        if (validateAdminResponse.getIsValid()) {
+        IdentityValidateAdminResponse identityValidateAdminResponse = identityService.validateAdmin(jwtToken);
+        if (identityValidateAdminResponse.getIsValid()) {
             recipesService.delete(id, jwtToken);
         }
 

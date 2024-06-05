@@ -6,9 +6,11 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
-public class ValidateAdminResponse {
-    Boolean isValid;
+public class IdentityUserResponse {
+    private Long id;
+    private String username;
+    private IdentityRoleResponse identityRoleResponse;
 }

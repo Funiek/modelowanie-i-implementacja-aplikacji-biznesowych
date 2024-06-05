@@ -6,11 +6,11 @@ import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
 import jakarta.annotation.PostConstruct;
-import org.example.request.AuthenticationRequest;
-import org.example.request.RegisterRequest;
-import org.example.response.AuthenticationResponse;
-import org.example.response.UserResponse;
-import org.example.response.ValidateAdminResponse;
+import org.example.request.IdentityAuthenticateRequest;
+import org.example.request.IdentityRegisterRequest;
+import org.example.response.IdentityAuthenticateResponse;
+import org.example.response.IdentityUserResponse;
+import org.example.response.IdentityValidateAdminResponse;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Value;
@@ -45,13 +45,13 @@ public class IdentityService {
         logger.warning("The RestTemplate request factory is " + restTemplate.getRequestFactory().getClass());
     }
 
-    public AuthenticationResponse register(RegisterRequest registerRequest) throws RuntimeException {
-        AuthenticationResponse authenticationResponse = null;
+    public IdentityAuthenticateResponse register(IdentityRegisterRequest identityRegisterRequest) throws RuntimeException {
+        IdentityAuthenticateResponse identityAuthenticateResponse = null;
 
         JSONObject registerJsonObject = new JSONObject();
         try {
-            registerJsonObject.put("username", registerRequest.getUsername());
-            registerJsonObject.put("password", registerRequest.getPassword());
+            registerJsonObject.put("username", identityRegisterRequest.getUsername());
+            registerJsonObject.put("password", identityRegisterRequest.getPassword());
         } catch (JSONException e) {
             throw new RuntimeException(e);
         }
@@ -62,28 +62,28 @@ public class IdentityService {
 
             HttpEntity<String> requestEntity = new HttpEntity<>(registerJsonObject.toString(), headers);
 
-            ResponseEntity<AuthenticationResponse> responseEntity = restTemplate.exchange(
+            ResponseEntity<IdentityAuthenticateResponse> responseEntity = restTemplate.exchange(
                     IDENTITY_SERVICE_URL + "/api/v1/auth/register",
                     HttpMethod.POST,
                     requestEntity,
-                    AuthenticationResponse.class
+                    IdentityAuthenticateResponse.class
             );
 
-            authenticationResponse = responseEntity.getBody();
+            identityAuthenticateResponse = responseEntity.getBody();
         } catch (Exception e) {
             throw new RuntimeException("Błąd podczas wysyłania zapytania POST: " + e.getMessage(), e);
         }
 
-        return authenticationResponse;
+        return identityAuthenticateResponse;
     }
 
-    public AuthenticationResponse authenticate(AuthenticationRequest authenticationRequest) throws RuntimeException {
-        AuthenticationResponse authenticationResponse = null;
+    public IdentityAuthenticateResponse authenticate(IdentityAuthenticateRequest identityAuthenticateRequest) throws RuntimeException {
+        IdentityAuthenticateResponse identityAuthenticateResponse = null;
 
         JSONObject registerJsonObject = new JSONObject();
         try {
-            registerJsonObject.put("username", authenticationRequest.getUsername());
-            registerJsonObject.put("password", authenticationRequest.getPassword());
+            registerJsonObject.put("username", identityAuthenticateRequest.getUsername());
+            registerJsonObject.put("password", identityAuthenticateRequest.getPassword());
         } catch (JSONException e) {
             throw new RuntimeException(e);
         }
@@ -94,23 +94,23 @@ public class IdentityService {
 
             HttpEntity<String> requestEntity = new HttpEntity<>(registerJsonObject.toString(), headers);
 
-            ResponseEntity<AuthenticationResponse> responseEntity = restTemplate.exchange(
+            ResponseEntity<IdentityAuthenticateResponse> responseEntity = restTemplate.exchange(
                     IDENTITY_SERVICE_URL + "/api/v1/auth/authenticate",
                     HttpMethod.POST,
                     requestEntity,
-                    AuthenticationResponse.class
+                    IdentityAuthenticateResponse.class
             );
 
-            authenticationResponse = responseEntity.getBody();
+            identityAuthenticateResponse = responseEntity.getBody();
         } catch (Exception e) {
             throw new RuntimeException("Błąd podczas wysyłania zapytania POST: " + e.getMessage(), e);
         }
 
-        return authenticationResponse;
+        return identityAuthenticateResponse;
     }
 
-    public ValidateAdminResponse validateAdmin(String token) throws RuntimeException {
-        ValidateAdminResponse validateAdminResponse = null;
+    public IdentityValidateAdminResponse validateAdmin(String token) throws RuntimeException {
+        IdentityValidateAdminResponse identityValidateAdminResponse = null;
 
         try {
             HttpHeaders headers = new HttpHeaders();
@@ -118,19 +118,19 @@ public class IdentityService {
             HttpEntity<String> requestEntity = new HttpEntity<>(headers);
 
 
-            ResponseEntity<ValidateAdminResponse> responseEntity = restTemplate.exchange(
+            ResponseEntity<IdentityValidateAdminResponse> responseEntity = restTemplate.exchange(
                     IDENTITY_SERVICE_URL + "/api/v1/auth/validate-admin",
                     HttpMethod.POST,
                     requestEntity,
-                    ValidateAdminResponse.class
+                    IdentityValidateAdminResponse.class
             );
 
-            validateAdminResponse = responseEntity.getBody();
+            identityValidateAdminResponse = responseEntity.getBody();
         } catch (Exception e) {
             throw new RuntimeException("Błąd podczas wysyłania zapytania POST: " + e.getMessage(), e);
         }
 
-        return validateAdminResponse;
+        return identityValidateAdminResponse;
     }
 
     public void delete(Long id, String token) {
@@ -142,22 +142,22 @@ public class IdentityService {
                 IDENTITY_SERVICE_URL + "/api/v1/users/" + id,
                 HttpMethod.DELETE,
                 requestEntity,
-                ValidateAdminResponse.class
+                IdentityValidateAdminResponse.class
         );
     }
 
-    public List<UserResponse> getAll(String token) {
-        UserResponse[] userDtos = null;
+    public List<IdentityUserResponse> getAll(String token) {
+        IdentityUserResponse[] userDtos = null;
 
         HttpHeaders headers = new HttpHeaders();
         headers.setBearerAuth(token);
         HttpEntity<String> requestEntity = new HttpEntity<>(headers);
 
-        ResponseEntity<UserResponse[]> response = restTemplate.exchange(
+        ResponseEntity<IdentityUserResponse[]> response = restTemplate.exchange(
                 IDENTITY_SERVICE_URL + "/api/v1/users",
                 HttpMethod.GET,
                 requestEntity,
-                UserResponse[].class
+                IdentityUserResponse[].class
         );
 
         userDtos = response.getBody();

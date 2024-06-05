@@ -3,9 +3,9 @@ package org.example.controller;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import org.example.request.AuthenticationRequest;
-import org.example.request.RegisterRequest;
-import org.example.response.AuthenticationResponse;
+import org.example.request.IdentityAuthenticateRequest;
+import org.example.request.IdentityRegisterRequest;
+import org.example.response.IdentityAuthenticateResponse;
 import org.example.service.IdentityService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -39,13 +39,13 @@ public class UserController {
     public String login(HttpServletRequest request, HttpServletResponse response, Model model) {
         String username = request.getParameter("username");
         String password = request.getParameter("password");
-        AuthenticationRequest authenticationRequest = new AuthenticationRequest(username, password);
+        IdentityAuthenticateRequest identityAuthenticateRequest = new IdentityAuthenticateRequest(username, password);
 
         try {
-            AuthenticationResponse authenticationResponse = identityService.authenticate(authenticationRequest);
-            int cookieTime = identityService.getTimeForCookie(authenticationResponse.getToken());
+            IdentityAuthenticateResponse identityAuthenticateResponse = identityService.authenticate(identityAuthenticateRequest);
+            int cookieTime = identityService.getTimeForCookie(identityAuthenticateResponse.getToken());
 
-            Cookie cookie = new Cookie("jwtToken", authenticationResponse.getToken());
+            Cookie cookie = new Cookie("jwtToken", identityAuthenticateResponse.getToken());
             cookie.setPath("/");
             cookie.setMaxAge(cookieTime);
             response.addCookie(cookie);
@@ -66,12 +66,12 @@ public class UserController {
     public String register(HttpServletRequest request, HttpServletResponse response, Model model) {
         String username = request.getParameter("username");
         String password = request.getParameter("password");
-        RegisterRequest registerRequest = new RegisterRequest(username, password);
+        IdentityRegisterRequest identityRegisterRequest = new IdentityRegisterRequest(username, password);
         try {
-            AuthenticationResponse authenticationResponse = identityService.register(registerRequest);
-            int cookieTime = identityService.getTimeForCookie(authenticationResponse.getToken());
+            IdentityAuthenticateResponse identityAuthenticateResponse = identityService.register(identityRegisterRequest);
+            int cookieTime = identityService.getTimeForCookie(identityAuthenticateResponse.getToken());
 
-            Cookie cookie = new Cookie("jwtToken", authenticationResponse.getToken());
+            Cookie cookie = new Cookie("jwtToken", identityAuthenticateResponse.getToken());
             cookie.setPath("/");
             cookie.setMaxAge(cookieTime);
             response.addCookie(cookie);

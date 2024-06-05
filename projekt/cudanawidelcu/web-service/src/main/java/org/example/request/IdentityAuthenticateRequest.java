@@ -9,6 +9,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class ValidateAdminRequest {
-    private String token;
+public class IdentityAuthenticateRequest {
+    private String username;
+    private String password;
 }
+

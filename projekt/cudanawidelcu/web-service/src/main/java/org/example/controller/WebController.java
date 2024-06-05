@@ -1,13 +1,7 @@
 package org.example.controller;
 
-import jakarta.servlet.http.Cookie;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
 import org.example.dto.RecipeDto;
 import org.example.request.*;
-import org.example.response.AuthenticationResponse;
-import org.example.response.UpdateRatingResponse;
-import org.example.service.IdentityService;
 import org.example.service.ImageService;
 import org.example.service.RecipesService;
 import org.springframework.core.io.Resource;
@@ -57,21 +51,8 @@ public class WebController {
 
     @RequestMapping(value = "/recipes/rate", method = RequestMethod.POST, headers = "Accept=application/json")
     @ResponseBody
-    public RecipeDto rate(@RequestBody RateRecipeRequest rateRecipeRequest) {
-        return recipesService.rate(rateRecipeRequest);
-    }
-
-    // TODO sprawdzić czy to jest teraz w ogóle używane XD
-    @RequestMapping(value = "/recipes/update-rating", method = RequestMethod.POST, headers = "Accept=application/json")
-    @ResponseBody
-    public UpdateRatingResponse updateRating(@RequestBody UpdateRatingRequest updateRatingRequest) {
-        RecipeDto recipeDto = recipesService.get(updateRatingRequest.getId());
-
-        UpdateRatingResponse updateRatingResponse = new UpdateRatingResponse();
-        updateRatingResponse.setRating(recipeDto.getRating());
-        updateRatingResponse.setCountVotes(recipeDto.getCountVotes());
-
-        return updateRatingResponse;
+    public RecipeDto rate(@RequestBody VotesSaveRequest votesSaveRequest) {
+        return recipesService.rate(votesSaveRequest);
     }
 
     @GetMapping("/recipes/create")
@@ -84,12 +65,11 @@ public class WebController {
     public String createRecipe(@ModelAttribute RecipeDto recipeDto,
                                @RequestParam("imageFile") MultipartFile imageFile,
                                @CookieValue("jwtToken") String jwtToken) throws IOException {
-        recipeDto.setRating(0D);
-        recipeDto.setCountVotes(0);
         if (!imageFile.isEmpty()) {
             imageService.sendImage(imageFile, recipeDto.getName());
         }
-        RecipeDto newRecipeDto = recipesService.createRecipe(recipeDto, jwtToken);
+        recipesService.createRecipe(recipeDto, jwtToken);
+
         return "redirect:/";
     }
 

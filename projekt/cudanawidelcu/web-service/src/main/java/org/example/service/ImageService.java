@@ -1,10 +1,7 @@
 package org.example.service;
 
-import org.example.dto.ProductDto;
 import org.example.dto.RecipeDto;
-import org.example.dto.VoteDto;
-import org.example.request.ChangeFileNameRequest;
-import org.json.JSONArray;
+import org.example.request.ImagesRenameRequest;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.core.io.ByteArrayResource;
@@ -65,13 +62,13 @@ public class ImageService {
         return restTemplate.getForEntity(IMAGES_SERVICE_URL + "/api/v1/images/" + name, Resource.class);
     }
 
-    public void renameImage(String token, ChangeFileNameRequest changeFileNameRequest) {
+    public void renameImage(String token, ImagesRenameRequest imagesRenameRequest) {
 
 
         JSONObject renameJsonObject = new JSONObject();
         try {
-            renameJsonObject.put("newName", changeFileNameRequest.getNewName());
-            renameJsonObject.put("oldName", changeFileNameRequest.getOldName());
+            renameJsonObject.put("newName", imagesRenameRequest.getNewName());
+            renameJsonObject.put("oldName", imagesRenameRequest.getOldName());
         } catch (JSONException e) {
             throw new RuntimeException(e);
         }

@@ -4,9 +4,8 @@ import jakarta.annotation.PostConstruct;
 import org.example.dto.ProductDto;
 import org.example.dto.RecipeDto;
 import org.example.dto.VoteDto;
-import org.example.request.CreateRecipeRequest;
-import org.example.request.RateRecipeRequest;
-import org.example.response.ValidateAdminResponse;
+import org.example.request.VotesSaveRequest;
+import org.example.response.IdentityValidateAdminResponse;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -73,8 +72,6 @@ public class RecipesService {
 			newRecipeJsonObject.put("name", recipeDto.getName());
 			newRecipeJsonObject.put("vote", recipeDto.getDescription());
 			newRecipeJsonObject.put("category", recipeDto.getCategory());
-			newRecipeJsonObject.put("rating", recipeDto.getRating());
-			newRecipeJsonObject.put("countVotes", recipeDto.getCountVotes());
 		} catch (JSONException e) {
 			throw new RuntimeException(e);
 		}
@@ -115,14 +112,14 @@ public class RecipesService {
 	}
 
 
-	public RecipeDto rate(RateRecipeRequest rateRecipeRequest) {
+	public RecipeDto rate(VotesSaveRequest votesSaveRequest) {
 		RecipeDto recipeDto = null;
 
 		JSONObject rateRecipeJsonObject = new JSONObject();
 		try {
-			rateRecipeJsonObject.put("id", rateRecipeRequest.getId());
-			rateRecipeJsonObject.put("name", rateRecipeRequest.getName());
-			rateRecipeJsonObject.put("vote", rateRecipeRequest.getVote());
+			rateRecipeJsonObject.put("id", votesSaveRequest.getId());
+			rateRecipeJsonObject.put("name", votesSaveRequest.getName());
+			rateRecipeJsonObject.put("vote", votesSaveRequest.getVote());
 		} catch (JSONException e) {
 			throw new RuntimeException(e);
 		}
@@ -157,7 +154,7 @@ public class RecipesService {
 				RECIPES_SERVICE_URL + "/api/v1/recipes/" + id,
 				HttpMethod.DELETE,
 				requestEntity,
-				ValidateAdminResponse.class
+				IdentityValidateAdminResponse.class
 		);
 	}
 
@@ -169,8 +166,6 @@ public class RecipesService {
 			updateRecipeJsonObject.put("id", recipeDtoToUpdate.getId());
 			updateRecipeJsonObject.put("name", recipeDtoToUpdate.getName());
 			updateRecipeJsonObject.put("description", recipeDtoToUpdate.getDescription());
-			updateRecipeJsonObject.put("rating", recipeDtoToUpdate.getRating());
-			updateRecipeJsonObject.put("countVotes", recipeDtoToUpdate.getCountVotes());
 			updateRecipeJsonObject.put("category", recipeDtoToUpdate.getCategory().name());
 
 			JSONArray productsJsonArray = new JSONArray();

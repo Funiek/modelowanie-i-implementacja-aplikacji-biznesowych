@@ -6,10 +6,10 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
-public class RegisterRequest {
-    private String username;
-    private String password;
+public class ImagesRenameRequest {
+    String oldName;
+    String newName;
 }

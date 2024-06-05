@@ -6,10 +6,10 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
-@Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class ChangeFileNameRequest {
-    String oldName;
-    String newName;
+@Builder
+public class IdentityRegisterRequest {
+    private String username;
+    private String password;
 }

@@ -9,7 +9,7 @@
 <div class="container">
     <main role="main" class="pb-3">
         <h1>Lista Użytkowników</h1>
-        <table class="table" th:if="${userResponses}">
+        <table class="table" th:if="${identityUserRespons}">
             <thead>
             <tr>
                 <th>Nazwa Użytkownika</th>
@@ -18,11 +18,11 @@
             </tr>
             </thead>
             <tbody>
-            <tr th:each="user : ${userResponses}">
+            <tr th:each="user : ${identityUserRespons}">
                 <td th:text="${user.username}"></td>
-                <td th:text="${user.roleResponse}"></td>
+                <td th:text="${user.getIdentityRoleResponse}"></td>
                 <td>
-                    <a class="index-detail-btn" th:if="${user.roleResponse.toString() != 'ADMIN'}" th:href="@{'/admin/users/delete/' + ${user.id}}">Usuń</a>
+                    <a class="index-detail-btn" th:if="${user.getIdentityRoleResponse.toString() != 'ADMIN'}" th:href="@{'/admin/users/delete/' + ${user.id}}">Usuń</a>
                 </td>
             </tr>
             </tbody>

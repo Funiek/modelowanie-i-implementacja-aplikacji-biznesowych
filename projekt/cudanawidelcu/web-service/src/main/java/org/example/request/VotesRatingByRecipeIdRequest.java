@@ -8,14 +8,11 @@ import org.example.dto.VoteDto;
 import java.util.List;
 
 @Data
-public class CreateRecipeRequest {
+public class VotesRatingByRecipeIdRequest {
     private Long id;
     private String name;
     private String description;
-    private Double rating;
-    private int countVotes;
     private CategoryDto category;
     private List<ProductDto> products;
     private List<VoteDto> votes;
-    private byte[] image;
 }
