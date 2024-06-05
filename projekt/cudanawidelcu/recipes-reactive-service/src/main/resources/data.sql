@@ -1,4 +1,4 @@
--- insert into recipe (category, count_votes, description, name, rating, created_at) values ('BREAKFAST', 1, 'lovely PANCIAKI', 'Nalesniki', 4.0, CURRENT_TIMESTAMP);
--- insert into recipe (category, count_votes, description, name, rating, created_at) values ('LUNCH', 0, 'lovely Spaghetti', 'Spaghetti', 0.0, CURRENT_TIMESTAMP);
--- -- insert into recipe (category, count_votes, description, name, rating, created_at) values ('LUNCH', 0, 'lovely Schabowe', 'Schabowe', 0.0, CURRENT_TIMESTAMP);
--- insert into recipe (category, count_votes, description, name, rating, created_at) values ('DINNER', 0, 'lovely Skyr', 'Skyr', 0.0, CURRENT_TIMESTAMP);
+-- insert into recipe (category, description, name, created_at) values ('BREAKFAST', 'lovely PANCIAKI', 'Nalesniki', CURRENT_TIMESTAMP);
+-- insert into recipe (category, description, name, created_at) values ('LUNCH', 'lovely Spaghetti', 'Spaghetti', CURRENT_TIMESTAMP);
+-- -- insert into recipe (category, description, name, created_at) values ('LUNCH', 'lovely Schabowe', 'Schabowe', CURRENT_TIMESTAMP);
+-- insert into recipe (category, description, name, created_at) values ('DINNER', 'lovely Skyr', 'Skyr', CURRENT_TIMESTAMP);

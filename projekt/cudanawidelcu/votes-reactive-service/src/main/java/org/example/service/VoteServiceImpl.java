@@ -2,6 +2,7 @@ package org.example.service;
 
 import org.example.model.Vote;
 import org.example.repository.VoteRepository;
+import org.example.response.RatingByRecipeIdResponse;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -32,5 +33,10 @@ public class VoteServiceImpl implements VoteService {
     @Override
     public Mono<Void> deleteAllByRecipeId(Long recipeId) {
         return voteRepository.deleteAllByRecipeId(recipeId);
+    }
+
+    @Override
+    public Flux<RatingByRecipeIdResponse> ratingByRecipeId(Long recipeId) {
+        // TODO napisz ciało metody
     }
 }

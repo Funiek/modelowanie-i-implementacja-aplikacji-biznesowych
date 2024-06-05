@@ -2,6 +2,7 @@ package org.example.controller;
 
 import org.example.dto.VoteDto;
 import org.example.model.Vote;
+import org.example.response.RatingByRecipeIdResponse;
 import org.example.service.VoteService;
 import org.example.util.VoteMapper;
 import org.springframework.web.bind.annotation.*;
@@ -23,26 +24,30 @@ public class VoteController {
     @GetMapping
     public Flux<VoteDto> findAll() {
         Flux<Vote> votes = voteService.findAll();
-        // TODO czy lepiej nie będzie zamienić na flatmap jeśli się da?
         return votes.map(VoteMapper::convertVoteToVoteDto);
     }
 
     @GetMapping("/recipe/{recipeId}")
     public Flux<VoteDto> findAllByRecipeId(@PathVariable("recipeId") Long recipeId) {
-        Flux<Vote> products = voteService.findAllByRecipe(recipeId);
-        return products.map(VoteMapper::convertVoteToVoteDto);
+        Flux<Vote> votes = voteService.findAllByRecipe(recipeId);
+        return votes.map(VoteMapper::convertVoteToVoteDto);
     }
 
     @PostMapping
     public Mono<VoteDto> save(@RequestBody VoteDto voteDto) {
-        // TODO pewnie do poprawienia żeby przyjmował parametr w MONO
         Vote vote = VoteMapper.convertVoteDtoToVote(voteDto);
         Mono<Vote> createVote = voteService.save(vote);
         return createVote.map(VoteMapper::convertVoteToVoteDto);
     }
 
     @DeleteMapping("/recipe/{recipeId}")
-    public Mono<Void> deleteByRecipeId(@PathVariable("recipeId") Long recipeId) {
+    public Mono<Void> deleteAllByRecipeId(@PathVariable("recipeId") Long recipeId) {
         return voteService.deleteAllByRecipeId(recipeId);
+    }
+
+    @GetMapping("/rating/recipe/{recipeId}")
+    public Flux<VoteDto> ratingByRecipeId(@PathVariable("recipeId") Long recipeId) {
+        Flux<RatingByRecipeIdResponse> votes = voteService.ratingByRecipeId(recipeId);
+        return products.map(VoteMapper::convertVoteToVoteDto);
     }
 }
