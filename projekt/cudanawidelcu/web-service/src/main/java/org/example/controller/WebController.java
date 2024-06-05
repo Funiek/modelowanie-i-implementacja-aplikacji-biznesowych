@@ -2,8 +2,10 @@ package org.example.controller;
 
 import org.example.dto.RecipeDto;
 import org.example.request.*;
+import org.example.response.VotesRatingByRecipeIdResponse;
 import org.example.service.ImageService;
 import org.example.service.RecipesService;
+import org.example.service.VotesService;
 import org.springframework.core.io.Resource;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -14,23 +16,43 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 import java.util.List;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 
 @Controller
 public class WebController {
 
     private final RecipesService recipesService;
     private final ImageService imageService;
+    private final VotesService votesService;
     protected Logger logger = Logger.getLogger(WebController.class.getName());
 
-    public WebController(RecipesService recipesService, ImageService imageService) {
+    public WebController(RecipesService recipesService, ImageService imageService, VotesService votesService) {
         this.recipesService = recipesService;
         this.imageService = imageService;
+        this.votesService = votesService;
     }
 
 
     @RequestMapping("/")
     public String index(Model model) {
-        List<RecipeDto> recipeDtos = recipesService.getAll();
+        List<RecipesFindAllRequest> recipesFindAllRequestList = recipesService.findAll();
+        List<RecipeDto> recipeDtos = recipesFindAllRequestList.stream()
+                        .map(recipe -> {
+                            VotesRatingByRecipeIdResponse rating = votesService.ratingByRecipeId(recipe.getId());
+                            return RecipeDto.builder()
+                                    .id(recipe.getId())
+                                    .name(recipe.getName())
+                                    .category(recipe.getCategory())
+                                    .votes(recipe.getVotes())
+                                    .products(recipe.getProducts())
+                                    .description(recipe.getDescription())
+                                    .countVotes(rating.getCountVotes())
+                                    .rating(rating.getRating())
+                                    .build();
+                        }).collect(Collectors.toList());
+
+
+
         model.addAttribute("recipeDtos", recipeDtos);
         return "index";
     }
@@ -49,7 +71,7 @@ public class WebController {
         return "details";
     }
 
-    @RequestMapping(value = "/recipes/rate", method = RequestMethod.POST, headers = "Accept=application/json")
+    @RequestMapping(value = "/votes/rating", method = RequestMethod.POST, headers = "Accept=application/json")
     @ResponseBody
     public RecipeDto rate(@RequestBody VotesSaveRequest votesSaveRequest) {
         return recipesService.rate(votesSaveRequest);

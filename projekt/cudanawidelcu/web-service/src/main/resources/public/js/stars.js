@@ -62,14 +62,13 @@ submitButton.addEventListener("click", () => {
     let activeElements = document.getElementsByClassName("active");
 
     let postData = {
-        id: recipeId,
-        name: recipeName,
+        recipeId: recipeId,
         vote: activeElements.length
     }
 
     $.ajax({
         type: "POST",
-        url: window.location.protocol + "//" + window.location.host + "/recipes/rate",
+        url: window.location.protocol + "//" + window.location.host + "/votes/rating",
         contentType: "application/json",
         data: JSON.stringify(postData),
         success: function(data, status) {

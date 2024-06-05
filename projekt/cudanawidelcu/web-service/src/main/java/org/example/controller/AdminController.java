@@ -2,16 +2,20 @@ package org.example.controller;
 
 import org.example.dto.RecipeDto;
 import org.example.request.ImagesRenameRequest;
+import org.example.request.RecipesFindAllRequest;
 import org.example.response.IdentityUserResponse;
 import org.example.response.IdentityValidateAdminResponse;
+import org.example.response.VotesRatingByRecipeIdResponse;
 import org.example.service.IdentityService;
 import org.example.service.ImageService;
 import org.example.service.RecipesService;
+import org.example.service.VotesService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/admin")
@@ -20,11 +24,13 @@ public class AdminController {
 
     private final RecipesService recipesService;
     private final ImageService imageService;
+    private final VotesService votesService;
 
-    public AdminController(IdentityService identityService, RecipesService recipesService, ImageService imageService) {
+    public AdminController(IdentityService identityService, RecipesService recipesService, ImageService imageService, VotesService votesService) {
         this.identityService = identityService;
         this.recipesService = recipesService;
         this.imageService = imageService;
+        this.votesService = votesService;
     }
 
     @GetMapping("/panel")
@@ -58,7 +64,21 @@ public class AdminController {
     public String manageProducts(@CookieValue("jwtToken") String jwtToken, Model model) {
         IdentityValidateAdminResponse identityValidateAdminResponse = identityService.validateAdmin(jwtToken);
         if (identityValidateAdminResponse.getIsValid()) {
-            List<RecipeDto> recipeDtos = recipesService.getAll();
+            List<RecipesFindAllRequest> recipesFindAllRequestList = recipesService.findAll();
+            List<RecipeDto> recipeDtos = recipesFindAllRequestList.stream()
+                    .map(recipe -> {
+                        VotesRatingByRecipeIdResponse rating = votesService.ratingByRecipeId(recipe.getId());
+                        return RecipeDto.builder()
+                                .id(recipe.getId())
+                                .name(recipe.getName())
+                                .category(recipe.getCategory())
+                                .votes(recipe.getVotes())
+                                .products(recipe.getProducts())
+                                .description(recipe.getDescription())
+                                .countVotes(rating.getCountVotes())
+                                .rating(rating.getRating())
+                                .build();
+                    }).collect(Collectors.toList());
             model.addAttribute("recipeDtos", recipeDtos);
             return "manageRecipes";
         }

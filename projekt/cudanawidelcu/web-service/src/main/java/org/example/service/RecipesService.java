@@ -4,6 +4,7 @@ import jakarta.annotation.PostConstruct;
 import org.example.dto.ProductDto;
 import org.example.dto.RecipeDto;
 import org.example.dto.VoteDto;
+import org.example.request.RecipesFindAllRequest;
 import org.example.request.VotesSaveRequest;
 import org.example.response.IdentityValidateAdminResponse;
 import org.json.JSONArray;
@@ -36,18 +37,18 @@ public class RecipesService {
 		logger.warning("The RestTemplate request factory is " + restTemplate.getRequestFactory().getClass());
 	}
 
-	public List<RecipeDto> getAll() {
-		RecipeDto[] recipeDtos = null;
+	public List<RecipesFindAllRequest> findAll() {
+		RecipesFindAllRequest[] recipes = null;
 
 		try {
 			String url = RECIPES_SERVICE_URL + "/api/v1/recipes";
-			recipeDtos = restTemplate.getForObject(url, RecipeDto[].class);
+			recipes = restTemplate.getForObject(url, RecipesFindAllRequest[].class);
 		}
 		catch (HttpClientErrorException e) {
 			logger.throwing(this.getClass().getSimpleName(), "getAll", e);
 		}
 
-		return (recipeDtos == null || recipeDtos.length == 0) ? null : Arrays.asList(recipeDtos);
+		return (recipes == null || recipes.length == 0) ? null : Arrays.asList(recipes);
 	}
 
 	public List<RecipeDto> getByCategory(String categoryName) {
@@ -117,8 +118,7 @@ public class RecipesService {
 
 		JSONObject rateRecipeJsonObject = new JSONObject();
 		try {
-			rateRecipeJsonObject.put("id", votesSaveRequest.getId());
-			rateRecipeJsonObject.put("name", votesSaveRequest.getName());
+			rateRecipeJsonObject.put("recipeId", votesSaveRequest.getRecipeId());
 			rateRecipeJsonObject.put("vote", votesSaveRequest.getVote());
 		} catch (JSONException e) {
 			throw new RuntimeException(e);

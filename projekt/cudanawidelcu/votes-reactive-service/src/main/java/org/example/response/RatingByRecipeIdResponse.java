@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class RatingByRecipeIdResponse {
-    Long recipeId;
-    Double rating;
-    int countVotes;
+    private Long recipeId;
+    private Double rating;
+    private int countVotes;
 }
