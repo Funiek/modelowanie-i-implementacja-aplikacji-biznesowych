@@ -46,8 +46,7 @@ public class VoteController {
     }
 
     @GetMapping("/rating/recipe/{recipeId}")
-    public Flux<VoteDto> ratingByRecipeId(@PathVariable("recipeId") Long recipeId) {
-        Flux<RatingByRecipeIdResponse> votes = voteService.ratingByRecipeId(recipeId);
-        return products.map(VoteMapper::convertVoteToVoteDto);
+    public Mono<RatingByRecipeIdResponse> ratingByRecipeId(@PathVariable("recipeId") Long recipeId) {
+        return voteService.ratingByRecipeId(recipeId);
     }
 }

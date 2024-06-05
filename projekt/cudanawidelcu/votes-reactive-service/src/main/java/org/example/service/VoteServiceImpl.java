@@ -36,7 +36,18 @@ public class VoteServiceImpl implements VoteService {
     }
 
     @Override
-    public Flux<RatingByRecipeIdResponse> ratingByRecipeId(Long recipeId) {
-        // TODO napisz ciało metody
+    public Mono<RatingByRecipeIdResponse> ratingByRecipeId(Long recipeId) {
+        return voteRepository.findAllByRecipeId(recipeId)
+                .collectList()
+                .map(votes -> {
+                    double totalRating = votes.stream().mapToDouble(Vote::getRating).sum();
+                    int countVotes = votes.size();
+                    double averageRating = countVotes > 0 ? totalRating / countVotes : 0.0;
+                    return RatingByRecipeIdResponse.builder()
+                            .recipeId(recipeId)
+                            .rating(averageRating)
+                            .countVotes(countVotes)
+                            .build();
+                });
     }
 }

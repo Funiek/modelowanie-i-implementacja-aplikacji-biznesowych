@@ -15,5 +15,5 @@ public interface VoteService {
 
     Mono<Void> deleteAllByRecipeId(Long recipeId);
 
-    Flux<RatingByRecipeIdResponse> ratingByRecipeId(Long recipeId);
+    Mono<RatingByRecipeIdResponse> ratingByRecipeId(Long recipeId);
 }
