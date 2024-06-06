@@ -19,6 +19,7 @@
 		<module>recipes-reactive-service</module>
 		<module>product-reactive-service</module>
         <module>votes-reactive-service</module>
+        <module>images-reactive-service</module>
     </modules>
 
 	<properties>

@@ -13,6 +13,7 @@
         <module name="images-service" />
         <module name="application-gateway" />
         <module name="votes-reactive-service" />
+        <module name="images-reactive-service" />
         <module name="test-service" />
         <module name="eureka-server" />
         <module name="identity-service" />
