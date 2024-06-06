@@ -20,6 +20,7 @@
 		<module>product-reactive-service</module>
         <module>votes-reactive-service</module>
         <module>images-reactive-service</module>
+        <module>identity-reactive-service</module>
     </modules>
 
 	<properties>

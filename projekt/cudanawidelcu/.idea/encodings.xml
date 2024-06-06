@@ -5,6 +5,8 @@
     <file url="file://$PROJECT_DIR$/application-gateway/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/eureka-server/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/eureka-server/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/identity-reactive-service/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/identity-reactive-service/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/identity-service/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/identity-service/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/images-reactive-service/src/main/java" charset="UTF-8" />
