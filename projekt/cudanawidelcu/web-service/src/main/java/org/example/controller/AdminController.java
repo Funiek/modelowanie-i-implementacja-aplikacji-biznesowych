@@ -2,6 +2,7 @@ package org.example.controller;
 
 import org.example.dto.RecipeDto;
 import org.example.request.ImagesRenameRequest;
+import org.example.request.RecipesUpdateRequest;
 import org.example.response.*;
 import org.example.service.IdentityService;
 import org.example.service.ImageService;
@@ -95,14 +96,14 @@ public class AdminController {
     }
 
     @PostMapping(path = "/recipes/edit", consumes = "application/x-www-form-urlencoded")
-    public String updateProducts(@CookieValue("jwtToken") String jwtToken, @ModelAttribute RecipeDto recipeDto) {
+    public String updateProducts(@CookieValue("jwtToken") String jwtToken, @ModelAttribute RecipesUpdateRequest recipesUpdateRequest) {
         IdentityValidateAdminResponse identityValidateAdminResponse = identityService.validateAdmin(jwtToken);
         if (identityValidateAdminResponse.getIsValid()) {
-            RecipeDto oldRecipe = recipesService.findById(recipeDto.getId());
-            recipesService.update(recipeDto.getId(), jwtToken, recipeDto);
+            RecipesFindByIdResponse oldRecipe = recipesService.findById(recipesUpdateRequest.getId());
+            recipesService.update(recipesUpdateRequest.getId(), jwtToken, recipesUpdateRequest);
             ImagesRenameRequest imagesRenameRequest = ImagesRenameRequest.builder()
                     .oldName(oldRecipe.getName() + ".jpeg")
-                    .newName(recipeDto.getName() + ".jpeg")
+                    .newName(recipesUpdateRequest.getName() + ".jpeg")
                     .build();
             imageService.renameImage(jwtToken, imagesRenameRequest);
             return "redirect:/admin/recipes/manage";

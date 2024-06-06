@@ -90,4 +90,29 @@ public class RecipeServiceImpl implements RecipeService {
         return recipeRepository.deleteById(id);
     }
 
+    @Override
+    public Mono<Recipe> findById(Long id) {
+        return recipeRepository.findById(id)
+                .flatMap(recipe -> productService.findAllByRecipe(recipe.getId())
+                        .collectList()
+                        .map(productDtos -> {
+                            List<Product> products = productDtos.stream()
+                                    .map(RecipeMapper::convertProductDtoToProduct)
+                                    .collect(Collectors.toList());
+                            recipe.setProducts(products);
+                            return recipe;
+                        })
+                )
+                .flatMap(recipe -> voteService.findAllByRecipe(recipe.getId())
+                        .collectList()
+                        .map(voteDtos -> {
+                            List<Vote> votes = voteDtos.stream()
+                                    .map(RecipeMapper::convertVoteDtoToVote)
+                                    .collect(Collectors.toList());
+                            recipe.setVotes(votes);
+                            return recipe;
+                        })
+                );
+    }
+
 }

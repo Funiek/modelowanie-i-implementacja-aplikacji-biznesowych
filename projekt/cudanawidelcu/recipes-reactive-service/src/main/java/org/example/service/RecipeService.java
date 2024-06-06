@@ -14,4 +14,6 @@ public interface RecipeService {
     Mono<Recipe> update(Long id, Recipe recipe);
 
     Mono<Void> deleteById(Long id);
+
+    Mono<Recipe> findById(Long id);
 }

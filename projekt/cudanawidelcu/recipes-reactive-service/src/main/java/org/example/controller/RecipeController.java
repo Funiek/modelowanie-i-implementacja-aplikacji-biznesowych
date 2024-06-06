@@ -33,6 +33,12 @@ public class RecipeController {
         return recipes.flatMap(recipe -> Mono.just(RecipeMapper.convertRecipeToRecipeDto(recipe)));
     }
 
+    @GetMapping("/{id}")
+    public Mono<RecipeDto> findById(@PathVariable("id")Long id) {
+        Mono<Recipe> recipe = recipeService.findById(id);
+        return recipe.map(RecipeMapper::convertRecipeToRecipeDto);
+    }
+
     @PostMapping
     public Mono<RecipeDto> save(@RequestBody RecipeDto recipeDto) {
         Recipe recipe = RecipeMapper.convertRecipeDtoToRecipe(recipeDto);

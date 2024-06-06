@@ -38,7 +38,7 @@ public class ImageController {
         response.setContentType(MediaType.IMAGE_JPEG_VALUE);
         StreamUtils.copy(resource, response.getOutputStream());
 
-        return null;
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @PostMapping
