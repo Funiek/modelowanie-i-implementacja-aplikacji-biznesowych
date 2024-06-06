@@ -2,10 +2,7 @@ package org.example.controller;
 
 import org.example.dto.RecipeDto;
 import org.example.request.ImagesRenameRequest;
-import org.example.request.RecipesFindAllRequest;
-import org.example.response.IdentityUserResponse;
-import org.example.response.IdentityValidateAdminResponse;
-import org.example.response.VotesRatingByRecipeIdResponse;
+import org.example.response.*;
 import org.example.service.IdentityService;
 import org.example.service.ImageService;
 import org.example.service.RecipesService;
@@ -64,8 +61,8 @@ public class AdminController {
     public String manageProducts(@CookieValue("jwtToken") String jwtToken, Model model) {
         IdentityValidateAdminResponse identityValidateAdminResponse = identityService.validateAdmin(jwtToken);
         if (identityValidateAdminResponse.getIsValid()) {
-            List<RecipesFindAllRequest> recipesFindAllRequestList = recipesService.findAll();
-            List<RecipeDto> recipeDtos = recipesFindAllRequestList.stream()
+            List<RecipesFindAllResponse> recipesFindAllResponseList = recipesService.findAll();
+            List<RecipeDto> recipeDtos = recipesFindAllResponseList.stream()
                     .map(recipe -> {
                         VotesRatingByRecipeIdResponse rating = votesService.ratingByRecipeId(recipe.getId());
                         return RecipeDto.builder()
@@ -89,8 +86,8 @@ public class AdminController {
     public String updateProducts(@PathVariable("id") Long id, @CookieValue("jwtToken") String jwtToken, Model model) {
         IdentityValidateAdminResponse identityValidateAdminResponse = identityService.validateAdmin(jwtToken);
         if (identityValidateAdminResponse.getIsValid()) {
-            RecipeDto recipeDto = recipesService.get(id);
-            model.addAttribute("recipeDto", recipeDto);
+            RecipesFindByIdResponse recipe = recipesService.findById(id);
+            model.addAttribute("recipe", recipe);
             return "editRecipe";
         }
 
@@ -101,7 +98,7 @@ public class AdminController {
     public String updateProducts(@CookieValue("jwtToken") String jwtToken, @ModelAttribute RecipeDto recipeDto) {
         IdentityValidateAdminResponse identityValidateAdminResponse = identityService.validateAdmin(jwtToken);
         if (identityValidateAdminResponse.getIsValid()) {
-            RecipeDto oldRecipe = recipesService.get(recipeDto.getId());
+            RecipeDto oldRecipe = recipesService.findById(recipeDto.getId());
             recipesService.update(recipeDto.getId(), jwtToken, recipeDto);
             ImagesRenameRequest imagesRenameRequest = ImagesRenameRequest.builder()
                     .oldName(oldRecipe.getName() + ".jpeg")

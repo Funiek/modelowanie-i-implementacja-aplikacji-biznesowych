@@ -1,4 +1,4 @@
-package org.example.request;
+package org.example.response;
 
 import lombok.Data;
 import org.example.dto.CategoryDto;
@@ -8,7 +8,7 @@ import org.example.dto.VoteDto;
 import java.util.List;
 
 @Data
-public class RecipesFindAllRequest {
+public class RecipesFindAllByCategoryResponse {
     private Long id;
     private String name;
     private String description;

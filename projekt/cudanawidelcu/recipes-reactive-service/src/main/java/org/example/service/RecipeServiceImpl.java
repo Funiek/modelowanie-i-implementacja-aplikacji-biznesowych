@@ -1,5 +1,6 @@
 package org.example.service;
 
+import org.example.model.Category;
 import org.example.model.Product;
 import org.example.model.Recipe;
 import org.example.model.Vote;
@@ -27,6 +28,31 @@ public class RecipeServiceImpl implements RecipeService {
     @Override
     public Flux<Recipe> findAll() {
         return recipeRepository.findAll()
+                .flatMap(recipe -> productService.findAllByRecipe(recipe.getId())
+                        .collectList()
+                        .map(productDtos -> {
+                            List<Product> products = productDtos.stream()
+                                    .map(RecipeMapper::convertProductDtoToProduct)
+                                    .collect(Collectors.toList());
+                            recipe.setProducts(products);
+                            return recipe;
+                        })
+                )
+                .flatMap(recipe -> voteService.findAllByRecipe(recipe.getId())
+                        .collectList()
+                        .map(voteDtos -> {
+                            List<Vote> votes = voteDtos.stream()
+                                    .map(RecipeMapper::convertVoteDtoToVote)
+                                    .collect(Collectors.toList());
+                            recipe.setVotes(votes);
+                            return recipe;
+                        })
+                );
+    }
+
+    @Override
+    public Flux<Recipe> findAllByCategory(Category category) {
+        return recipeRepository.findAllByCategory(category)
                 .flatMap(recipe -> productService.findAllByRecipe(recipe.getId())
                         .collectList()
                         .map(productDtos -> {

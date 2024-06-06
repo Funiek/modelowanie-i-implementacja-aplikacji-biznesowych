@@ -1,10 +1,14 @@
 package org.example.service;
 
 import jakarta.annotation.PostConstruct;
+import org.example.dto.CategoryDto;
 import org.example.dto.ProductDto;
 import org.example.dto.RecipeDto;
 import org.example.dto.VoteDto;
-import org.example.request.RecipesFindAllRequest;
+import org.example.response.RecipesFindAllByCategoryResponse;
+import org.example.response.RecipesFindAllResponse;
+import org.example.response.RecipesFindByIdResponse;
+import org.example.request.RecipesUpdateRequest;
 import org.example.request.VotesSaveRequest;
 import org.example.response.IdentityValidateAdminResponse;
 import org.json.JSONArray;
@@ -37,12 +41,11 @@ public class RecipesService {
 		logger.warning("The RestTemplate request factory is " + restTemplate.getRequestFactory().getClass());
 	}
 
-	public List<RecipesFindAllRequest> findAll() {
-		RecipesFindAllRequest[] recipes = null;
+	public List<RecipesFindAllResponse> findAll() {
+		RecipesFindAllResponse[] recipes = null;
 
 		try {
-			String url = RECIPES_SERVICE_URL + "/api/v1/recipes";
-			recipes = restTemplate.getForObject(url, RecipesFindAllRequest[].class);
+			recipes = restTemplate.getForObject(RECIPES_SERVICE_URL + "/api/v1/recipes", RecipesFindAllResponse[].class);
 		}
 		catch (HttpClientErrorException e) {
 			logger.throwing(this.getClass().getSimpleName(), "getAll", e);
@@ -51,18 +54,17 @@ public class RecipesService {
 		return (recipes == null || recipes.length == 0) ? null : Arrays.asList(recipes);
 	}
 
-	public List<RecipeDto> getByCategory(String categoryName) {
-		RecipeDto[] recipeDtos = null;
+	public List<RecipesFindAllByCategoryResponse> findAllByCategory(CategoryDto categoryDto) {
+		RecipesFindAllByCategoryResponse[] recipes = null;
 
 		try {
-			String url = RECIPES_SERVICE_URL + "/api/v1/recipes/category/" + categoryName;
-			recipeDtos = restTemplate.getForObject(url, RecipeDto[].class);
+			recipes = restTemplate.getForObject(RECIPES_SERVICE_URL + "/api/v1/recipes/category/" + categoryDto, RecipesFindAllByCategoryResponse[].class);
 		}
 		catch (HttpClientErrorException e) {
 			logger.throwing(this.getClass().getSimpleName(), "getByCategory", e);
 		}
 
-		return (recipeDtos == null || recipeDtos.length == 0) ? null : Arrays.asList(recipeDtos);
+		return (recipes == null || recipes.length == 0) ? null : Arrays.asList(recipes);
 	}
 
 	public RecipeDto createRecipe(RecipeDto recipeDto, String jwtToken) {
@@ -99,17 +101,17 @@ public class RecipesService {
 		return newRecipeDto;
 	}
 
-	public RecipeDto get(Long id) {
-		RecipeDto recipeDto = null;
+	public RecipesFindByIdResponse findById(Long id) {
+		RecipesFindByIdResponse recipe = null;
 
 		try {
-			recipeDto = restTemplate.getForObject(RECIPES_SERVICE_URL + "/api/v1/recipes/" + id, RecipeDto.class);
+			recipe = restTemplate.getForObject(RECIPES_SERVICE_URL + "/api/v1/recipes/" + id, RecipesFindByIdResponse.class);
 		}
 		catch (HttpClientErrorException e) {
-			logger.throwing(this.getClass().getSimpleName(), "get", e);
+			logger.throwing(this.getClass().getSimpleName(), "findById", e);
 		}
 
-		return recipeDto;
+		return recipe;
 	}
 
 
@@ -158,18 +160,18 @@ public class RecipesService {
 		);
 	}
 
-	public RecipeDto update(Long id, String token, RecipeDto recipeDtoToUpdate) {
-		RecipeDto recipeDto = null;
+	public RecipesUpdateRequest update(Long id, String token, RecipesUpdateRequest recipeToUpdate) {
+		RecipesUpdateRequest recipe = null;
 
 		JSONObject updateRecipeJsonObject = new JSONObject();
 		try {
-			updateRecipeJsonObject.put("id", recipeDtoToUpdate.getId());
-			updateRecipeJsonObject.put("name", recipeDtoToUpdate.getName());
-			updateRecipeJsonObject.put("description", recipeDtoToUpdate.getDescription());
-			updateRecipeJsonObject.put("category", recipeDtoToUpdate.getCategory().name());
+			updateRecipeJsonObject.put("id", recipeToUpdate.getId());
+			updateRecipeJsonObject.put("name", recipeToUpdate.getName());
+			updateRecipeJsonObject.put("description", recipeToUpdate.getDescription());
+			updateRecipeJsonObject.put("category", recipeToUpdate.getCategory().name());
 
 			JSONArray productsJsonArray = new JSONArray();
-			for (ProductDto product : recipeDtoToUpdate.getProducts()) {
+			for (ProductDto product : recipeToUpdate.getProducts()) {
 				JSONObject productJson = new JSONObject();
 				productJson.put("id", product.getId());
 				productJson.put("name", product.getName());
@@ -180,7 +182,7 @@ public class RecipesService {
 			updateRecipeJsonObject.put("products", productsJsonArray);
 
 			JSONArray votesJsonArray = new JSONArray();
-			for (VoteDto vote : recipeDtoToUpdate.getVotes()) {
+			for (VoteDto vote : recipeToUpdate.getVotes()) {
 				JSONObject voteJson = new JSONObject();
 				voteJson.put("id", vote.getId());
 				voteJson.put("rating", vote.getRating());
@@ -197,15 +199,15 @@ public class RecipesService {
 		headers.setContentType(MediaType.APPLICATION_JSON);
 		HttpEntity<String> requestEntity = new HttpEntity<>(updateRecipeJsonObject.toString(), headers);
 
-		ResponseEntity<RecipeDto> responseEntity = restTemplate.exchange(
+		ResponseEntity<RecipesUpdateRequest> responseEntity = restTemplate.exchange(
 				RECIPES_SERVICE_URL + "/api/v1/recipes/" + id,
 				HttpMethod.PUT,
 				requestEntity,
-				RecipeDto.class
+				RecipesUpdateRequest.class
 		);
 
-		recipeDto = responseEntity.getBody();
+		recipe = responseEntity.getBody();
 
-		return recipeDto;
+		return recipe;
 	}
 }

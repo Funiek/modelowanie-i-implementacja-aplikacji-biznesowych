@@ -1,6 +1,7 @@
 package org.example.controller;
 
 import org.example.dto.RecipeDto;
+import org.example.model.Category;
 import org.example.model.Recipe;
 import org.example.service.RecipeService;
 import org.example.util.RecipeMapper;
@@ -23,6 +24,12 @@ public class RecipeController {
     @GetMapping
     public Flux<RecipeDto> findAll() {
         Flux<Recipe> recipes = recipeService.findAll();
+        return recipes.flatMap(recipe -> Mono.just(RecipeMapper.convertRecipeToRecipeDto(recipe)));
+    }
+
+    @GetMapping("category/{categoryName}")
+    public Flux<RecipeDto> findAllByCategory(@PathVariable("categoryName")Category category) {
+        Flux<Recipe> recipes = recipeService.findAllByCategory(category);
         return recipes.flatMap(recipe -> Mono.just(RecipeMapper.convertRecipeToRecipeDto(recipe)));
     }
 

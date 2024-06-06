@@ -1,7 +1,6 @@
 package org.example.service;
 
 import jakarta.annotation.PostConstruct;
-import org.example.request.RecipesFindAllRequest;
 import org.example.response.VotesRatingByRecipeIdResponse;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;

@@ -1,7 +1,9 @@
 package org.example.controller;
 
+import org.example.dto.CategoryDto;
 import org.example.dto.RecipeDto;
 import org.example.request.*;
+import org.example.response.RecipesFindByIdResponse;
 import org.example.response.VotesRatingByRecipeIdResponse;
 import org.example.service.ImageService;
 import org.example.service.RecipesService;
@@ -35,8 +37,7 @@ public class WebController {
 
     @RequestMapping("/")
     public String index(Model model) {
-        List<RecipesFindAllRequest> recipesFindAllRequestList = recipesService.findAll();
-        List<RecipeDto> recipeDtos = recipesFindAllRequestList.stream()
+        List<RecipeDto> recipeDtos =  recipesService.findAll().stream()
                         .map(recipe -> {
                             VotesRatingByRecipeIdResponse rating = votesService.ratingByRecipeId(recipe.getId());
                             return RecipeDto.builder()
@@ -51,22 +52,46 @@ public class WebController {
                                     .build();
                         }).collect(Collectors.toList());
 
-
-
         model.addAttribute("recipeDtos", recipeDtos);
         return "index";
     }
 
-    @RequestMapping("/category/{categoryName}")
-    public String getByCategory(@PathVariable("categoryName") String categoryName, Model model) {
-        List<RecipeDto> recipeDtos = recipesService.getByCategory(categoryName);
+    @RequestMapping("/category/{category}")
+    public String findAllByCategory(@PathVariable("category") CategoryDto categoryDto, Model model) {
+        List<RecipeDto> recipeDtos =  recipesService.findAllByCategory(categoryDto).stream()
+                .map(recipe -> {
+                    VotesRatingByRecipeIdResponse rating = votesService.ratingByRecipeId(recipe.getId());
+                    return RecipeDto.builder()
+                            .id(recipe.getId())
+                            .name(recipe.getName())
+                            .category(recipe.getCategory())
+                            .votes(recipe.getVotes())
+                            .products(recipe.getProducts())
+                            .description(recipe.getDescription())
+                            .countVotes(rating.getCountVotes())
+                            .rating(rating.getRating())
+                            .build();
+                }).collect(Collectors.toList());
+
         model.addAttribute("recipeDtos", recipeDtos);
         return "index";
     }
 
     @RequestMapping("/recipes/details/{id}")
     public String details(@PathVariable("id") Long id, Model model) {
-        RecipeDto recipeDto = recipesService.get(id);
+        RecipesFindByIdResponse recipe = recipesService.findById(id);
+        VotesRatingByRecipeIdResponse rating = votesService.ratingByRecipeId(recipe.getId());
+        RecipeDto recipeDto = RecipeDto.builder()
+                .id(recipe.getId())
+                .name(recipe.getName())
+                .category(recipe.getCategory())
+                .votes(recipe.getVotes())
+                .products(recipe.getProducts())
+                .description(recipe.getDescription())
+                .countVotes(rating.getCountVotes())
+                .rating(rating.getRating())
+                .build();
+
         model.addAttribute("recipeDto", recipeDto);
         return "details";
     }
