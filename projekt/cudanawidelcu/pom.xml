@@ -11,11 +11,8 @@
 	<description>Cuda na widelcu</description>
 	<modules>
 		<module>eureka-server</module>
-		<module>recipes-service</module>
 		<module>web-service</module>
 		<module>application-gateway</module>
-		<module>identity-service</module>
-        <module>images-service</module>
 		<module>recipes-reactive-service</module>
 		<module>product-reactive-service</module>
         <module>votes-reactive-service</module>
