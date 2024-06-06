@@ -2,7 +2,7 @@ spring:
   cloud:
     gateway:
       routes:
-        - id: recipes-create
+        - id: recipes-save
           uri: lb://recipes-service
           predicates:
             - Path=/recipes-service/api/v1/recipes
@@ -24,12 +24,6 @@ spring:
             - Path=/recipes-service/**
           filters:
             - StripPrefix=1
-        - id: test-service
-          uri: lb://test-service
-          predicates:
-            - Path=/test-service/**
-          filters:
-            - StripPrefix=1
         - id: identity-service
           uri: lb://identity-service
           predicates:
@@ -49,12 +43,44 @@ spring:
             - Path=/images-service/**
           filters:
             - StripPrefix=1
+        - id: products-save
+          uri: lb://products-service
+          predicates:
+            - Path=/products-service/api/v1/products
+            - Method=POST
+          filters:
+            - StripPrefix=1
+            - RoleCheck=ADMIN
+        - id: products-update
+          uri: lb://products-service
+          predicates:
+            - Path=/products-service/api/v1/products
+            - Method=PUT
+          filters:
+            - StripPrefix=1
+            - RoleCheck=ADMIN
         - id: products-service
           uri: lb://products-service
           predicates:
             - Path=/products-service/**
           filters:
             - StripPrefix=1
+        - id: votes-save
+          uri: lb://votes-service
+          predicates:
+            - Path=/votes-service/api/v1/votes
+            - Method=POST
+          filters:
+            - StripPrefix=1
+            - RoleCheck=ADMIN
+        - id: votes-update
+          uri: lb://votes-service
+          predicates:
+            - Path=/votes-service/api/v1/votes
+            - Method=PUT
+          filters:
+            - StripPrefix=1
+            - RoleCheck=ADMIN
         - id: votes-service
           uri: lb://votes-service
           predicates:
