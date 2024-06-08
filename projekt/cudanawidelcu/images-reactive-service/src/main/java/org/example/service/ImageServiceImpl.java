@@ -10,7 +10,7 @@ import java.nio.file.Paths;
 
 @Service
 public class ImageServiceImpl implements ImageService {
-    private final String PATH = "C:\\Users\\krzys\\Documents\\Coding\\modelowanie-i-implementacja-aplikacji-biznesowych\\projekt\\cudanawidelcu\\img";
+    private final String PATH = "C:\\Users\\funko\\Documents\\Coding\\modelowanie-i-implementacja-aplikacji-biznesowych\\projekt\\cudanawidelcu\\img";
     @Override
     public Mono<InputStream> getImage(String fileName) {
         return Mono.fromCallable(() -> {

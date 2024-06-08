@@ -9,7 +9,6 @@ import org.example.response.RecipesFindAllByCategoryResponse;
 import org.example.response.RecipesFindAllResponse;
 import org.example.response.RecipesFindByIdResponse;
 import org.example.request.RecipesUpdateRequest;
-import org.example.request.VotesSaveRequest;
 import org.example.response.IdentityValidateAdminResponse;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -67,7 +66,7 @@ public class RecipesService {
 		return (recipes == null || recipes.length == 0) ? null : Arrays.asList(recipes);
 	}
 
-	public RecipeDto createRecipe(RecipeDto recipeDto, String jwtToken) {
+	public RecipeDto save(RecipeDto recipeDto, String jwtToken) {
 		RecipeDto newRecipeDto = null;
 
 		JSONObject newRecipeJsonObject = new JSONObject();
@@ -114,38 +113,6 @@ public class RecipesService {
 		return recipe;
 	}
 
-
-	public RecipeDto rate(VotesSaveRequest votesSaveRequest) {
-		RecipeDto recipeDto = null;
-
-		JSONObject rateRecipeJsonObject = new JSONObject();
-		try {
-			rateRecipeJsonObject.put("recipeId", votesSaveRequest.getRecipeId());
-			rateRecipeJsonObject.put("vote", votesSaveRequest.getVote());
-		} catch (JSONException e) {
-			throw new RuntimeException(e);
-		}
-
-		try {
-			HttpHeaders headers = new HttpHeaders();
-			headers.setContentType(MediaType.APPLICATION_JSON);
-
-			HttpEntity<String> requestEntity = new HttpEntity<>(rateRecipeJsonObject.toString(), headers);
-
-			ResponseEntity<RecipeDto> responseEntity = restTemplate.exchange(
-					RECIPES_SERVICE_URL + "/api/v1/recipes/rate",
-					HttpMethod.POST,
-					requestEntity,
-					RecipeDto.class
-			);
-
-			recipeDto = responseEntity.getBody();
-		} catch (Exception e) {
-			throw new RuntimeException("Błąd podczas wysyłania zapytania POST: " + e.getMessage(), e);
-		}
-
-		return recipeDto;
-	}
 
 	public void delete(Long id, String token) {
 		HttpHeaders headers = new HttpHeaders();

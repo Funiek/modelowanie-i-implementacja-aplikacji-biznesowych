@@ -65,14 +65,6 @@ spring:
             - Path=/products-service/**
           filters:
             - StripPrefix=1
-        - id: votes-save
-          uri: lb://votes-service
-          predicates:
-            - Path=/votes-service/api/v1/votes
-            - Method=POST
-          filters:
-            - StripPrefix=1
-            - RoleCheck=ADMIN
         - id: votes-update
           uri: lb://votes-service
           predicates:

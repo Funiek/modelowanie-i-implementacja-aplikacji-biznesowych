@@ -5,6 +5,7 @@ import org.example.dto.RecipeDto;
 import org.example.request.*;
 import org.example.response.RecipesFindByIdResponse;
 import org.example.response.VotesRatingByRecipeIdResponse;
+import org.example.response.VotesSaveResponse;
 import org.example.service.ImageService;
 import org.example.service.RecipesService;
 import org.example.service.VotesService;
@@ -98,8 +99,9 @@ public class WebController {
 
     @RequestMapping(value = "/votes/rating", method = RequestMethod.POST, headers = "Accept=application/json")
     @ResponseBody
-    public RecipeDto rate(@RequestBody VotesSaveRequest votesSaveRequest) {
-        return recipesService.rate(votesSaveRequest);
+    public VotesRatingByRecipeIdResponse rate(@RequestBody VotesSaveRequest votesSaveRequest) {
+        VotesSaveResponse votesSaveResponse = votesService.save(votesSaveRequest);
+        return votesService.ratingByRecipeId(votesSaveResponse.getRecipeId());
     }
 
     @GetMapping("/recipes/create")
@@ -115,12 +117,10 @@ public class WebController {
         if (!imageFile.isEmpty()) {
             imageService.sendImage(imageFile, recipeDto.getName());
         }
-        recipesService.createRecipe(recipeDto, jwtToken);
+        recipesService.save(recipeDto, jwtToken);
 
         return "redirect:/";
     }
-
-
 
     @GetMapping("/img/{imageName}")
     public ResponseEntity<Resource> getImage(@PathVariable("imageName") String imageName) {

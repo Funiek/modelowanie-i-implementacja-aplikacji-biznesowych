@@ -87,7 +87,9 @@ public class RecipeServiceImpl implements RecipeService {
 
     @Override
     public Mono<Void> deleteById(Long id) {
-        return recipeRepository.deleteById(id);
+        return recipeRepository.deleteById(id)
+                .then(productService.deleteAllByRecipeId(id))
+                .then(voteService.deleteAllByRecipeId(id));
     }
 
     @Override

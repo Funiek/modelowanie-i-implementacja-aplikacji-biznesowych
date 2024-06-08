@@ -31,8 +31,6 @@ public class RoleCheckGatewayFilterFactory extends AbstractGatewayFilterFactory<
                 return Mono.empty();
             }
 
-
-//            HttpHeaders headers = exchange.getRequest().getHeaders();
             HttpHeaders headers = new HttpHeaders();
             headers.setBearerAuth(auth.substring(7));
 

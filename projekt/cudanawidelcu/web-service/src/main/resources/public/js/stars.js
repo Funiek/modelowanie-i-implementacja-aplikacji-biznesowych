@@ -63,7 +63,7 @@ submitButton.addEventListener("click", () => {
 
     let postData = {
         recipeId: recipeId,
-        vote: activeElements.length
+        rating: activeElements.length
     }
 
     $.ajax({
