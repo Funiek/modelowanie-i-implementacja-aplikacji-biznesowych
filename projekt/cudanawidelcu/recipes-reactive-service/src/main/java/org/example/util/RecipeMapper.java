@@ -16,7 +16,9 @@ import reactor.core.publisher.Mono;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class RecipeMapper {
@@ -37,11 +39,13 @@ public class RecipeMapper {
                 .name(recipeDto.getName())
                 .description(recipeDto.getDescription())
                 .category(Category.fromCategoryDto(recipeDto.getCategory()))
-                .products(recipeDto.getProducts()
+                .products(Optional.ofNullable(recipeDto.getProducts())
+                        .orElse(Collections.emptyList())
                         .stream()
                         .map(RecipeMapper::convertProductDtoToProduct)
                         .collect(Collectors.toList()))
-                .votes(recipeDto.getVotes()
+                .votes(Optional.ofNullable(recipeDto.getVotes())
+                        .orElse(Collections.emptyList())
                         .stream()
                         .map(RecipeMapper::convertVoteDtoToVote)
                         .collect(Collectors.toList()))

@@ -9,7 +9,7 @@ spring:
             - Method=POST
           filters:
             - StripPrefix=1
-            - RoleCheck=ADMIN
+            - RoleCheck=USER,ADMIN
         - id: recipes-update
           uri: lb://recipes-service
           predicates:
@@ -17,7 +17,7 @@ spring:
             - Method=PUT
           filters:
             - StripPrefix=1
-            - RoleCheck=ADMIN
+            - AdminCheck=ADMIN
         - id: recipes-service
           uri: lb://recipes-service
           predicates:
@@ -30,13 +30,13 @@ spring:
             - Path=/identity-service/**
           filters:
             - StripPrefix=1
-        - id: images-rename
-          uri: lb://images-service
-          predicates:
-            - Path=/images-service/api/v1/images/rename
-          filters:
-            - StripPrefix=1
-            - RoleCheck=ADMIN
+#        - id: images-rename
+#          uri: lb://images-service
+#          predicates:
+#            - Path=/images-service/api/v1/images/rename
+#          filters:
+#            - StripPrefix=1
+#            - AdminCheck=ADMIN
         - id: images-service
           uri: lb://images-service
           predicates:
@@ -50,7 +50,7 @@ spring:
             - Method=POST
           filters:
             - StripPrefix=1
-            - RoleCheck=ADMIN
+            - AdminCheck=ADMIN
         - id: products-update
           uri: lb://products-service
           predicates:
@@ -58,7 +58,7 @@ spring:
             - Method=PUT
           filters:
             - StripPrefix=1
-            - RoleCheck=ADMIN
+            - AdminCheck=ADMIN
         - id: products-service
           uri: lb://products-service
           predicates:
@@ -72,7 +72,7 @@ spring:
             - Method=PUT
           filters:
             - StripPrefix=1
-            - RoleCheck=ADMIN
+            - AdminCheck=ADMIN
         - id: votes-service
           uri: lb://votes-service
           predicates:

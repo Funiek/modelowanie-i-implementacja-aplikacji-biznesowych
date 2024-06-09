@@ -3,7 +3,7 @@ package org.example.response;
 import org.example.model.UserRole;
 
 public enum RoleResponse {
-    USER, ADMIN;
+    USER, ADMIN, NONE;
 
     public static RoleResponse fromRole(UserRole userRole) {
         return switch (userRole) {

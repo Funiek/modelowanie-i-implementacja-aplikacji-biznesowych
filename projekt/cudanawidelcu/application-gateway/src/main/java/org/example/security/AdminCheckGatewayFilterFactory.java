@@ -1,23 +1,21 @@
 package org.example.security;
 
 import lombok.Getter;
-import org.example.dto.RoleDto;
 import org.example.dto.ValidateAdminDto;
+import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.cloud.gateway.filter.GatewayFilter;
 import org.springframework.cloud.gateway.filter.factory.AbstractGatewayFilterFactory;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
+import org.springframework.http.*;
 import org.springframework.stereotype.Component;
-import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
 
 @Component
-public class RoleCheckGatewayFilterFactory extends AbstractGatewayFilterFactory<RoleCheckGatewayFilterFactory.Config> {
+public class AdminCheckGatewayFilterFactory extends AbstractGatewayFilterFactory<AdminCheckGatewayFilterFactory.Config> {
 
     private final WebClient.Builder builder;
     private final String IDENTITY_SERVICE_URL = "http://APPLICATION-GATEWAY/identity-service";
 
-    public RoleCheckGatewayFilterFactory(WebClient.Builder builder) {
+    public AdminCheckGatewayFilterFactory(WebClient.Builder builder) {
         super(Config.class);
         this.builder = builder;
     }
@@ -35,14 +33,16 @@ public class RoleCheckGatewayFilterFactory extends AbstractGatewayFilterFactory<
             HttpHeaders headers = new HttpHeaders();
             headers.setBearerAuth(auth.substring(7));
 
-            Mono<RoleDto> response = builder.build()
+            Mono<ValidateAdminDto> response = builder.build()
                     .post()
-                    .uri(IDENTITY_SERVICE_URL + "/api/v1/auth/role")
+                    .uri(IDENTITY_SERVICE_URL + "/api/v1/auth/validate-admin")
                     .headers(httpHeaders -> httpHeaders.addAll(headers))
-                    .retrieve().bodyToMono(RoleDto.class);
+                    .retrieve().bodyToMono(ValidateAdminDto.class);
 
-            return response.flatMap(roleDto -> {
-                if (roleDto == RoleDto.NONE) {
+            return response.flatMap(isAdminResponse -> {
+                boolean isAdmin = Boolean.TRUE.equals(isAdminResponse.getIsValid());
+
+                if (!isAdmin) {
                     exchange.getResponse().setStatusCode(HttpStatus.FORBIDDEN);
                     return Mono.empty();
                 }

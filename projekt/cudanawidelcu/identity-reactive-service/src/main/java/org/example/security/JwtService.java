@@ -86,4 +86,13 @@ public class JwtService {
 
         return Objects.equals(role, "ADMIN");
     }
+
+    public String findRole(String authorizationHeader) {
+        if (authorizationHeader == null || !authorizationHeader.startsWith("Bearer ")) {
+            return "";
+        }
+
+        String token = authorizationHeader.substring(7);
+        return extractRole(token);
+    }
 }

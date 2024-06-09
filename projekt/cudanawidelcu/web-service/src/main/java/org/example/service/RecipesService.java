@@ -72,7 +72,7 @@ public class RecipesService {
 		JSONObject newRecipeJsonObject = new JSONObject();
 		try {
 			newRecipeJsonObject.put("name", recipeDto.getName());
-			newRecipeJsonObject.put("vote", recipeDto.getDescription());
+			newRecipeJsonObject.put("description", recipeDto.getDescription());
 			newRecipeJsonObject.put("category", recipeDto.getCategory());
 		} catch (JSONException e) {
 			throw new RuntimeException(e);

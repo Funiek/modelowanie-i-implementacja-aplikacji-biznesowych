@@ -7,12 +7,16 @@ import org.springframework.core.io.Resource;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.codec.multipart.FilePart;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.reactive.config.EnableWebFlux;
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 @RestController
 @RequestMapping("api/v1/images")
+@EnableWebFlux
 @CrossOrigin(origins = "*", methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE})
 public class ImageController {
     private final ImageService imageService;
@@ -32,10 +36,13 @@ public class ImageController {
                 });
     }
 
-    @PostMapping
-    public Mono<ResponseEntity<String>> uploadImage(@RequestParam("image") MultipartFile image) {
-        return imageService.uploadImage(image)
+    @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public Mono<ResponseEntity<String>> uploadImage(@RequestPart("image") Flux<FilePart> filePartFlux) {
+        return filePartFlux
+                .flatMap(imageService::uploadImage)
                 .then(Mono.just(new ResponseEntity<>("File uploaded", HttpStatus.OK)));
+//        return imageService.uploadImage(image)
+//                .then(Mono.just(new ResponseEntity<>("File uploaded", HttpStatus.OK)));
     }
 
     @PostMapping(value = "/rename")

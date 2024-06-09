@@ -6,6 +6,7 @@ import org.example.repository.UserRepository;
 import org.example.request.AuthenticationRequest;
 import org.example.request.RegisterRequest;
 import org.example.response.AuthenticationResponse;
+import org.example.response.RoleResponse;
 import org.example.response.ValidateAdminResponse;
 import org.example.security.JwtService;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -16,6 +17,7 @@ import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -37,6 +39,7 @@ public class AuthenticationService {
                 .username(request.getUsername())
                 .password(passwordEncoder.encode(request.getPassword()))
                 .userRole(UserRole.USER)
+                .createdAt(LocalDate.now())
                 .build();
 
         return userRepository.save(user)
@@ -77,6 +80,12 @@ public class AuthenticationService {
 
     public Mono<Void> delete(Long id) {
         return userRepository.deleteById(id);
+    }
+
+    public Mono<RoleResponse> findRole(String auth) {
+        return Mono.just(
+                RoleResponse.valueOf(jwtService.findRole(auth))
+        );
     }
 }
 

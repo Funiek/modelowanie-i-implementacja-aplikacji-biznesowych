@@ -7,6 +7,7 @@ import org.example.response.ValidateAdminResponse;
 import org.example.service.AuthenticationService;
 import org.example.util.UserMapper;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.reactive.config.EnableWebFlux;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
@@ -15,6 +16,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/v1/users")
+@EnableWebFlux
 @CrossOrigin(origins = "*", methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE})
 public class UsersController {
     private final AuthenticationService authenticationService;

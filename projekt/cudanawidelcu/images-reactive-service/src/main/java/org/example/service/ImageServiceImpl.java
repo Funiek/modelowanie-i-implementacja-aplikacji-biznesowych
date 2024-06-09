@@ -1,16 +1,22 @@
 package org.example.service;
 
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.codec.multipart.FilePart;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import reactor.core.publisher.Mono;
+import reactor.core.scheduler.Schedulers;
 
 import java.io.*;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 
 @Service
 public class ImageServiceImpl implements ImageService {
-    private final String PATH = "C:\\Users\\funko\\Documents\\Coding\\modelowanie-i-implementacja-aplikacji-biznesowych\\projekt\\cudanawidelcu\\img";
+    @Value("${img}")
+    private String PATH;
+
     @Override
     public Mono<InputStream> getImage(String fileName) {
         return Mono.fromCallable(() -> {
@@ -20,15 +26,9 @@ public class ImageServiceImpl implements ImageService {
     }
 
     @Override
-    public Mono<Void> uploadImage(MultipartFile file) {
-        return Mono.fromRunnable(() -> {
-            try {
-                String fullPath = PATH + File.separator + file.getOriginalFilename();
-                Files.copy(file.getInputStream(), Paths.get(fullPath));
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-        });
+    public Mono<Void> uploadImage(FilePart filePart) {
+        Path path = Paths.get(PATH + File.separator + filePart.filename());
+        return filePart.transferTo(path);
     }
 
     @Override
