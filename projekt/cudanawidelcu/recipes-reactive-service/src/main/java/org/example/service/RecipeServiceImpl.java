@@ -1,5 +1,6 @@
 package org.example.service;
 
+import org.example.exception.RecipeNotFoundException;
 import org.example.model.Category;
 import org.example.model.Product;
 import org.example.model.Recipe;
@@ -82,7 +83,9 @@ public class RecipeServiceImpl implements RecipeService {
 
     @Override
     public Mono<Recipe> update(Long id, Recipe recipe) {
-        return null;
+        return recipeRepository.findById(id)
+                .flatMap(existingRecipe -> recipeRepository.save(recipe))
+                .switchIfEmpty(Mono.error(new RecipeNotFoundException(recipe.getName())));
     }
 
     @Override

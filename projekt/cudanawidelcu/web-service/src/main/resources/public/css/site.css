@@ -51,3 +51,7 @@ body {
 .index-detail-btn:hover {
     color: dimgrey;
 }
+
+.href-hover-gray:hover {
+    color: dimgrey !important;
+}

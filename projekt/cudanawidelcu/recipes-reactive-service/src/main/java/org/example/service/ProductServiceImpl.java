@@ -55,7 +55,7 @@ public class ProductServiceImpl implements ProductService {
     public Mono<Void> deleteAllByRecipeId(Long recipeId) {
         return builder.build()
                 .delete()
-                .uri(PRODUCTS_SERVICE_URL + "/api/v1/products" + recipeId)
+                .uri(PRODUCTS_SERVICE_URL + "/api/v1/products/recipe/" + recipeId)
                 .retrieve()
                 .bodyToMono(Void.class);
     }

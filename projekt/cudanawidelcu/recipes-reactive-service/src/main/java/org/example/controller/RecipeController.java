@@ -49,8 +49,8 @@ public class RecipeController {
     @PutMapping("/{id}")
     public Mono<RecipeDto> update(@PathVariable("id") Long id, @RequestBody RecipeDto recipeDto) {
         Recipe recipe = RecipeMapper.convertRecipeDtoToRecipe(recipeDto);
-        Mono<Recipe> createdRecipe = recipeService.update(id, recipe);
-        return createdRecipe.map(RecipeMapper::convertRecipeToRecipeDto);
+        Mono<Recipe> updatedRecipe = recipeService.update(id, recipe);
+        return updatedRecipe.map(RecipeMapper::convertRecipeToRecipeDto);
     }
 
     @DeleteMapping("/{id}")

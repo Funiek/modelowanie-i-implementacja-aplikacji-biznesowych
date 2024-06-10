@@ -64,8 +64,9 @@
             <input type="hidden" th:field="*{countVotes}" />
 
 
-            <button type="submit" class="btn btn-primary">Zapisz</button>
-            <a th:href="@{/admin/panel}" class="btn btn-secondary">Anuluj</a>
+            <button type="submit" class="nice-button" style="float:left; margin-right: 16px">Zapisz</button>
+            <a th:href="@{/admin/recipes/manage}" class="nice-button href-hover-gray" style="float:left; margin-right: 16px">Anuluj</a>
+            <div style="clear:both"></div>
         </form>
     </main>
 </div>

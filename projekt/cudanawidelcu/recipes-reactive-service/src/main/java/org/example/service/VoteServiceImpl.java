@@ -54,7 +54,7 @@ public class VoteServiceImpl implements VoteService {
     public Mono<Void> deleteAllByRecipeId(Long recipeId) {
         return builder.build()
                 .delete()
-                .uri(VOTES_SERVICE_URL + "/api/v1/votes" + recipeId)
+                .uri(VOTES_SERVICE_URL + "/api/v1/votes/recipe/" + recipeId)
                 .retrieve()
                 .bodyToMono(Void.class);
     }

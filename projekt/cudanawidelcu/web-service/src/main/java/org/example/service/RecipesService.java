@@ -136,27 +136,6 @@ public class RecipesService {
 			updateRecipeJsonObject.put("name", recipeToUpdate.getName());
 			updateRecipeJsonObject.put("description", recipeToUpdate.getDescription());
 			updateRecipeJsonObject.put("category", recipeToUpdate.getCategory().name());
-
-			JSONArray productsJsonArray = new JSONArray();
-			for (ProductDto product : recipeToUpdate.getProducts()) {
-				JSONObject productJson = new JSONObject();
-				productJson.put("id", product.getId());
-				productJson.put("name", product.getName());
-				productJson.put("measure", product.getMeasure());
-				productJson.put("qty", product.getQty());
-				productsJsonArray.put(productJson);
-			}
-			updateRecipeJsonObject.put("products", productsJsonArray);
-
-			JSONArray votesJsonArray = new JSONArray();
-			for (VoteDto vote : recipeToUpdate.getVotes()) {
-				JSONObject voteJson = new JSONObject();
-				voteJson.put("id", vote.getId());
-				voteJson.put("rating", vote.getRating());
-				votesJsonArray.put(voteJson);
-			}
-			updateRecipeJsonObject.put("votes", votesJsonArray);
-
 		} catch (JSONException e) {
 			throw new RuntimeException(e);
 		}

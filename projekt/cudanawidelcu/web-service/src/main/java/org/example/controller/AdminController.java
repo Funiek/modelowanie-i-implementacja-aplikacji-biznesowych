@@ -13,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 @Controller
@@ -88,7 +89,19 @@ public class AdminController {
         IdentityValidateAdminResponse identityValidateAdminResponse = identityService.validateAdmin(jwtToken);
         if (identityValidateAdminResponse.getIsValid()) {
             RecipesFindByIdResponse recipe = recipesService.findById(id);
-            model.addAttribute("recipe", recipe);
+            VotesRatingByRecipeIdResponse rating = votesService.ratingByRecipeId(recipe.getId());
+            RecipeDto recipeDto = RecipeDto.builder()
+                    .id(recipe.getId())
+                    .name(recipe.getName())
+                    .category(recipe.getCategory())
+                    .votes(recipe.getVotes())
+                    .products(recipe.getProducts())
+                    .description(recipe.getDescription())
+                    .countVotes(rating.getCountVotes())
+                    .rating(rating.getRating())
+                    .build();
+
+            model.addAttribute("recipeDto", recipeDto);
             return "editRecipe";
         }
 
@@ -101,11 +114,15 @@ public class AdminController {
         if (identityValidateAdminResponse.getIsValid()) {
             RecipesFindByIdResponse oldRecipe = recipesService.findById(recipesUpdateRequest.getId());
             recipesService.update(recipesUpdateRequest.getId(), jwtToken, recipesUpdateRequest);
-            ImagesRenameRequest imagesRenameRequest = ImagesRenameRequest.builder()
-                    .oldName(oldRecipe.getName() + ".jpeg")
-                    .newName(recipesUpdateRequest.getName() + ".jpeg")
-                    .build();
-            imageService.renameImage(jwtToken, imagesRenameRequest);
+
+            if (!Objects.equals(oldRecipe.getName(), recipesUpdateRequest.getName())) {
+                ImagesRenameRequest imagesRenameRequest = ImagesRenameRequest.builder()
+                        .oldName(oldRecipe.getName() + ".jpeg")
+                        .newName(recipesUpdateRequest.getName() + ".jpeg")
+                        .build();
+                imageService.renameImage(jwtToken, imagesRenameRequest);
+            }
+
             return "redirect:/admin/recipes/manage";
         }
 
