@@ -19,6 +19,6 @@ public class LoggingAspect {
     public void logMethodCall(JoinPoint joinPoint) {
         String methodName = joinPoint.getSignature().getName();
         String className = joinPoint.getTarget().getClass().getSimpleName();
-        logger.info("RECIPES LOGGER ===> Method: " + className + "." + methodName + " !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+        logger.info("IDENTITY LOGGER ===> Method: " + className + "." + methodName + " !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
     }
 }
