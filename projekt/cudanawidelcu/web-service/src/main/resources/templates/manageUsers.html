@@ -9,18 +9,22 @@
 <div class="container">
     <main role="main" class="pb-3">
         <h1>Lista Użytkowników</h1>
-        <table class="table" th:if="${identityUserRespons}">
+        <table class="table" th:if="${identityUserResponse}">
             <thead>
             <tr>
                 <th>Nazwa Użytkownika</th>
                 <th>Rola</th>
                 <th></th>
+                <th></th>
             </tr>
             </thead>
             <tbody>
-            <tr th:each="user : ${identityUserRespons}">
+            <tr th:each="user : ${identityUserResponse}">
                 <td th:text="${user.username}"></td>
                 <td th:text="${user.getIdentityRoleResponse}"></td>
+                <td>
+                    <a class="index-detail-btn" th:if="${user.getIdentityRoleResponse.toString() != 'ADMIN'}" th:href="@{'/admin/users/edit/' + ${user.id}}">Aktualizuj</a>
+                </td>
                 <td>
                     <a class="index-detail-btn" th:if="${user.getIdentityRoleResponse.toString() != 'ADMIN'}" th:href="@{'/admin/users/delete/' + ${user.id}}">Usuń</a>
                 </td>

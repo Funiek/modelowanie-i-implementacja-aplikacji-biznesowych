@@ -46,7 +46,7 @@ public class IdentityService {
     }
 
     public IdentityAuthenticateResponse register(IdentityRegisterRequest identityRegisterRequest) throws RuntimeException {
-        IdentityAuthenticateResponse identityAuthenticateResponse = null;
+        IdentityAuthenticateResponse identityAuthenticateResponse;
 
         JSONObject registerJsonObject = new JSONObject();
         try {
@@ -78,7 +78,7 @@ public class IdentityService {
     }
 
     public IdentityAuthenticateResponse authenticate(IdentityAuthenticateRequest identityAuthenticateRequest) throws RuntimeException {
-        IdentityAuthenticateResponse identityAuthenticateResponse = null;
+        IdentityAuthenticateResponse identityAuthenticateResponse;
 
         JSONObject registerJsonObject = new JSONObject();
         try {
@@ -110,7 +110,7 @@ public class IdentityService {
     }
 
     public IdentityValidateAdminResponse validateAdmin(String token) throws RuntimeException {
-        IdentityValidateAdminResponse identityValidateAdminResponse = null;
+        IdentityValidateAdminResponse identityValidateAdminResponse;
 
         try {
             HttpHeaders headers = new HttpHeaders();
@@ -147,7 +147,7 @@ public class IdentityService {
     }
 
     public List<IdentityUserResponse> getAll(String token) {
-        IdentityUserResponse[] userDtos = null;
+        IdentityUserResponse[] userDtos;
 
         HttpHeaders headers = new HttpHeaders();
         headers.setBearerAuth(token);

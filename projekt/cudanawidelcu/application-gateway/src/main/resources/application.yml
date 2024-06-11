@@ -30,13 +30,13 @@ spring:
             - Path=/identity-service/**
           filters:
             - StripPrefix=1
-#        - id: images-rename
-#          uri: lb://images-service
-#          predicates:
-#            - Path=/images-service/api/v1/images/rename
-#          filters:
-#            - StripPrefix=1
-#            - AdminCheck=ADMIN
+        - id: images-rename
+          uri: lb://images-service
+          predicates:
+            - Path=/images-service/api/v1/images/rename
+          filters:
+            - StripPrefix=1
+            - AdminCheck=ADMIN
         - id: images-service
           uri: lb://images-service
           predicates:

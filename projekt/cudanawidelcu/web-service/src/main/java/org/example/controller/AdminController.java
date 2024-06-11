@@ -45,8 +45,8 @@ public class AdminController {
     public String manageUsers(@CookieValue("jwtToken") String jwtToken, Model model) {
         IdentityValidateAdminResponse identityValidateAdminResponse = identityService.validateAdmin(jwtToken);
         if (identityValidateAdminResponse.getIsValid()) {
-            List<IdentityUserResponse> identityUserRespons = identityService.getAll(jwtToken);
-            model.addAttribute("userResponses", identityUserRespons);
+            List<IdentityUserResponse> identityUserResponse = identityService.getAll(jwtToken);
+            model.addAttribute("identityUserResponse", identityUserResponse);
             return "manageUsers";
         }
 
