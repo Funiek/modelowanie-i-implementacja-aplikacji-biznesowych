@@ -5,11 +5,8 @@ import org.example.dto.CategoryDto;
 import org.example.dto.ProductDto;
 import org.example.dto.RecipeDto;
 import org.example.dto.VoteDto;
-import org.example.response.RecipesFindAllByCategoryResponse;
-import org.example.response.RecipesFindAllResponse;
-import org.example.response.RecipesFindByIdResponse;
+import org.example.response.*;
 import org.example.request.RecipesUpdateRequest;
-import org.example.response.IdentityValidateAdminResponse;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -127,8 +124,8 @@ public class RecipesService {
 		);
 	}
 
-	public RecipesUpdateRequest update(Long id, String token, RecipesUpdateRequest recipeToUpdate) {
-		RecipesUpdateRequest recipe = null;
+	public RecipesUpdateResponse update(Long id, String token, RecipesUpdateRequest recipeToUpdate) {
+		RecipesUpdateResponse recipe;
 
 		JSONObject updateRecipeJsonObject = new JSONObject();
 		try {
@@ -145,11 +142,11 @@ public class RecipesService {
 		headers.setContentType(MediaType.APPLICATION_JSON);
 		HttpEntity<String> requestEntity = new HttpEntity<>(updateRecipeJsonObject.toString(), headers);
 
-		ResponseEntity<RecipesUpdateRequest> responseEntity = restTemplate.exchange(
+		ResponseEntity<RecipesUpdateResponse> responseEntity = restTemplate.exchange(
 				RECIPES_SERVICE_URL + "/api/v1/recipes/" + id,
 				HttpMethod.PUT,
 				requestEntity,
-				RecipesUpdateRequest.class
+				RecipesUpdateResponse.class
 		);
 
 		recipe = responseEntity.getBody();

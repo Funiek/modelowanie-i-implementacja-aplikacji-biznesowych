@@ -1,6 +1,8 @@
 package org.example.controller;
 
 import org.example.dto.RecipeDto;
+import org.example.request.IdentityUserRoleRequest;
+import org.example.request.IdentityUserUpdateRequest;
 import org.example.request.ImagesRenameRequest;
 import org.example.request.RecipesUpdateRequest;
 import org.example.response.*;
@@ -53,12 +55,39 @@ public class AdminController {
         return "redirect:/admin/users/manage";
     }
 
-    @GetMapping("/users/delete/{id}")
-    public String deleteUser(@PathVariable("id") Long id, @CookieValue("jwtToken") String jwtToken) {
-        identityService.delete(id, jwtToken);
+    @GetMapping("/users/edit/{id}")
+    public String editUser(@PathVariable("id") Long id, @CookieValue("jwtToken") String jwtToken, Model model) {
+        IdentityValidateAdminResponse identityValidateAdminResponse = identityService.validateAdmin(jwtToken);
+        if (identityValidateAdminResponse.getIsValid()) {
+            IdentityUserResponse identityUserResponse = identityService.findById(jwtToken, id);
+            model.addAttribute("userDto", IdentityUserUpdateRequest.builder()
+                            .id(identityUserResponse.getId())
+                            .username(identityUserResponse.getUsername())
+                            .roleRequest(IdentityUserRoleRequest.valueOf(identityUserResponse.getRoleResponse().name()))
+                    .build());
+            return "editUser";
+        }
 
         return "redirect:/";
     }
+
+    @PostMapping(path = "/users/edit", consumes = "application/x-www-form-urlencoded")
+    public String editUser(@CookieValue("jwtToken") String jwtToken, @ModelAttribute IdentityUserUpdateRequest userUpdateRequest) {
+        IdentityValidateAdminResponse identityValidateAdminResponse = identityService.validateAdmin(jwtToken);
+        if (identityValidateAdminResponse.getIsValid()) {
+            identityService.update(userUpdateRequest.getId(), jwtToken, userUpdateRequest);
+            return "redirect:/admin/users/manage";
+        }
+
+        return "redirect:/";
+    }
+
+    @GetMapping("/users/delete/{id}")
+    public String deleteUser(@PathVariable("id") Long id, @CookieValue("jwtToken") String jwtToken) {
+        identityService.delete(id, jwtToken);
+        return "redirect:/admin/users/manage";
+    }
+
     @GetMapping("/recipes/manage")
     public String manageProducts(@CookieValue("jwtToken") String jwtToken, Model model) {
         IdentityValidateAdminResponse identityValidateAdminResponse = identityService.validateAdmin(jwtToken);
@@ -85,7 +114,7 @@ public class AdminController {
         return "redirect:/";
     }
     @GetMapping("/recipes/edit/{id}")
-    public String updateProducts(@PathVariable("id") Long id, @CookieValue("jwtToken") String jwtToken, Model model) {
+    public String editRecipe(@PathVariable("id") Long id, @CookieValue("jwtToken") String jwtToken, Model model) {
         IdentityValidateAdminResponse identityValidateAdminResponse = identityService.validateAdmin(jwtToken);
         if (identityValidateAdminResponse.getIsValid()) {
             RecipesFindByIdResponse recipe = recipesService.findById(id);
@@ -109,7 +138,7 @@ public class AdminController {
     }
 
     @PostMapping(path = "/recipes/edit", consumes = "application/x-www-form-urlencoded")
-    public String updateProducts(@CookieValue("jwtToken") String jwtToken, @ModelAttribute RecipesUpdateRequest recipesUpdateRequest) {
+    public String editRecipe(@CookieValue("jwtToken") String jwtToken, @ModelAttribute RecipesUpdateRequest recipesUpdateRequest) {
         IdentityValidateAdminResponse identityValidateAdminResponse = identityService.validateAdmin(jwtToken);
         if (identityValidateAdminResponse.getIsValid()) {
             RecipesFindByIdResponse oldRecipe = recipesService.findById(recipesUpdateRequest.getId());

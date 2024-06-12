@@ -78,7 +78,7 @@ public class ImageService {
         headers.setContentType(MediaType.APPLICATION_JSON);
         HttpEntity<String> requestEntity = new HttpEntity<>(renameJsonObject.toString(), headers);
 
-        ResponseEntity<RecipeDto> responseEntity = restTemplate.exchange(
+        restTemplate.exchange(
                 IMAGES_SERVICE_URL + "/api/v1/images/rename",
                 HttpMethod.POST,
                 requestEntity,

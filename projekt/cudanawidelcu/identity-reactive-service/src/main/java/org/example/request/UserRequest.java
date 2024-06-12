@@ -1,16 +1,17 @@
-package org.example.response;
+package org.example.request;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.example.response.RoleResponse;
 
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class IdentityUserResponse {
+public class UserRequest {
     private Long id;
     private String username;
-    private IdentityRoleResponse roleResponse;
+    private RoleRequest roleRequest;
 }

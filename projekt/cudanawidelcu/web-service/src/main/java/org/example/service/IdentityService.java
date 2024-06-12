@@ -8,15 +8,15 @@ import io.jsonwebtoken.security.Keys;
 import jakarta.annotation.PostConstruct;
 import org.example.request.IdentityAuthenticateRequest;
 import org.example.request.IdentityRegisterRequest;
-import org.example.response.IdentityAuthenticateResponse;
-import org.example.response.IdentityUserResponse;
-import org.example.response.IdentityValidateAdminResponse;
+import org.example.request.IdentityUserUpdateRequest;
+import org.example.response.*;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 
 import java.security.Key;
@@ -180,5 +180,52 @@ public class IdentityService {
         Date expiration = claims.getExpiration();
 
         return (int) (expiration.getTime() - issuedAt.getTime()) / 1000;
+    }
+
+    public IdentityUserResponse findById(String token, Long id) {
+        IdentityUserResponse userResponse;
+        HttpHeaders headers = new HttpHeaders();
+        headers.setBearerAuth(token);
+        HttpEntity<String> requestEntity = new HttpEntity<>(headers);
+
+        ResponseEntity<IdentityUserResponse> response = restTemplate.exchange(
+                IDENTITY_SERVICE_URL + "/api/v1/users/" + id,
+                HttpMethod.GET,
+                requestEntity,
+                IdentityUserResponse.class
+        );
+
+        userResponse = response.getBody();
+
+        return userResponse;
+    }
+
+    public IdentityUserResponse update(Long id, String jwtToken, IdentityUserUpdateRequest userUpdateRequest) {
+        IdentityUserResponse recipe;
+
+        JSONObject updateUserJsonObject = new JSONObject();
+        try {
+            updateUserJsonObject.put("id", userUpdateRequest.getId());
+            updateUserJsonObject.put("username", userUpdateRequest.getUsername());
+            updateUserJsonObject.put("roleRequest", userUpdateRequest.getRoleRequest().name());
+        } catch (JSONException e) {
+            throw new RuntimeException(e);
+        }
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setBearerAuth(jwtToken);
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        HttpEntity<String> requestEntity = new HttpEntity<>(updateUserJsonObject.toString(), headers);
+
+        ResponseEntity<IdentityUserResponse> responseEntity = restTemplate.exchange(
+                IDENTITY_SERVICE_URL + "/api/v1/users/" + id,
+                HttpMethod.PUT,
+                requestEntity,
+                IdentityUserResponse.class
+        );
+
+        recipe = responseEntity.getBody();
+
+        return recipe;
     }
 }

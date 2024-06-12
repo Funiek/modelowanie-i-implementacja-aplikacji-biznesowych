@@ -1,0 +1,39 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{head :: copy}"></head>
+
+<body>
+<header th:replace="~{header :: copy}"></header>
+<div class="container">
+    <main role="main" class="pb-3">
+        <h1>Edytuj Użytkownika</h1>
+
+        <form th:action="@{/admin/users/edit}" th:object="${userDto}" method="post">
+            <div class="form-group">
+                <label for="username">Nazwa użytkownika</label>
+                <input type="text" class="form-control" id="username" th:field="*{username}" placeholder="Nazwa użytkownika" required/>
+            </div>
+
+            <div class="form-group">
+                <label for="role">Rola</label>
+                <select class="form-control" id="role" th:field="*{roleRequest}">
+                    <option th:each="role : ${T(org.example.request.IdentityUserRoleRequest).values()}"
+                            th:value="${role}"
+                            th:text="${role}">Rola</option>
+                </select>
+            </div>
+
+            <input type="hidden" th:field="*{id}" />
+
+            <button type="submit" class="nice-button" style="float:left; margin-right: 16px">Zapisz</button>
+            <a th:href="@{/admin/users/manage}" class="nice-button href-hover-gray" style="float:left; margin-right: 16px">Anuluj</a>
+            <div style="clear:both"></div>
+        </form>
+    </main>
+</div>
+
+<footer th:replace="~{footer :: copy}"></footer>
+</body>
+</html>

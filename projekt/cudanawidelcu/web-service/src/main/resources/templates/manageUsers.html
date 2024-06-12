@@ -21,12 +21,12 @@
             <tbody>
             <tr th:each="user : ${identityUserResponse}">
                 <td th:text="${user.username}"></td>
-                <td th:text="${user.getIdentityRoleResponse}"></td>
+                <td th:text="${user.roleResponse}"></td>
                 <td>
-                    <a class="index-detail-btn" th:if="${user.getIdentityRoleResponse.toString() != 'ADMIN'}" th:href="@{'/admin/users/edit/' + ${user.id}}">Aktualizuj</a>
+                    <a class="index-detail-btn" th:href="@{'/admin/users/edit/' + ${user.id}}">Aktualizuj</a>
                 </td>
                 <td>
-                    <a class="index-detail-btn" th:if="${user.getIdentityRoleResponse.toString() != 'ADMIN'}" th:href="@{'/admin/users/delete/' + ${user.id}}">Usuń</a>
+                    <a class="index-detail-btn" th:if="${user.getRoleResponse().name() != 'ADMIN'}" th:href="@{'/admin/users/delete/' + ${user.id}}">Usuń</a>
                 </td>
             </tr>
             </tbody>

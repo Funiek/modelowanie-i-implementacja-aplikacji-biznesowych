@@ -33,7 +33,7 @@ public class VotesService {
     }
 
     public VotesSaveResponse save(VotesSaveRequest votesSaveRequest) {
-        VotesSaveResponse votesSaveResponse = null;
+        VotesSaveResponse votesSaveResponse;
 
         JSONObject rateRecipeJsonObject = new JSONObject();
         try {

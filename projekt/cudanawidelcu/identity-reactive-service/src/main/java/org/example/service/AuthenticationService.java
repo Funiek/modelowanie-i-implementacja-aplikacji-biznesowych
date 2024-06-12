@@ -1,5 +1,6 @@
 package org.example.service;
 
+import org.example.exception.UserNotAdminException;
 import org.example.model.UserRole;
 import org.example.model.User;
 import org.example.repository.UserRepository;
@@ -22,13 +23,13 @@ import java.util.List;
 
 @Service
 public class AuthenticationService {
-    private final UserRepository userRepository;
+    private final UserService userService;
     private final PasswordEncoder passwordEncoder;
     private final JwtService jwtService;
     private final ReactiveAuthenticationManager authenticationManager;
 
-    public AuthenticationService(UserRepository userRepository, PasswordEncoder passwordEncoder, JwtService jwtService, ReactiveAuthenticationManager authenticationManager) {
-        this.userRepository = userRepository;
+    public AuthenticationService(UserService userService, PasswordEncoder passwordEncoder, JwtService jwtService, ReactiveAuthenticationManager authenticationManager) {
+        this.userService = userService;
         this.passwordEncoder = passwordEncoder;
         this.jwtService = jwtService;
         this.authenticationManager = authenticationManager;
@@ -42,7 +43,7 @@ public class AuthenticationService {
                 .createdAt(LocalDate.now())
                 .build();
 
-        return userRepository.save(user)
+        return userService.save(user)
                 .map(savedUser -> {
                     String jwtToken = jwtService.generateToken(savedUser);
                     return AuthenticationResponse.builder()
@@ -58,7 +59,7 @@ public class AuthenticationService {
                                 request.getPassword()
                         )
                 )
-                .flatMap(authentication -> userRepository.findByUsername(request.getUsername())
+                .flatMap(authentication -> userService.findByUsername(request.getUsername())
                         .map(user -> {
                             String jwtToken = jwtService.generateToken(user);
                             return AuthenticationResponse.builder()
@@ -67,25 +68,14 @@ public class AuthenticationService {
                         }));
     }
 
-    public Mono<ValidateAdminResponse> validateAdmin(String token) {
+    public Mono<ValidateAdminResponse> validateAdmin(String token) throws UserNotAdminException {
         boolean isValidAdmin = jwtService.validateAdmin(token);
         return Mono.just(ValidateAdminResponse.builder()
                 .isValid(isValidAdmin)
-                .build());
+                .build())
+                .switchIfEmpty(Mono.error(new UserNotAdminException()));
     }
 
-    public Flux<User> getAll() {
-        return userRepository.findAll();
-    }
 
-    public Mono<Void> delete(Long id) {
-        return userRepository.deleteById(id);
-    }
-
-    public Mono<RoleResponse> findRole(String auth) {
-        return Mono.just(
-                RoleResponse.valueOf(jwtService.findRole(auth))
-        );
-    }
 }
 
