@@ -1,6 +1,6 @@
 package org.example.service;
 
-import org.example.exception.UserNotAdminException;
+import org.example.exception.UserNotFoundException;
 import org.example.model.UserRole;
 import org.example.model.User;
 import org.example.repository.UserRepository;
@@ -23,13 +23,13 @@ import java.util.List;
 
 @Service
 public class AuthenticationService {
-    private final UserService userService;
+    private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     private final JwtService jwtService;
     private final ReactiveAuthenticationManager authenticationManager;
 
-    public AuthenticationService(UserService userService, PasswordEncoder passwordEncoder, JwtService jwtService, ReactiveAuthenticationManager authenticationManager) {
-        this.userService = userService;
+    public AuthenticationService(UserRepository userRepository, PasswordEncoder passwordEncoder, JwtService jwtService, ReactiveAuthenticationManager authenticationManager) {
+        this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
         this.jwtService = jwtService;
         this.authenticationManager = authenticationManager;
@@ -43,7 +43,7 @@ public class AuthenticationService {
                 .createdAt(LocalDate.now())
                 .build();
 
-        return userService.save(user)
+        return userRepository.save(user)
                 .map(savedUser -> {
                     String jwtToken = jwtService.generateToken(savedUser);
                     return AuthenticationResponse.builder()
@@ -59,7 +59,7 @@ public class AuthenticationService {
                                 request.getPassword()
                         )
                 )
-                .flatMap(authentication -> userService.findByUsername(request.getUsername())
+                .flatMap(authentication -> userRepository.findByUsername(request.getUsername())
                         .map(user -> {
                             String jwtToken = jwtService.generateToken(user);
                             return AuthenticationResponse.builder()
@@ -68,14 +68,39 @@ public class AuthenticationService {
                         }));
     }
 
-    public Mono<ValidateAdminResponse> validateAdmin(String token) throws UserNotAdminException {
+    public Mono<ValidateAdminResponse> validateAdmin(String token) {
         boolean isValidAdmin = jwtService.validateAdmin(token);
         return Mono.just(ValidateAdminResponse.builder()
                 .isValid(isValidAdmin)
-                .build())
-                .switchIfEmpty(Mono.error(new UserNotAdminException()));
+                .build());
     }
 
+    public Flux<User> getAll() {
+        return userRepository.findAll();
+    }
 
+    public Mono<Void> delete(Long id) {
+        return userRepository.deleteById(id);
+    }
+
+    public Mono<RoleResponse> findRole(String auth) {
+        return Mono.just(
+                RoleResponse.valueOf(jwtService.findRole(auth))
+        );
+    }
+
+    public Mono<User> update(Long id, User user) {
+        return userRepository.findById(id)
+                .flatMap(existingUser -> {
+                    existingUser.setUserRole(user.getUserRole());
+                    existingUser.setUsername(user.getUsername());
+                    return userRepository.save(existingUser);
+                })
+                .switchIfEmpty(Mono.error(new UserNotFoundException(user.getUsername())));
+    }
+
+    public Mono<User> findById(Long id) {
+        return userRepository.findById(id).switchIfEmpty(Mono.error(new UserNotFoundException()));
+    }
 }
 

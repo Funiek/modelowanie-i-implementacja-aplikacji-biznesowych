@@ -20,6 +20,7 @@ import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 
 import java.security.Key;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
@@ -161,7 +162,7 @@ public class IdentityService {
         );
 
         userDtos = response.getBody();
-        return (userDtos == null || userDtos.length == 0) ? null : Arrays.asList(userDtos);
+        return (userDtos == null || userDtos.length == 0) ? new ArrayList<>() : Arrays.asList(userDtos);
     }
     private Key getSigningKey() {
         byte[] keyBytes = Decoders.BASE64.decode(SECRET);

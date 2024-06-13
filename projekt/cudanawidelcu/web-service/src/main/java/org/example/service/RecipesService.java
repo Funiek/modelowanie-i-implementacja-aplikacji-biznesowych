@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.logging.Logger;
@@ -47,7 +48,7 @@ public class RecipesService {
 			logger.throwing(this.getClass().getSimpleName(), "getAll", e);
 		}
 
-		return (recipes == null || recipes.length == 0) ? null : Arrays.asList(recipes);
+		return (recipes == null || recipes.length == 0) ? new ArrayList<>() : Arrays.asList(recipes);
 	}
 
 	public List<RecipesFindAllByCategoryResponse> findAllByCategory(CategoryDto categoryDto) {
@@ -60,7 +61,7 @@ public class RecipesService {
 			logger.throwing(this.getClass().getSimpleName(), "getByCategory", e);
 		}
 
-		return (recipes == null || recipes.length == 0) ? null : Arrays.asList(recipes);
+		return (recipes == null || recipes.length == 0) ? new ArrayList<>() : Arrays.asList(recipes);
 	}
 
 	public RecipeDto save(RecipeDto recipeDto, String jwtToken) {
