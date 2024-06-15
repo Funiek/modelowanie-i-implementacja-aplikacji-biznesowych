@@ -6,6 +6,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import org.example.request.IdentityAuthenticateRequest;
 import org.example.request.IdentityRegisterRequest;
 import org.example.response.IdentityAuthenticateResponse;
+import org.example.service.IdentityService;
 import org.example.service.IdentityServiceImpl;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,9 +15,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 public class UserController {
-    private final IdentityServiceImpl identityService;
+    private final IdentityService identityService;
 
-    public UserController(IdentityServiceImpl identityService) {
+    public UserController(IdentityService identityService) {
         this.identityService = identityService;
     }
 

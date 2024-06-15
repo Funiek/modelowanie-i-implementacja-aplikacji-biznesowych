@@ -26,14 +26,14 @@ import java.util.List;
 import java.util.logging.Logger;
 
 @Service
-public class IdentityServiceImpl {
+public class IdentityServiceImpl implements IdentityService {
     private final RestTemplate restTemplate;
     private final String IDENTITY_SERVICE_URL = "http://APPLICATION-GATEWAY/identity-service";
 
     @Value("${secret}")
     private String SECRET;
 
-    protected Logger logger = Logger.getLogger(RecipesService.class
+    protected Logger logger = Logger.getLogger(RecipesServiceImpl.class
             .getName());
 
     public IdentityServiceImpl(@LoadBalanced RestTemplate restTemplate) {
