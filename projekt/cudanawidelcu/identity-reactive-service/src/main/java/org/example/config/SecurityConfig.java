@@ -36,11 +36,6 @@ public class SecurityConfig {
                 .addFilterAt(jwtRequestFilter, SecurityWebFiltersOrder.AUTHENTICATION)
                 .build();
     }
-
-//    @Bean
-//    public WebFluxSecurityCustomizer webFluxSecurityCustomizer() {
-//        return web -> web.ignoring().pathMatchers("/api/v1/auth/authenticate", "/api/v1/auth/register");
-//    }
 }
 
 

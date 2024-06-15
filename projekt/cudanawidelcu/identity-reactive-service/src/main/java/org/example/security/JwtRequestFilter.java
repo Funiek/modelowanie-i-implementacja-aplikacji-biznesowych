@@ -1,6 +1,9 @@
 package org.example.security;
 
+import org.example.service.JwtService;
+import org.example.service.JwtServiceImpl;
 import org.example.service.UserService;
+import org.example.service.UserServiceImpl;
 import org.springframework.http.server.reactive.ServerHttpRequest;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.ReactiveSecurityContextHolder;
@@ -24,39 +27,6 @@ public class JwtRequestFilter implements WebFilter {
         this.userService = userService;
         this.jwtService = jwtService;
     }
-
-
-//    @Override
-//    protected void doFilterInternal(@NonNull HttpServletRequest request, @NonNull HttpServletResponse response, @NonNull FilterChain chain)
-//            throws ServletException, IOException {
-//
-//        final String authorizationHeader = request.getHeader("Authorization");
-//
-//        String username = null;
-//        String jwt = null;
-//
-//        if (authorizationHeader == null || !authorizationHeader.startsWith("Bearer ")) {
-//            chain.doFilter(request, response);
-//            return;
-//        }
-//
-//        jwt = authorizationHeader.substring(7);
-//        username = jwtService.extractUsername(jwt);
-//
-//        if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
-//            UserDetails userDetails = this.userService.loadUserByUsername(username);
-//            if (jwtService.isTokenValid(jwt, userDetails)) {
-//                UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
-//                authenticationToken.setDetails(
-//                        new WebAuthenticationDetailsSource().buildDetails(request)
-//                );
-//
-//                SecurityContextHolder.getContext().setAuthentication(authenticationToken);
-//            }
-//        }
-//
-//        chain.doFilter(request, response);
-//    }
 
     @Override
     @NonNull

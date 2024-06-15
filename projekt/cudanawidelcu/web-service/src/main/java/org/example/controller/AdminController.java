@@ -6,7 +6,7 @@ import org.example.request.IdentityUserUpdateRequest;
 import org.example.request.ImagesRenameRequest;
 import org.example.request.RecipesUpdateRequest;
 import org.example.response.*;
-import org.example.service.IdentityService;
+import org.example.service.IdentityServiceImpl;
 import org.example.service.ImageService;
 import org.example.service.RecipesService;
 import org.example.service.VotesService;
@@ -21,13 +21,13 @@ import java.util.stream.Collectors;
 @Controller
 @RequestMapping("/admin")
 public class AdminController {
-    private final IdentityService identityService;
+    private final IdentityServiceImpl identityService;
 
     private final RecipesService recipesService;
     private final ImageService imageService;
     private final VotesService votesService;
 
-    public AdminController(IdentityService identityService, RecipesService recipesService, ImageService imageService, VotesService votesService) {
+    public AdminController(IdentityServiceImpl identityService, RecipesService recipesService, ImageService imageService, VotesService votesService) {
         this.identityService = identityService;
         this.recipesService = recipesService;
         this.imageService = imageService;

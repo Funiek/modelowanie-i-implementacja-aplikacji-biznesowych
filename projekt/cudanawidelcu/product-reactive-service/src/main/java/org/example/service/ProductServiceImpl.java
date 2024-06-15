@@ -16,6 +16,7 @@ public class ProductServiceImpl implements ProductService {
         this.productRepository = productRepository;
     }
 
+    @Override
     public Flux<Product> findAll() {
         return productRepository.findAll();
     }
@@ -39,6 +40,5 @@ public class ProductServiceImpl implements ProductService {
     public Mono<Void> deleteAllByRecipeId(Long recipeId) {
         return productRepository.deleteAllByRecipeId(recipeId);
     }
-
 
 }

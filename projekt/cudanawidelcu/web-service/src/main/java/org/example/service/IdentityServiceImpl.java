@@ -16,7 +16,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 
 import java.security.Key;
@@ -27,7 +26,7 @@ import java.util.List;
 import java.util.logging.Logger;
 
 @Service
-public class IdentityService {
+public class IdentityServiceImpl {
     private final RestTemplate restTemplate;
     private final String IDENTITY_SERVICE_URL = "http://APPLICATION-GATEWAY/identity-service";
 
@@ -37,7 +36,7 @@ public class IdentityService {
     protected Logger logger = Logger.getLogger(RecipesService.class
             .getName());
 
-    public IdentityService(@LoadBalanced RestTemplate restTemplate) {
+    public IdentityServiceImpl(@LoadBalanced RestTemplate restTemplate) {
         this.restTemplate = restTemplate;
     }
 
