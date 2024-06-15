@@ -6,6 +6,8 @@ import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
+import java.util.List;
+
 @Service
 public class ProductServiceImpl implements ProductService {
     private final ProductRepository productRepository;
@@ -26,6 +28,11 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public Mono<Product> save(Product product) {
         return productRepository.save(product);
+    }
+
+    @Override
+    public Flux<Product> saveAll(List<Product> products) {
+        return productRepository.saveAll(products);
     }
 
     @Override

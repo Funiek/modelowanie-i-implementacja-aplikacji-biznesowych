@@ -9,6 +9,8 @@ import org.springframework.web.reactive.config.EnableWebFlux;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
+import java.util.List;
+
 @RestController
 @EnableWebFlux
 @RequestMapping("/api/v1/products")
@@ -37,6 +39,17 @@ public class ProductController {
         Product product = ProductMapper.convertProductDtoToProduct(productDto);
         Mono<Product> createProduct = productService.save(product);
         return createProduct.map(ProductMapper::convertProductToProductDto);
+    }
+
+    @PostMapping("/batch")
+    public Flux<ProductDto> saveAll(@RequestBody List<ProductDto> productDtos) {
+        List<Product> products = productDtos.stream()
+                .map(ProductMapper::convertProductDtoToProduct)
+                .toList();
+
+        Flux<Product> createProducts = productService.saveAll(products);
+
+        return createProducts.map(ProductMapper::convertProductToProductDto);
     }
 
     @DeleteMapping("/recipe/{recipeId}")
