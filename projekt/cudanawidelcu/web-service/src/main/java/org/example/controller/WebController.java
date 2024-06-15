@@ -7,6 +7,7 @@ import org.example.response.RecipesFindByIdResponse;
 import org.example.response.VotesRatingByRecipeIdResponse;
 import org.example.response.VotesSaveResponse;
 import org.example.service.ImageService;
+import org.example.service.ProductsService;
 import org.example.service.RecipesService;
 import org.example.service.VotesService;
 import org.springframework.core.io.Resource;
@@ -27,12 +28,14 @@ public class WebController {
     private final RecipesService recipesService;
     private final ImageService imageService;
     private final VotesService votesService;
+    private final ProductsService productsService;
     protected Logger logger = Logger.getLogger(WebController.class.getName());
 
-    public WebController(RecipesService recipesService, ImageService imageService, VotesService votesService) {
+    public WebController(RecipesService recipesService, ImageService imageService, VotesService votesService, ProductsService productsService) {
         this.recipesService = recipesService;
         this.imageService = imageService;
         this.votesService = votesService;
+        this.productsService = productsService;
     }
 
 
@@ -117,7 +120,10 @@ public class WebController {
         if (!imageFile.isEmpty()) {
             imageService.sendImage(imageFile, recipeDto.getName());
         }
-        recipesService.save(recipeDto, jwtToken);
+        RecipeDto newRecipeDto = recipesService.save(recipeDto, jwtToken);
+        if(!recipeDto.getProducts().isEmpty()) {
+            productsService.saveAll(recipeDto.getProducts(), jwtToken, newRecipeDto.getId());
+        }
 
         return "redirect:/";
     }

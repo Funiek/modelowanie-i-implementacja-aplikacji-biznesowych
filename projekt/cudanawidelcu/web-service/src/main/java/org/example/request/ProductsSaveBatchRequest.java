@@ -1,4 +1,4 @@
-package org.example.dto;
+package org.example.request;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,8 +9,9 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class ProductDto {
+public class ProductsSaveBatchRequest {
     private Long id;
+    private Long recipeId;
     private String name;
     private String measure;
     private Double qty;

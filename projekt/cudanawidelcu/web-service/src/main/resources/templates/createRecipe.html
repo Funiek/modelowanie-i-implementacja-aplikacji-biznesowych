@@ -30,11 +30,41 @@
                 <label for="imageFile">Zdjęcie</label>
                 <input type="file" id="imageFile" name="imageFile" class="form-control-file">
             </div>
+
+            <!-- Sekcja dla produktów -->
+            <div class="form-group">
+                <label>Produkty</label>
+                <div id="products">
+                    <div class="product-entry">
+                        <input type="text" name="products[0].name" placeholder="Nazwa produktu" class="form-control" required>
+                        <input type="text" name="products[0].measure" placeholder="Miara (np. gramy, sztuki)" class="form-control" required>
+                        <input type="number" step="0.01" name="products[0].qty" placeholder="Ilość" class="form-control" required>
+                    </div>
+                </div>
+                <button type="button" onclick="addProduct()">Dodaj produkt</button>
+            </div>
+
             <button type="submit" class="nice-button" style="float:left; margin-right: 16px">Dodaj przepis</button>
             <div style="clear:both"></div>
         </form>
     </main>
 </div>
 <footer th:replace="~{footer :: copy}"></footer>
+
+<script>
+    let productIndex = 1;
+    function addProduct() {
+        const productContainer = document.getElementById('products');
+        const newProductEntry = document.createElement('div');
+        newProductEntry.classList.add('product-entry');
+        newProductEntry.innerHTML = `
+            <input type="text" name="products[${productIndex}].name" placeholder="Nazwa produktu" class="form-control" required>
+            <input type="text" name="products[${productIndex}].measure" placeholder="Miara (np. gramy, sztuki)" class="form-control" required>
+            <input type="number" step="0.01" name="products[${productIndex}].qty" placeholder="Ilość" class="form-control" required>
+        `;
+        productContainer.appendChild(newProductEntry);
+        productIndex++;
+    }
+</script>
 </body>
 </html>
