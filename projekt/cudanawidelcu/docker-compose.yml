@@ -31,7 +31,7 @@ services:
       cudanawidelcu-network:
         ipv4_address: 172.16.238.12
     volumes:
-      - ./identity-service/target/identity-service-1.0.0.RELEASE.jar:/app.jar
+      - ./identity-reactive-service/target/identity-reactive-service-1.0.0.RELEASE.jar:/app.jar
     depends_on:
       - cudanawidelcu_api_gateway
       - cudanawidelcu_postgres_users
@@ -44,7 +44,7 @@ services:
       cudanawidelcu-network:
         ipv4_address: 172.16.238.13
     volumes:
-      - ./recipes-service/target/recipes-service-1.0.0.RELEASE.jar:/app.jar
+      - ./recipes-reactive-service/target/recipes-reactive-service-1.0.0.RELEASE.jar:/app.jar
     depends_on:
       - cudanawidelcu_api_gateway
       - cudanawidelcu_postgres_recipes
@@ -57,7 +57,7 @@ services:
       cudanawidelcu-network:
         ipv4_address: 172.16.238.14
     volumes:
-      - ./product-service/target/product-service-1.0.0.RELEASE.jar:/app.jar
+      - ./products-reactive-service/target/products-reactive-service-1.0.0.RELEASE.jar:/app.jar
     depends_on:
       - cudanawidelcu_api_gateway
       - cudanawidelcu_postgres_products
@@ -70,7 +70,7 @@ services:
       cudanawidelcu-network:
         ipv4_address: 172.16.238.15
     volumes:
-      - ./votes-service/target/votes-service-1.0.0.RELEASE.jar:/app.jar
+      - ./votes-reactive-service/target/votes-reactive-service-1.0.0.RELEASE.jar:/app.jar
     depends_on:
       - cudanawidelcu_api_gateway
       - cudanawidelcu_postgres_votes
@@ -78,14 +78,14 @@ services:
   cudanawidelcu_images_service:
     image: openjdk:17-oracle
     ports:
-      - "1004:1004"
+      - "1005:1005"
     networks:
       cudanawidelcu-network:
-        ipv4_address: 172.16.238.15
+        ipv4_address: 172.16.238.21
     environment:
         img: /app/img
     volumes:
-      - ./images-service/target/images-service-1.0.0.RELEASE.jar:/app.jar
+      - ./images-reactive-service/target/images-reactive-service-1.0.0.RELEASE.jar:/app.jar
       - ./img:/app/img
     depends_on:
       - cudanawidelcu_api_gateway
@@ -96,11 +96,16 @@ services:
       - "80:80"
     networks:
       cudanawidelcu-network:
-        ipv4_address: 172.16.238.14
+        ipv4_address: 172.16.238.16
     volumes:
       - ./web-service/target/web-service-1.0.0.RELEASE.jar:/app.jar
     depends_on:
       - cudanawidelcu_api_gateway
+      - cudanawidelcu_images_service
+      - cudanawidelcu_recipes_service
+      - cudanawidelcu_products_service
+      - cudanawidelcu_votes_service
+      - cudanawidelcu_identity_service
     entrypoint: [ "java", "-jar", "/app.jar" ]
   cudanawidelcu_postgres_recipes:
     image: postgres:16.3
@@ -111,6 +116,9 @@ services:
       POSTGRES_DB: postgres
     ports:
       - "5432:5432"
+    networks:
+      cudanawidelcu-network:
+        ipv4_address: 172.16.238.17
     volumes:
       - ./sql/recipes:/docker-entrypoint-initdb.d
   cudanawidelcu_postgres_products:
@@ -122,6 +130,9 @@ services:
       POSTGRES_DB: postgres
     ports:
       - "5433:5432"
+    networks:
+      cudanawidelcu-network:
+        ipv4_address: 172.16.238.18
     volumes:
       - ./sql/products:/docker-entrypoint-initdb.d
   cudanawidelcu_postgres_votes:
@@ -133,6 +144,9 @@ services:
       POSTGRES_DB: postgres
     ports:
       - "5434:5432"
+    networks:
+      cudanawidelcu-network:
+        ipv4_address: 172.16.238.19
     volumes:
       - ./sql/votes:/docker-entrypoint-initdb.d
   cudanawidelcu_postgres_users:
@@ -144,6 +158,9 @@ services:
       POSTGRES_DB: postgres
     ports:
       - "5435:5432"
+    networks:
+      cudanawidelcu-network:
+        ipv4_address: 172.16.238.20
     volumes:
       - ./sql/users:/docker-entrypoint-initdb.d
 

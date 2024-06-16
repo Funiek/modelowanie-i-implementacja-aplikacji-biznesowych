@@ -14,7 +14,7 @@
 		<module>web-service</module>
 		<module>application-gateway</module>
 		<module>recipes-reactive-service</module>
-		<module>product-reactive-service</module>
+		<module>products-reactive-service</module>
         <module>votes-reactive-service</module>
         <module>images-reactive-service</module>
         <module>identity-reactive-service</module>

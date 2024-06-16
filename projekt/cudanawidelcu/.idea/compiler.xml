@@ -9,11 +9,11 @@
         <outputRelativeToContentRoot value="true" />
         <module name="identity-reactive-service" />
         <module name="recipes-reactive-service" />
-        <module name="product-reactive-service" />
         <module name="application-gateway" />
         <module name="votes-reactive-service" />
         <module name="images-reactive-service" />
         <module name="test-service" />
+        <module name="products-reactive-service" />
         <module name="eureka-server" />
         <module name="web-service" />
       </profile>

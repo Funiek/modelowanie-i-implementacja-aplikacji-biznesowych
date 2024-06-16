@@ -13,6 +13,7 @@
 
     <groupId>org.example</groupId>
     <artifactId>recipes-reactive-service</artifactId>
+    <version>1.0.0.RELEASE</version>
 
     <properties>
         <maven.compiler.source>17</maven.compiler.source>
@@ -68,7 +69,7 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
-                    <mainClass>org.example.WebServiceApplication</mainClass>
+                    <mainClass>org.example.RecipesReactiveServiceApplication</mainClass>
                     <layout>JAR</layout>
                 </configuration>
                 <executions>
