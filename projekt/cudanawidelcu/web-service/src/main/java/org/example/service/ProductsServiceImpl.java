@@ -17,13 +17,16 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.logging.Logger;
 
+/**
+ * Implementation of ProductsService responsible for handling product-related operations.
+ */
 @Service
 public class ProductsServiceImpl implements ProductsService {
+
     private final RestTemplate restTemplate;
     private final String PRODUCTS_SERVICE_URL = "http://APPLICATION-GATEWAY/products-service";
 
-    protected Logger logger = Logger.getLogger(RecipesServiceImpl.class
-            .getName());
+    protected Logger logger = Logger.getLogger(ProductsServiceImpl.class.getName());
 
     public ProductsServiceImpl(@LoadBalanced RestTemplate restTemplate) {
         this.restTemplate = restTemplate;
@@ -34,10 +37,16 @@ public class ProductsServiceImpl implements ProductsService {
         logger.warning("The RestTemplate request factory is " + restTemplate.getRequestFactory().getClass());
     }
 
-
-
-
-    public List<ProductsSaveBatchResponse> saveAll(List<ProductDto> productDtos, String jwtToken, Long recipeId) {
+    /**
+     * Saves a list of products in batch for a specific recipe.
+     *
+     * @param productDtos list of ProductDto objects to be saved
+     * @param jwtToken    JWT token for authentication
+     * @param recipeId    ID of the recipe to which the products belong
+     * @return list of ProductsSaveBatchResponse containing the saved products
+     * @throws RuntimeException if there's an error during the HTTP request
+     */
+    public List<ProductsSaveBatchResponse> saveAll(List<ProductDto> productDtos, String jwtToken, Long recipeId) throws RuntimeException {
         ProductsSaveBatchResponse[] newProductSaveBatchResponse;
 
         JSONArray productsJsonArray = new JSONArray();
@@ -75,14 +84,11 @@ public class ProductsServiceImpl implements ProductsService {
                     ProductsSaveBatchResponse[].class
             );
 
-
-
             newProductSaveBatchResponse = responseEntity.getBody();
         } catch (Exception e) {
-            throw new RuntimeException("Błąd podczas wysyłania zapytania POST: " + e.getMessage(), e);
+            throw new RuntimeException("Error during POST request: " + e.getMessage(), e);
         }
 
         return (newProductSaveBatchResponse == null || newProductSaveBatchResponse.length == 0) ? new ArrayList<>() : Arrays.asList(newProductSaveBatchResponse);
     }
-
 }

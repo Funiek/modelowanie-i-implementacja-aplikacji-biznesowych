@@ -16,8 +16,12 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 import java.util.logging.Logger;
 
+/**
+ * Implementation of ImageService responsible for handling image-related operations.
+ */
 @Service
 public class ImageServiceImpl implements ImageService {
+
     private final String IMAGES_SERVICE_URL = "http://APPLICATION-GATEWAY/images-service";
     private final RestTemplate restTemplate;
     protected Logger logger = Logger.getLogger(ImageServiceImpl.class.getName());
@@ -26,7 +30,13 @@ public class ImageServiceImpl implements ImageService {
         this.restTemplate = restTemplate;
     }
 
-
+    /**
+     * Sends an image to the images service.
+     *
+     * @param file image file to be sent
+     * @param name name of the image
+     * @throws IOException if there's an error reading the file
+     */
     public void sendImage(MultipartFile file, String name) throws IOException {
         ByteArrayResource resource = new ByteArrayResource(file.getBytes()) {
             @Override
@@ -50,21 +60,31 @@ public class ImageServiceImpl implements ImageService {
                 String.class
         );
 
-
         if (response.getStatusCode() == HttpStatus.OK) {
-            System.out.println("Image uploaded successfully");
+            logger.info("Image uploaded successfully");
         } else {
-            System.err.println("Failed to upload image. Status code: " + response.getStatusCode());
+            logger.severe("Failed to upload image. Status code: " + response.getStatusCode());
         }
     }
 
+    /**
+     * Retrieves an image from the images service.
+     *
+     * @param name name of the image
+     * @return ResponseEntity containing the image resource
+     */
     public ResponseEntity<Resource> getImage(String name) {
         return restTemplate.getForEntity(IMAGES_SERVICE_URL + "/api/v1/images/" + name, Resource.class);
     }
 
-    public void renameImage(String token, ImagesRenameRequest imagesRenameRequest) {
-
-
+    /**
+     * Renames an image in the images service.
+     *
+     * @param token               JWT token for authentication
+     * @param imagesRenameRequest request object containing old and new image names
+     * @throws RuntimeException if there's an error during the HTTP request
+     */
+    public void renameImage(String token, ImagesRenameRequest imagesRenameRequest) throws RuntimeException {
         JSONObject renameJsonObject = new JSONObject();
         try {
             renameJsonObject.put("newName", imagesRenameRequest.getNewName());

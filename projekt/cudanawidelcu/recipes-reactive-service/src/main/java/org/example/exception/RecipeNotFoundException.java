@@ -5,12 +5,9 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 
 import java.io.Serial;
 
+
 /**
- * Allow the controller to return a 404 if an account is not found by simply
- * throwing this exception. The @ResponseStatus causes Spring MVC to return a
- * 404 instead of the usual 500.
- * 
- * @author Paul Chapman
+ * Exception thrown when a recipe is not found.
  */
 @ResponseStatus(HttpStatus.NOT_FOUND)
 public class RecipeNotFoundException extends RuntimeException {
@@ -18,6 +15,11 @@ public class RecipeNotFoundException extends RuntimeException {
 	@Serial
 	private static final long serialVersionUID = 1L;
 
+	/**
+	 * Constructs a new RecipeNotFoundException with the given recipe name.
+	 *
+	 * @param recipeName the name of the recipe that was not found
+	 */
 	public RecipeNotFoundException(String recipeName) {
 		super("No such recipe: " + recipeName);
 	}

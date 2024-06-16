@@ -9,7 +9,20 @@ import reactor.core.publisher.Mono;
 
 @Repository
 public interface ProductRepository extends R2dbcRepository<Product, Long> {
-//    @Query("SELECT * FROM product p WHERE p.recipe_id = :recipeId")
+
+    /**
+     * Finds all products by recipe ID.
+     *
+     * @param recipeId the ID of the recipe
+     * @return a flux of products that match the given recipe ID
+     */
     Flux<Product> findAllByRecipeId(Long recipeId);
+
+    /**
+     * Deletes all products by recipe ID.
+     *
+     * @param recipeId the ID of the recipe
+     * @return a mono indicating completion of the delete operation
+     */
     Mono<Void> deleteAllByRecipeId(Long recipeId);
 }

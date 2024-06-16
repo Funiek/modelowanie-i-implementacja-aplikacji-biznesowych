@@ -19,6 +19,9 @@ import java.util.List;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
+/**
+ * Controller class for handling web endpoints related to recipes, votes, images, and categories.
+ */
 @Controller
 public class WebController {
 
@@ -35,31 +38,15 @@ public class WebController {
         this.productsService = productsService;
     }
 
-
+    /**
+     * Endpoint for the home page displaying all recipes.
+     *
+     * @param model Spring MVC model
+     * @return view name for the home page
+     */
     @RequestMapping("/")
     public String index(Model model) {
-        List<RecipeDto> recipeDtos =  recipesService.findAll().stream()
-                        .map(recipe -> {
-                            VotesRatingByRecipeIdResponse rating = votesService.ratingByRecipeId(recipe.getId());
-                            return RecipeDto.builder()
-                                    .id(recipe.getId())
-                                    .name(recipe.getName())
-                                    .category(recipe.getCategory())
-                                    .votes(recipe.getVotes())
-                                    .products(recipe.getProducts())
-                                    .description(recipe.getDescription())
-                                    .countVotes(rating.getCountVotes())
-                                    .rating(rating.getRating())
-                                    .build();
-                        }).collect(Collectors.toList());
-
-        model.addAttribute("recipeDtos", recipeDtos);
-        return "index";
-    }
-
-    @RequestMapping("/category/{category}")
-    public String findAllByCategory(@PathVariable("category") CategoryDto categoryDto, Model model) {
-        List<RecipeDto> recipeDtos =  recipesService.findAllByCategory(categoryDto).stream()
+        List<RecipeDto> recipeDtos = recipesService.findAll().stream()
                 .map(recipe -> {
                     VotesRatingByRecipeIdResponse rating = votesService.ratingByRecipeId(recipe.getId());
                     return RecipeDto.builder()
@@ -78,6 +65,41 @@ public class WebController {
         return "index";
     }
 
+    /**
+     * Endpoint for displaying recipes by category.
+     *
+     * @param categoryDto category DTO object
+     * @param model       Spring MVC model
+     * @return view name for the recipes page filtered by category
+     */
+    @RequestMapping("/category/{category}")
+    public String findAllByCategory(@PathVariable("category") CategoryDto categoryDto, Model model) {
+        List<RecipeDto> recipeDtos = recipesService.findAllByCategory(categoryDto).stream()
+                .map(recipe -> {
+                    VotesRatingByRecipeIdResponse rating = votesService.ratingByRecipeId(recipe.getId());
+                    return RecipeDto.builder()
+                            .id(recipe.getId())
+                            .name(recipe.getName())
+                            .category(recipe.getCategory())
+                            .votes(recipe.getVotes())
+                            .products(recipe.getProducts())
+                            .description(recipe.getDescription())
+                            .countVotes(rating.getCountVotes())
+                            .rating(rating.getRating())
+                            .build();
+                }).collect(Collectors.toList());
+
+        model.addAttribute("recipeDtos", recipeDtos);
+        return "index";
+    }
+
+    /**
+     * Endpoint for displaying recipe details.
+     *
+     * @param id    recipe ID
+     * @param model Spring MVC model
+     * @return view name for the recipe details page
+     */
     @RequestMapping("/recipes/details/{id}")
     public String details(@PathVariable("id") Long id, Model model) {
         RecipesFindByIdResponse recipe = recipesService.findById(id);
@@ -97,6 +119,12 @@ public class WebController {
         return "details";
     }
 
+    /**
+     * Endpoint for saving user rating on a recipe.
+     *
+     * @param votesSaveRequest request object containing the rating and recipe ID
+     * @return response object containing the updated rating and vote count
+     */
     @RequestMapping(value = "/votes/rating", method = RequestMethod.POST, headers = "Accept=application/json")
     @ResponseBody
     public VotesRatingByRecipeIdResponse rate(@RequestBody VotesSaveRequest votesSaveRequest) {
@@ -104,12 +132,27 @@ public class WebController {
         return votesService.ratingByRecipeId(votesSaveResponse.getRecipeId());
     }
 
+    /**
+     * Endpoint for displaying the form to create a new recipe.
+     *
+     * @param model Spring MVC model
+     * @return view name for the create recipe form
+     */
     @GetMapping("/recipes/create")
     public String createRecipe(Model model) {
         model.addAttribute("recipeDto", new RecipeDto());
         return "createRecipe";
     }
 
+    /**
+     * Endpoint for processing the form submission to create a new recipe.
+     *
+     * @param recipeDto  recipe DTO object containing the recipe details
+     * @param imageFile  image file to be uploaded for the recipe
+     * @param jwtToken   JWT token for authentication
+     * @return redirects to the home page after creating the recipe
+     * @throws IOException if there is an error handling the image file
+     */
     @PostMapping("/recipes/create")
     public String createRecipe(@ModelAttribute RecipeDto recipeDto,
                                @RequestParam("imageFile") MultipartFile imageFile,
@@ -118,16 +161,22 @@ public class WebController {
             imageService.sendImage(imageFile, recipeDto.getName());
         }
         RecipeDto newRecipeDto = recipesService.save(recipeDto, jwtToken);
-        if(!recipeDto.getProducts().isEmpty()) {
+        if (!recipeDto.getProducts().isEmpty()) {
             productsService.saveAll(recipeDto.getProducts(), jwtToken, newRecipeDto.getId());
         }
 
         return "redirect:/";
     }
 
+    /**
+     * Endpoint for downloading images associated with recipes.
+     *
+     * @param imageName name of the image file
+     * @return ResponseEntity with the image resource
+     */
     @GetMapping("/img/{imageName}")
     public ResponseEntity<Resource> getImage(@PathVariable("imageName") String imageName) {
-        logger.info("ZDJECIE DO POBRANIA: " + imageName);
+        logger.info("Image to download: " + imageName);
         return imageService.getImage(imageName);
     }
 }

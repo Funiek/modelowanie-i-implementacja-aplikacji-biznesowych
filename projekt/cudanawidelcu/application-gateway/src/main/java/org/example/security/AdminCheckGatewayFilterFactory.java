@@ -9,17 +9,31 @@ import org.springframework.http.*;
 import org.springframework.stereotype.Component;
 import reactor.core.publisher.Mono;
 
+/**
+ * Gateway filter factory that checks if the incoming request is from an admin.
+ */
 @Component
 public class AdminCheckGatewayFilterFactory extends AbstractGatewayFilterFactory<AdminCheckGatewayFilterFactory.Config> {
 
     private final WebClient.Builder builder;
     private final String IDENTITY_SERVICE_URL = "http://APPLICATION-GATEWAY/identity-service";
 
+    /**
+     * Constructor for AdminCheckGatewayFilterFactory.
+     *
+     * @param builder the WebClient builder to use for making HTTP requests
+     */
     public AdminCheckGatewayFilterFactory(WebClient.Builder builder) {
         super(Config.class);
         this.builder = builder;
     }
 
+    /**
+     * Applies the filter based on the given configuration.
+     *
+     * @param config the configuration for this filter
+     * @return the GatewayFilter that applies admin validation
+     */
     @Override
     public GatewayFilter apply(Config config) {
         return (exchange, chain) -> {
@@ -55,10 +69,21 @@ public class AdminCheckGatewayFilterFactory extends AbstractGatewayFilterFactory
         };
     }
 
+    /**
+     * Configuration class for AdminCheckGatewayFilterFactory.
+     */
     @Getter
     public static class Config {
+        /**
+         * Role to be validated.
+         */
         private String role;
 
+        /**
+         * Sets the role to be validated.
+         *
+         * @param role the role to set
+         */
         public void setRole(String role) {
             this.role = role;
         }

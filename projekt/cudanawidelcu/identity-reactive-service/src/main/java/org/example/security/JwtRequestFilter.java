@@ -17,17 +17,33 @@ import reactor.util.annotation.NonNull;
 
 import java.util.List;
 
+/**
+ * Filter class to intercept incoming requests and validate JWT tokens for authentication.
+ */
 @Component
 public class JwtRequestFilter implements WebFilter {
 
     private final UserService userService;
     private final JwtService jwtService;
 
+    /**
+     * Constructor for JwtRequestFilter.
+     *
+     * @param userService the user service for querying user details
+     * @param jwtService the JWT service for token operations
+     */
     public JwtRequestFilter(UserService userService, JwtService jwtService) {
         this.userService = userService;
         this.jwtService = jwtService;
     }
 
+    /**
+     * Filters the incoming server web exchange.
+     *
+     * @param exchange the server web exchange
+     * @param chain the web filter chain
+     * @return Mono emitting void upon completion
+     */
     @Override
     @NonNull
     public Mono<Void> filter(ServerWebExchange exchange, @NonNull WebFilterChain chain) {

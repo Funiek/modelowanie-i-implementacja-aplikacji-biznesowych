@@ -6,11 +6,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import java.io.Serial;
 
 /**
- * Allow the controller to return a 404 if an account is not found by simply
- * throwing this exception. The @ResponseStatus causes Spring MVC to return a
- * 404 instead of the usual 500.
- * 
- * @author Paul Chapman
+ * Exception thrown when a product is not found.
  */
 @ResponseStatus(HttpStatus.NOT_FOUND)
 public class ProductNotFoundException extends RuntimeException {
@@ -18,6 +14,11 @@ public class ProductNotFoundException extends RuntimeException {
 	@Serial
 	private static final long serialVersionUID = 1L;
 
+	/**
+	 * Constructor for ProductNotFoundException.
+	 *
+	 * @param productName name of the product that was not found
+	 */
 	public ProductNotFoundException(String productName) {
 		super("No such product: " + productName);
 	}

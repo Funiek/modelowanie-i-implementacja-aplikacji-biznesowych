@@ -13,17 +13,32 @@ import org.springframework.web.reactive.config.EnableWebFlux;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
+/**
+ * Controller class for handling user-related operations.
+ */
 @RestController
 @RequestMapping("/api/v1/users")
 @EnableWebFlux
 @CrossOrigin(origins = "*", methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE})
 public class UsersController {
+
     private final AuthenticationService authenticationService;
 
+    /**
+     * Constructor for UsersController.
+     *
+     * @param authenticationService the authentication service to use for handling requests
+     */
     public UsersController(AuthenticationService authenticationService) {
         this.authenticationService = authenticationService;
     }
 
+    /**
+     * Retrieves all users.
+     *
+     * @param auth the Authorization header containing the JWT token
+     * @return Flux emitting UserResponse for each user
+     */
     @GetMapping
     public Flux<UserResponse> userResponses(@RequestHeader("Authorization") String auth) {
         return authenticationService.validateAdmin(auth)
@@ -34,6 +49,13 @@ public class UsersController {
                 .switchIfEmpty(Mono.error(new UserNotAdminException()));
     }
 
+    /**
+     * Finds a user by ID.
+     *
+     * @param id the ID of the user to find
+     * @param auth the Authorization header containing the JWT token
+     * @return Mono emitting UserResponse for the found user
+     */
     @GetMapping("/{id}")
     public Mono<UserResponse> findById(@PathVariable("id") Long id, @RequestHeader("Authorization") String auth) {
         return authenticationService.validateAdmin(auth)
@@ -41,6 +63,15 @@ public class UsersController {
                 .flatMap(valid -> authenticationService.findById(id))
                 .map(UserMapper::convertUserToUserResponse);
     }
+
+    /**
+     * Updates a user by ID.
+     *
+     * @param id the ID of the user to update
+     * @param auth the Authorization header containing the JWT token
+     * @param userRequest the updated user information
+     * @return Mono emitting UserResponse for the updated user
+     */
     @PutMapping("/{id}")
     public Mono<UserResponse> update(@PathVariable("id") Long id, @RequestHeader("Authorization") String auth, @RequestBody UserRequest userRequest) {
         return authenticationService.validateAdmin(auth)
@@ -52,6 +83,13 @@ public class UsersController {
                 .map(UserMapper::convertUserToUserResponse);
     }
 
+    /**
+     * Deletes a user by ID.
+     *
+     * @param id the ID of the user to delete
+     * @param auth the Authorization header containing the JWT token
+     * @return Mono emitting Void upon successful deletion
+     */
     @DeleteMapping("/{id}")
     public Mono<Void> delete(@PathVariable("id") Long id, @RequestHeader("Authorization") String auth) {
         return authenticationService.validateAdmin(auth)
@@ -59,4 +97,3 @@ public class UsersController {
                 .flatMap(valid -> authenticationService.delete(id));
     }
 }
-

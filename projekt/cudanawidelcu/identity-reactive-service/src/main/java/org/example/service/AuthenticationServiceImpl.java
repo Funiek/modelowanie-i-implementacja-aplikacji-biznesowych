@@ -18,13 +18,25 @@ import reactor.core.publisher.Mono;
 
 import java.time.LocalDate;
 
+/**
+ * Service class that implements AuthenticationService.
+ */
 @Service
 public class AuthenticationServiceImpl implements AuthenticationService {
+
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     private final JwtService jwtService;
     private final ReactiveAuthenticationManager authenticationManager;
 
+    /**
+     * Constructor for AuthenticationServiceImpl.
+     *
+     * @param userRepository the user repository
+     * @param passwordEncoder the password encoder
+     * @param jwtService the JWT service
+     * @param authenticationManager the reactive authentication manager
+     */
     public AuthenticationServiceImpl(UserRepository userRepository, PasswordEncoder passwordEncoder, JwtService jwtService, ReactiveAuthenticationManager authenticationManager) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
@@ -32,6 +44,12 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         this.authenticationManager = authenticationManager;
     }
 
+    /**
+     * Registers a new user.
+     *
+     * @param request the registration request
+     * @return Mono emitting an AuthenticationResponse with a JWT token upon successful registration
+     */
     public Mono<AuthenticationResponse> register(RegisterRequest request) {
         User user = User.builder()
                 .username(request.getUsername())
@@ -49,6 +67,12 @@ public class AuthenticationServiceImpl implements AuthenticationService {
                 });
     }
 
+    /**
+     * Authenticates a user.
+     *
+     * @param request the authentication request
+     * @return Mono emitting an AuthenticationResponse with a JWT token upon successful authentication
+     */
     public Mono<AuthenticationResponse> authenticate(AuthenticationRequest request) {
         return authenticationManager.authenticate(
                         new UsernamePasswordAuthenticationToken(
@@ -65,6 +89,12 @@ public class AuthenticationServiceImpl implements AuthenticationService {
                         }));
     }
 
+    /**
+     * Validates if the user is an admin based on the provided JWT token.
+     *
+     * @param token the JWT token
+     * @return Mono emitting a ValidateAdminResponse indicating if the user is an admin
+     */
     public Mono<ValidateAdminResponse> validateAdmin(String token) {
         boolean isValidAdmin = jwtService.validateAdmin(token);
         return Mono.just(ValidateAdminResponse.builder()
@@ -72,20 +102,44 @@ public class AuthenticationServiceImpl implements AuthenticationService {
                 .build());
     }
 
+    /**
+     * Retrieves all users.
+     *
+     * @return Flux emitting all users
+     */
     public Flux<User> getAll() {
         return userRepository.findAll();
     }
 
+    /**
+     * Deletes a user by ID.
+     *
+     * @param id the user ID
+     * @return Mono emitting void upon completion
+     */
     public Mono<Void> delete(Long id) {
         return userRepository.deleteById(id);
     }
 
+    /**
+     * Finds the role of the user based on the provided JWT token.
+     *
+     * @param auth the JWT token
+     * @return Mono emitting a RoleResponse with the user's role
+     */
     public Mono<RoleResponse> findRole(String auth) {
         return Mono.just(
                 RoleResponse.valueOf(jwtService.findRole(auth))
         );
     }
 
+    /**
+     * Updates a user's details.
+     *
+     * @param id the user ID
+     * @param user the updated user details
+     * @return Mono emitting the updated User
+     */
     public Mono<User> update(Long id, User user) {
         return userRepository.findById(id)
                 .flatMap(existingUser -> {
@@ -96,8 +150,13 @@ public class AuthenticationServiceImpl implements AuthenticationService {
                 .switchIfEmpty(Mono.error(new UserNotFoundException(user.getUsername())));
     }
 
+    /**
+     * Finds a user by ID.
+     *
+     * @param id the user ID
+     * @return Mono emitting the User if found, otherwise emits UserNotFoundException
+     */
     public Mono<User> findById(Long id) {
         return userRepository.findById(id).switchIfEmpty(Mono.error(new UserNotFoundException()));
     }
 }
-

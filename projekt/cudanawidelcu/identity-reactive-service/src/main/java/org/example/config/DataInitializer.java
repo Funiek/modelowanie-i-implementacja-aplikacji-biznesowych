@@ -11,17 +11,32 @@ import reactor.core.publisher.Mono;
 
 import java.time.LocalDate;
 
+/**
+ * Initializes data upon application startup, specifically creating an admin user if not already present.
+ */
 @Component
 public class DataInitializer implements ApplicationRunner {
 
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
 
+    /**
+     * Constructor for DataInitializer.
+     *
+     * @param userRepository the repository for accessing user data
+     * @param passwordEncoder the password encoder for encrypting passwords
+     */
     public DataInitializer(UserRepository userRepository, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
     }
 
+    /**
+     * Executes data initialization upon application startup.
+     *
+     * @param args the application arguments passed to the application
+     * @throws Exception if an error occurs during data initialization
+     */
     @Override
     public void run(ApplicationArguments args) throws Exception {
         userRepository.findByUsername("admin")

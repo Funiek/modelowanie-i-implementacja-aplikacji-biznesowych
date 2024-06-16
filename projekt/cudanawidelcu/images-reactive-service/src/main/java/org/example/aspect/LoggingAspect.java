@@ -8,13 +8,26 @@ import org.springframework.stereotype.Component;
 
 import java.util.logging.Logger;
 
+/**
+ * Aspect for logging method calls within Spring service components.
+ */
 @Aspect
 @Component
 public class LoggingAspect {
+
     protected Logger logger = Logger.getLogger(LoggingAspect.class.getName());
+
+    /**
+     * Pointcut definition for all methods within Spring service components.
+     */
     @Pointcut("within(@org.springframework.stereotype.Service *)")
     public void servicePointcut() {}
 
+    /**
+     * Advice to log method calls matched by the 'servicePointcut' pointcut.
+     *
+     * @param joinPoint the join point representing the intercepted method
+     */
     @Before("servicePointcut()")
     public void logMethodCall(JoinPoint joinPoint) {
         String methodName = joinPoint.getSignature().getName();

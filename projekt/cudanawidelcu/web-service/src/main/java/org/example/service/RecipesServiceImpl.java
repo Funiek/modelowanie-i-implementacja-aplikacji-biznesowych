@@ -18,13 +18,16 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.logging.Logger;
 
+/**
+ * Implementation of RecipesService responsible for handling recipe-related operations.
+ */
 @Service
 public class RecipesServiceImpl implements RecipesService {
+
 	private final RestTemplate restTemplate;
 	private final String RECIPES_SERVICE_URL = "http://APPLICATION-GATEWAY/recipes-service";
 
-	protected Logger logger = Logger.getLogger(RecipesServiceImpl.class
-			.getName());
+	protected Logger logger = Logger.getLogger(RecipesServiceImpl.class.getName());
 
 	public RecipesServiceImpl(@LoadBalanced RestTemplate restTemplate) {
 		this.restTemplate = restTemplate;
@@ -35,33 +38,50 @@ public class RecipesServiceImpl implements RecipesService {
 		logger.warning("The RestTemplate request factory is " + restTemplate.getRequestFactory().getClass());
 	}
 
+	/**
+	 * Retrieves all recipes.
+	 *
+	 * @return list of RecipesFindAllResponse containing all recipes
+	 */
 	public List<RecipesFindAllResponse> findAll() {
 		RecipesFindAllResponse[] recipes = null;
 
 		try {
 			recipes = restTemplate.getForObject(RECIPES_SERVICE_URL + "/api/v1/recipes", RecipesFindAllResponse[].class);
-		}
-		catch (HttpClientErrorException e) {
-			logger.throwing(this.getClass().getSimpleName(), "getAll", e);
+		} catch (HttpClientErrorException e) {
+			logger.throwing(this.getClass().getSimpleName(), "findAll", e);
 		}
 
 		return (recipes == null || recipes.length == 0) ? new ArrayList<>() : Arrays.asList(recipes);
 	}
 
+	/**
+	 * Retrieves all recipes by a specific category.
+	 *
+	 * @param categoryDto category by which to filter recipes
+	 * @return list of RecipesFindAllByCategoryResponse containing recipes filtered by category
+	 */
 	public List<RecipesFindAllByCategoryResponse> findAllByCategory(CategoryDto categoryDto) {
 		RecipesFindAllByCategoryResponse[] recipes = null;
 
 		try {
 			recipes = restTemplate.getForObject(RECIPES_SERVICE_URL + "/api/v1/recipes/category/" + categoryDto, RecipesFindAllByCategoryResponse[].class);
-		}
-		catch (HttpClientErrorException e) {
-			logger.throwing(this.getClass().getSimpleName(), "getByCategory", e);
+		} catch (HttpClientErrorException e) {
+			logger.throwing(this.getClass().getSimpleName(), "findAllByCategory", e);
 		}
 
 		return (recipes == null || recipes.length == 0) ? new ArrayList<>() : Arrays.asList(recipes);
 	}
 
-	public RecipeDto save(RecipeDto recipeDto, String jwtToken) {
+	/**
+	 * Saves a new recipe.
+	 *
+	 * @param recipeDto recipe to be saved
+	 * @param jwtToken  JWT token for authentication
+	 * @return RecipeDto object representing the newly saved recipe
+	 * @throws RuntimeException if there's an error during the HTTP request
+	 */
+	public RecipeDto save(RecipeDto recipeDto, String jwtToken) throws RuntimeException {
 		RecipeDto newRecipeDto = null;
 
 		JSONObject newRecipeJsonObject = new JSONObject();
@@ -89,26 +109,36 @@ public class RecipesServiceImpl implements RecipesService {
 
 			newRecipeDto = responseEntity.getBody();
 		} catch (Exception e) {
-			throw new RuntimeException("Błąd podczas wysyłania zapytania POST: " + e.getMessage(), e);
+			throw new RuntimeException("Error during POST request: " + e.getMessage(), e);
 		}
 
 		return newRecipeDto;
 	}
 
+	/**
+	 * Retrieves a recipe by its ID.
+	 *
+	 * @param id ID of the recipe to retrieve
+	 * @return RecipesFindByIdResponse containing the recipe details
+	 */
 	public RecipesFindByIdResponse findById(Long id) {
 		RecipesFindByIdResponse recipe = null;
 
 		try {
 			recipe = restTemplate.getForObject(RECIPES_SERVICE_URL + "/api/v1/recipes/" + id, RecipesFindByIdResponse.class);
-		}
-		catch (HttpClientErrorException e) {
+		} catch (HttpClientErrorException e) {
 			logger.throwing(this.getClass().getSimpleName(), "findById", e);
 		}
 
 		return recipe;
 	}
 
-
+	/**
+	 * Deletes a recipe by its ID.
+	 *
+	 * @param id    ID of the recipe to delete
+	 * @param token JWT token for authentication
+	 */
 	public void delete(Long id, String token) {
 		HttpHeaders headers = new HttpHeaders();
 		headers.setBearerAuth(token);
@@ -122,6 +152,14 @@ public class RecipesServiceImpl implements RecipesService {
 		);
 	}
 
+	/**
+	 * Updates a recipe.
+	 *
+	 * @param id             ID of the recipe to update
+	 * @param token          JWT token for authentication
+	 * @param recipeToUpdate updated recipe details
+	 * @return RecipesUpdateResponse containing updated recipe details
+	 */
 	public RecipesUpdateResponse update(Long id, String token, RecipesUpdateRequest recipeToUpdate) {
 		RecipesUpdateResponse recipe;
 

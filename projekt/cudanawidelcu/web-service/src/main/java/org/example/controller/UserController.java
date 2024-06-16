@@ -13,14 +13,24 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
+/**
+ * Controller class for handling user authentication and registration operations.
+ */
 @Controller
 public class UserController {
+
     private final IdentityService identityService;
 
     public UserController(IdentityService identityService) {
         this.identityService = identityService;
     }
 
+    /**
+     * Endpoint for user logout.
+     *
+     * @param response HTTP response object
+     * @return redirects to the home page
+     */
     @GetMapping("/logout")
     public String logout(HttpServletResponse response) {
         Cookie cookie = new Cookie("jwtToken", null);
@@ -31,11 +41,24 @@ public class UserController {
         return "redirect:/";
     }
 
+    /**
+     * Endpoint for displaying the login form.
+     *
+     * @return login view
+     */
     @GetMapping("/login")
     public String login() {
         return "login";
     }
 
+    /**
+     * Endpoint for processing user login form submission.
+     *
+     * @param request  HTTP request object
+     * @param response HTTP response object
+     * @param model    Spring MVC model
+     * @return redirects to the home page if login is successful, otherwise redirects back to the login page with an error message
+     */
     @PostMapping("/login")
     public String login(HttpServletRequest request, HttpServletResponse response, Model model) {
         String username = request.getParameter("username");
@@ -58,16 +81,30 @@ public class UserController {
         return "redirect:/";
     }
 
+    /**
+     * Endpoint for displaying the registration form.
+     *
+     * @return registration view
+     */
     @GetMapping("/register")
     public String register() {
         return "register";
     }
 
+    /**
+     * Endpoint for processing user registration form submission.
+     *
+     * @param request  HTTP request object
+     * @param response HTTP response object
+     * @param model    Spring MVC model
+     * @return redirects to the home page if registration is successful, otherwise redirects back to the login page with an error message
+     */
     @PostMapping("/register")
     public String register(HttpServletRequest request, HttpServletResponse response, Model model) {
         String username = request.getParameter("username");
         String password = request.getParameter("password");
         IdentityRegisterRequest identityRegisterRequest = new IdentityRegisterRequest(username, password);
+
         try {
             IdentityAuthenticateResponse identityAuthenticateResponse = identityService.register(identityRegisterRequest);
             int cookieTime = identityService.getTimeForCookie(identityAuthenticateResponse.getToken());

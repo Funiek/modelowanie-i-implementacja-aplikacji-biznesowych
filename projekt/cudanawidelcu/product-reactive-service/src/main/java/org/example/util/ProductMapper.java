@@ -7,7 +7,17 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Mapper class for converting between Product and ProductDto.
+ */
 public class ProductMapper {
+
+    /**
+     * Converts Product entity to ProductDto.
+     *
+     * @param product the Product entity to convert
+     * @return the corresponding ProductDto
+     */
     public static ProductDto convertProductToProductDto(Product product) {
         return ProductDto.builder()
                 .id(product.getId())
@@ -18,6 +28,12 @@ public class ProductMapper {
                 .build();
     }
 
+    /**
+     * Converts ProductDto to Product entity.
+     *
+     * @param productDto the ProductDto to convert
+     * @return the corresponding Product entity
+     */
     public static Product convertProductDtoToProduct(ProductDto productDto) {
         return Product.builder()
                 .id(productDto.getId())

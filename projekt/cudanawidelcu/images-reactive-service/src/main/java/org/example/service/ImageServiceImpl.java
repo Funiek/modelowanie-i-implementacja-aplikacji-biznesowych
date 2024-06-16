@@ -12,11 +12,21 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
+/**
+ * Service implementation for handling image-related operations.
+ */
 @Service
 public class ImageServiceImpl implements ImageService {
+
     @Value("${img}")
     private String PATH;
 
+    /**
+     * Retrieves an image as an InputStream.
+     *
+     * @param fileName the name of the image file to retrieve
+     * @return a Mono that emits an InputStream containing the image data
+     */
     @Override
     public Mono<InputStream> getImage(String fileName) {
         return Mono.fromCallable(() -> {
@@ -25,12 +35,25 @@ public class ImageServiceImpl implements ImageService {
         });
     }
 
+    /**
+     * Uploads an image file.
+     *
+     * @param filePart the FilePart representing the image file to upload
+     * @return a Mono<Void> that completes when the file upload is finished
+     */
     @Override
     public Mono<Void> uploadImage(FilePart filePart) {
         Path path = Paths.get(PATH + File.separator + filePart.filename());
         return filePart.transferTo(path);
     }
 
+    /**
+     * Renames an existing image file.
+     *
+     * @param oldFileName the current name of the image file to rename
+     * @param newFileName the new name to assign to the image file
+     * @return a Mono<Void> that completes when the file renaming is finished
+     */
     @Override
     public Mono<Void> renameImage(String oldFileName, String newFileName) {
         return Mono.fromRunnable(() -> {
@@ -48,7 +71,6 @@ public class ImageServiceImpl implements ImageService {
                 if (newFile.exists()) {
                     throw new IOException("File with the new name already exists: " + newFullPath);
                 }
-                System.gc();
 
                 boolean success = oldFile.renameTo(newFile);
                 if (!success) {

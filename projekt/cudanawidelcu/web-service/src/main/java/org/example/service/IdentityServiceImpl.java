@@ -25,16 +25,19 @@ import java.util.Date;
 import java.util.List;
 import java.util.logging.Logger;
 
+/**
+ * Implementation of IdentityService responsible for user authentication, registration, and user management operations.
+ */
 @Service
 public class IdentityServiceImpl implements IdentityService {
+
     private final RestTemplate restTemplate;
     private final String IDENTITY_SERVICE_URL = "http://APPLICATION-GATEWAY/identity-service";
 
     @Value("${secret}")
     private String SECRET;
 
-    protected Logger logger = Logger.getLogger(RecipesServiceImpl.class
-            .getName());
+    protected Logger logger = Logger.getLogger(RecipesServiceImpl.class.getName());
 
     public IdentityServiceImpl(@LoadBalanced RestTemplate restTemplate) {
         this.restTemplate = restTemplate;
@@ -45,6 +48,13 @@ public class IdentityServiceImpl implements IdentityService {
         logger.warning("The RestTemplate request factory is " + restTemplate.getRequestFactory().getClass());
     }
 
+    /**
+     * Registers a new user.
+     *
+     * @param identityRegisterRequest request object containing username and password
+     * @return response object containing authentication token
+     * @throws RuntimeException if there's an error during the HTTP request
+     */
     public IdentityAuthenticateResponse register(IdentityRegisterRequest identityRegisterRequest) throws RuntimeException {
         IdentityAuthenticateResponse identityAuthenticateResponse;
 
@@ -71,19 +81,26 @@ public class IdentityServiceImpl implements IdentityService {
 
             identityAuthenticateResponse = responseEntity.getBody();
         } catch (Exception e) {
-            throw new RuntimeException("Błąd podczas wysyłania zapytania POST: " + e.getMessage(), e);
+            throw new RuntimeException("Error sending POST request: " + e.getMessage(), e);
         }
 
         return identityAuthenticateResponse;
     }
 
+    /**
+     * Authenticates a user.
+     *
+     * @param identityAuthenticateRequest request object containing username and password
+     * @return response object containing authentication token
+     * @throws RuntimeException if there's an error during the HTTP request
+     */
     public IdentityAuthenticateResponse authenticate(IdentityAuthenticateRequest identityAuthenticateRequest) throws RuntimeException {
         IdentityAuthenticateResponse identityAuthenticateResponse;
 
-        JSONObject registerJsonObject = new JSONObject();
+        JSONObject authenticateJsonObject = new JSONObject();
         try {
-            registerJsonObject.put("username", identityAuthenticateRequest.getUsername());
-            registerJsonObject.put("password", identityAuthenticateRequest.getPassword());
+            authenticateJsonObject.put("username", identityAuthenticateRequest.getUsername());
+            authenticateJsonObject.put("password", identityAuthenticateRequest.getPassword());
         } catch (JSONException e) {
             throw new RuntimeException(e);
         }
@@ -92,7 +109,7 @@ public class IdentityServiceImpl implements IdentityService {
             HttpHeaders headers = new HttpHeaders();
             headers.setContentType(MediaType.APPLICATION_JSON);
 
-            HttpEntity<String> requestEntity = new HttpEntity<>(registerJsonObject.toString(), headers);
+            HttpEntity<String> requestEntity = new HttpEntity<>(authenticateJsonObject.toString(), headers);
 
             ResponseEntity<IdentityAuthenticateResponse> responseEntity = restTemplate.exchange(
                     IDENTITY_SERVICE_URL + "/api/v1/auth/authenticate",
@@ -103,12 +120,19 @@ public class IdentityServiceImpl implements IdentityService {
 
             identityAuthenticateResponse = responseEntity.getBody();
         } catch (Exception e) {
-            throw new RuntimeException("Błąd podczas wysyłania zapytania POST: " + e.getMessage(), e);
+            throw new RuntimeException("Error sending POST request: " + e.getMessage(), e);
         }
 
         return identityAuthenticateResponse;
     }
 
+    /**
+     * Validates if the user associated with the token is an admin.
+     *
+     * @param token JWT token for authentication
+     * @return response object containing validation result
+     * @throws RuntimeException if there's an error during the HTTP request
+     */
     public IdentityValidateAdminResponse validateAdmin(String token) throws RuntimeException {
         IdentityValidateAdminResponse identityValidateAdminResponse;
 
@@ -116,7 +140,6 @@ public class IdentityServiceImpl implements IdentityService {
             HttpHeaders headers = new HttpHeaders();
             headers.setBearerAuth(token);
             HttpEntity<String> requestEntity = new HttpEntity<>(headers);
-
 
             ResponseEntity<IdentityValidateAdminResponse> responseEntity = restTemplate.exchange(
                     IDENTITY_SERVICE_URL + "/api/v1/auth/validate-admin",
@@ -127,12 +150,18 @@ public class IdentityServiceImpl implements IdentityService {
 
             identityValidateAdminResponse = responseEntity.getBody();
         } catch (Exception e) {
-            throw new RuntimeException("Błąd podczas wysyłania zapytania POST: " + e.getMessage(), e);
+            throw new RuntimeException("Error sending POST request: " + e.getMessage(), e);
         }
 
         return identityValidateAdminResponse;
     }
 
+    /**
+     * Deletes a user by ID.
+     *
+     * @param id    user ID
+     * @param token JWT token for authentication
+     */
     public void delete(Long id, String token) {
         HttpHeaders headers = new HttpHeaders();
         headers.setBearerAuth(token);
@@ -146,8 +175,14 @@ public class IdentityServiceImpl implements IdentityService {
         );
     }
 
+    /**
+     * Retrieves all users.
+     *
+     * @param token JWT token for authentication
+     * @return list of user responses
+     */
     public List<IdentityUserResponse> getAll(String token) {
-        IdentityUserResponse[] userDtos;
+        IdentityUserResponse[] userResponses;
 
         HttpHeaders headers = new HttpHeaders();
         headers.setBearerAuth(token);
@@ -160,28 +195,17 @@ public class IdentityServiceImpl implements IdentityService {
                 IdentityUserResponse[].class
         );
 
-        userDtos = response.getBody();
-        return (userDtos == null || userDtos.length == 0) ? new ArrayList<>() : Arrays.asList(userDtos);
-    }
-    private Key getSigningKey() {
-        byte[] keyBytes = Decoders.BASE64.decode(SECRET);
-        return Keys.hmacShaKeyFor(keyBytes);
-    }
-    public int getTimeForCookie(String token) {
-        Keys.secretKeyFor(SignatureAlgorithm.HS256);
-        Key key = getSigningKey();
-        Claims claims = Jwts.parserBuilder()
-                .setSigningKey(key)
-                .build()
-                .parseClaimsJws(token)
-                .getBody();
-
-        Date issuedAt = claims.getIssuedAt();
-        Date expiration = claims.getExpiration();
-
-        return (int) (expiration.getTime() - issuedAt.getTime()) / 1000;
+        userResponses = response.getBody();
+        return (userResponses == null || userResponses.length == 0) ? new ArrayList<>() : Arrays.asList(userResponses);
     }
 
+    /**
+     * Retrieves the user by ID.
+     *
+     * @param token JWT token for authentication
+     * @param id    user ID
+     * @return user response object
+     */
     public IdentityUserResponse findById(String token, Long id) {
         IdentityUserResponse userResponse;
         HttpHeaders headers = new HttpHeaders();
@@ -200,8 +224,16 @@ public class IdentityServiceImpl implements IdentityService {
         return userResponse;
     }
 
+    /**
+     * Updates a user by ID.
+     *
+     * @param id               user ID
+     * @param jwtToken         JWT token for authentication
+     * @param userUpdateRequest request object containing updated user details
+     * @return updated user response object
+     */
     public IdentityUserResponse update(Long id, String jwtToken, IdentityUserUpdateRequest userUpdateRequest) {
-        IdentityUserResponse recipe;
+        IdentityUserResponse userResponse;
 
         JSONObject updateUserJsonObject = new JSONObject();
         try {
@@ -224,8 +256,38 @@ public class IdentityServiceImpl implements IdentityService {
                 IdentityUserResponse.class
         );
 
-        recipe = responseEntity.getBody();
+        userResponse = responseEntity.getBody();
 
-        return recipe;
+        return userResponse;
+    }
+
+    /**
+     * Retrieves the time for the cookie to expire based on the JWT token.
+     *
+     * @param token JWT token
+     * @return time for the cookie to expire in seconds
+     */
+    public int getTimeForCookie(String token) {
+        Key key = getSigningKey();
+        Claims claims = Jwts.parserBuilder()
+                .setSigningKey(key)
+                .build()
+                .parseClaimsJws(token)
+                .getBody();
+
+        Date issuedAt = claims.getIssuedAt();
+        Date expiration = claims.getExpiration();
+
+        return (int) (expiration.getTime() - issuedAt.getTime()) / 1000;
+    }
+
+    /**
+     * Generates a signing key for JWT based on the secret.
+     *
+     * @return signing key
+     */
+    private Key getSigningKey() {
+        byte[] keyBytes = Decoders.BASE64.decode(SECRET);
+        return Keys.hmacShaKeyFor(keyBytes);
     }
 }

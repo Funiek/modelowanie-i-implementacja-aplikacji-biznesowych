@@ -21,7 +21,17 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+/**
+ * Utility class for mapping between entities and DTOs related to recipes.
+ */
 public class RecipeMapper {
+
+    /**
+     * Converts a Recipe entity to a RecipeDto.
+     *
+     * @param recipe the Recipe entity to convert
+     * @return the corresponding RecipeDto
+     */
     public static RecipeDto convertRecipeToRecipeDto(Recipe recipe) {
         return RecipeDto.builder()
                 .id(recipe.getId())
@@ -33,6 +43,12 @@ public class RecipeMapper {
                 .build();
     }
 
+    /**
+     * Converts a RecipeDto to a Recipe entity.
+     *
+     * @param recipeDto the RecipeDto to convert
+     * @return the corresponding Recipe entity
+     */
     public static Recipe convertRecipeDtoToRecipe(RecipeDto recipeDto) {
         return Recipe.builder()
                 .id(recipeDto.getId())
@@ -53,16 +69,28 @@ public class RecipeMapper {
                 .build();
     }
 
-
+    /**
+     * Converts a Product entity to a ProductDto.
+     *
+     * @param product the Product entity to convert
+     * @return the corresponding ProductDto
+     */
     public static ProductDto convertProductToProductDto(Product product) {
         return ProductDto.builder()
-                        .id(product.getId())
-                        .recipeId(product.getRecipeId())
-                        .qty(product.getQty())
-                        .measure(product.getMeasure())
-                        .name(product.getName())
-                        .build();
+                .id(product.getId())
+                .recipeId(product.getRecipeId())
+                .qty(product.getQty())
+                .measure(product.getMeasure())
+                .name(product.getName())
+                .build();
     }
+
+    /**
+     * Converts a ProductDto to a Product entity.
+     *
+     * @param productDto the ProductDto to convert
+     * @return the corresponding Product entity
+     */
     public static Product convertProductDtoToProduct(ProductDto productDto) {
         return Product.builder()
                 .id(productDto.getId())
@@ -73,6 +101,12 @@ public class RecipeMapper {
                 .build();
     }
 
+    /**
+     * Converts a Vote entity to a VoteDto.
+     *
+     * @param vote the Vote entity to convert
+     * @return the corresponding VoteDto
+     */
     public static VoteDto convertVoteToVoteDto(Vote vote) {
         return VoteDto.builder()
                 .id(vote.getId())
@@ -81,13 +115,17 @@ public class RecipeMapper {
                 .build();
     }
 
+    /**
+     * Converts a VoteDto to a Vote entity.
+     *
+     * @param voteDto the VoteDto to convert
+     * @return the corresponding Vote entity
+     */
     public static Vote convertVoteDtoToVote(VoteDto voteDto) {
-        Vote vote = new Vote();
-        vote.setId(voteDto.getId());
-        vote.setRecipeId(voteDto.getRecipeId());
-        vote.setRating(voteDto.getRating());
-
-        return vote;
+        return Vote.builder()
+                .id(voteDto.getId())
+                .recipeId(voteDto.getRecipeId())
+                .rating(voteDto.getRating())
+                .build();
     }
-
 }

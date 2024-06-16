@@ -12,12 +12,15 @@ import org.springframework.web.client.RestTemplate;
 
 import java.util.logging.Logger;
 
+/**
+ * Implementation of VotesService responsible for handling voting-related operations.
+ */
 @Service
 public class VotesServiceImpl implements VotesService {
+
     private final RestTemplate restTemplate;
     private final String VOTES_SERVICE_URL = "http://APPLICATION-GATEWAY/votes-service";
-    protected Logger logger = Logger.getLogger(RecipesServiceImpl.class
-            .getName());
+    protected Logger logger = Logger.getLogger(VotesServiceImpl.class.getName());
 
     public VotesServiceImpl(RestTemplate restTemplate) {
         this.restTemplate = restTemplate;
@@ -28,11 +31,24 @@ public class VotesServiceImpl implements VotesService {
         logger.warning("The RestTemplate request factory is " + restTemplate.getRequestFactory().getClass());
     }
 
+    /**
+     * Retrieves rating information for a recipe by its ID.
+     *
+     * @param recipeId ID of the recipe to retrieve rating for
+     * @return VotesRatingByRecipeIdResponse containing rating information
+     */
     public VotesRatingByRecipeIdResponse ratingByRecipeId(Long recipeId) {
         return restTemplate.getForObject(VOTES_SERVICE_URL + "/api/v1/votes/rating/recipe/" + recipeId, VotesRatingByRecipeIdResponse.class);
     }
 
-    public VotesSaveResponse save(VotesSaveRequest votesSaveRequest) {
+    /**
+     * Saves a new vote for a recipe.
+     *
+     * @param votesSaveRequest request containing recipe ID and rating to be saved
+     * @return VotesSaveResponse containing the response from the votes service
+     * @throws RuntimeException if there's an error during the HTTP request
+     */
+    public VotesSaveResponse save(VotesSaveRequest votesSaveRequest) throws RuntimeException {
         VotesSaveResponse votesSaveResponse;
 
         JSONObject rateRecipeJsonObject = new JSONObject();
@@ -58,10 +74,9 @@ public class VotesServiceImpl implements VotesService {
 
             votesSaveResponse = responseEntity.getBody();
         } catch (Exception e) {
-            throw new RuntimeException("Błąd podczas wysyłania zapytania POST: " + e.getMessage(), e);
+            throw new RuntimeException("Error during POST request: " + e.getMessage(), e);
         }
 
         return votesSaveResponse;
     }
-
 }

@@ -26,7 +26,7 @@ services:
   cudanawidelcu_identity_service:
     image: openjdk:17-oracle
     ports:
-      - "6666:6666"
+      - "1006:1006"
     networks:
       cudanawidelcu-network:
         ipv4_address: 172.16.238.12
@@ -34,16 +34,58 @@ services:
       - ./identity-service/target/identity-service-1.0.0.RELEASE.jar:/app.jar
     depends_on:
       - cudanawidelcu_api_gateway
+      - cudanawidelcu_postgres_users
     entrypoint: [ "java", "-jar", "/app.jar" ]
   cudanawidelcu_recipes_service:
     image: openjdk:17-oracle
     ports:
-      - "2222:2222"
+      - "1002:1002"
     networks:
       cudanawidelcu-network:
         ipv4_address: 172.16.238.13
     volumes:
       - ./recipes-service/target/recipes-service-1.0.0.RELEASE.jar:/app.jar
+    depends_on:
+      - cudanawidelcu_api_gateway
+      - cudanawidelcu_postgres_recipes
+    entrypoint: [ "java", "-jar", "/app.jar" ]
+  cudanawidelcu_products_service:
+    image: openjdk:17-oracle
+    ports:
+      - "1003:1003"
+    networks:
+      cudanawidelcu-network:
+        ipv4_address: 172.16.238.14
+    volumes:
+      - ./products-service/target/products-service-1.0.0.RELEASE.jar:/app.jar
+    depends_on:
+      - cudanawidelcu_api_gateway
+      - cudanawidelcu_postgres_products
+    entrypoint: [ "java", "-jar", "/app.jar" ]
+  cudanawidelcu_votes_service:
+    image: openjdk:17-oracle
+    ports:
+      - "1004:1004"
+    networks:
+      cudanawidelcu-network:
+        ipv4_address: 172.16.238.15
+    volumes:
+      - ./votes-service/target/votes-service-1.0.0.RELEASE.jar:/app.jar
+    depends_on:
+      - cudanawidelcu_api_gateway
+      - cudanawidelcu_postgres_votes
+    entrypoint: [ "java", "-jar", "/app.jar" ]
+  cudanawidelcu_images_service:
+    image: openjdk:17-oracle
+    ports:
+      - "1004:1004"
+    networks:
+      cudanawidelcu-network:
+        ipv4_address: 172.16.238.15
+    environment:
+
+    volumes:
+      - ./images-service/target/images-service-1.0.0.RELEASE.jar:/app.jar
     depends_on:
       - cudanawidelcu_api_gateway
     entrypoint: [ "java", "-jar", "/app.jar" ]

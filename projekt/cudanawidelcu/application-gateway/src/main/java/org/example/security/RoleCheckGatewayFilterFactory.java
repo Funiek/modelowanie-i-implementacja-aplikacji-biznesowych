@@ -11,17 +11,31 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
 
+/**
+ * Gateway filter factory that checks if the incoming request has a specific role.
+ */
 @Component
 public class RoleCheckGatewayFilterFactory extends AbstractGatewayFilterFactory<RoleCheckGatewayFilterFactory.Config> {
 
     private final WebClient.Builder builder;
     private final String IDENTITY_SERVICE_URL = "http://APPLICATION-GATEWAY/identity-service";
 
+    /**
+     * Constructor for RoleCheckGatewayFilterFactory.
+     *
+     * @param builder the WebClient builder to use for making HTTP requests
+     */
     public RoleCheckGatewayFilterFactory(WebClient.Builder builder) {
         super(Config.class);
         this.builder = builder;
     }
 
+    /**
+     * Applies the filter based on the given configuration.
+     *
+     * @param config the configuration for this filter
+     * @return the GatewayFilter that applies role validation
+     */
     @Override
     public GatewayFilter apply(Config config) {
         return (exchange, chain) -> {
@@ -55,10 +69,21 @@ public class RoleCheckGatewayFilterFactory extends AbstractGatewayFilterFactory<
         };
     }
 
+    /**
+     * Configuration class for RoleCheckGatewayFilterFactory.
+     */
     @Getter
     public static class Config {
+        /**
+         * Role to be validated.
+         */
         private String role;
 
+        /**
+         * Sets the role to be validated.
+         *
+         * @param role the role to set
+         */
         public void setRole(String role) {
             this.role = role;
         }

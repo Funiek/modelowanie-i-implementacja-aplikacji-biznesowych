@@ -14,8 +14,12 @@ import reactor.core.publisher.Mono;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * Implementation of RecipeService that manages recipes, products, and votes.
+ */
 @Service
 public class RecipeServiceImpl implements RecipeService {
+
     private final RecipeRepository recipeRepository;
     private final ProductService productService;
     private final VoteService voteService;
@@ -26,6 +30,11 @@ public class RecipeServiceImpl implements RecipeService {
         this.voteService = voteService;
     }
 
+    /**
+     * Retrieves all recipes with associated products and votes.
+     *
+     * @return a Flux emitting all recipes
+     */
     @Override
     public Flux<Recipe> findAll() {
         return recipeRepository.findAll()
@@ -51,6 +60,12 @@ public class RecipeServiceImpl implements RecipeService {
                 );
     }
 
+    /**
+     * Retrieves all recipes belonging to a specific category with associated products and votes.
+     *
+     * @param category the category of the recipes
+     * @return a Flux emitting all recipes in the given category
+     */
     @Override
     public Flux<Recipe> findAllByCategory(Category category) {
         return recipeRepository.findAllByCategory(category)
@@ -76,11 +91,24 @@ public class RecipeServiceImpl implements RecipeService {
                 );
     }
 
+    /**
+     * Saves a recipe.
+     *
+     * @param recipe the recipe to save
+     * @return a Mono emitting the saved recipe
+     */
     @Override
     public Mono<Recipe> save(Recipe recipe) {
         return recipeRepository.save(recipe);
     }
 
+    /**
+     * Updates a recipe with the given ID.
+     *
+     * @param id     the ID of the recipe to update
+     * @param recipe the updated recipe
+     * @return a Mono emitting the updated recipe
+     */
     @Override
     public Mono<Recipe> update(Long id, Recipe recipe) {
         return recipeRepository.findById(id)
@@ -88,6 +116,12 @@ public class RecipeServiceImpl implements RecipeService {
                 .switchIfEmpty(Mono.error(new RecipeNotFoundException(recipe.getName())));
     }
 
+    /**
+     * Deletes a recipe by its ID, along with associated products and votes.
+     *
+     * @param id the ID of the recipe to delete
+     * @return a Mono emitting when the deletion is complete
+     */
     @Override
     public Mono<Void> deleteById(Long id) {
         return recipeRepository.deleteById(id)
@@ -95,6 +129,12 @@ public class RecipeServiceImpl implements RecipeService {
                 .then(voteService.deleteAllByRecipeId(id));
     }
 
+    /**
+     * Retrieves a recipe by its ID with associated products and votes.
+     *
+     * @param id the ID of the recipe
+     * @return a Mono emitting the recipe
+     */
     @Override
     public Mono<Recipe> findById(Long id) {
         return recipeRepository.findById(id)
@@ -119,5 +159,4 @@ public class RecipeServiceImpl implements RecipeService {
                         })
                 );
     }
-
 }

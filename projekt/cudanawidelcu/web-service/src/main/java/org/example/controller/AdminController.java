@@ -15,22 +15,32 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
+/**
+ * Controller class for handling administrative operations.
+ */
 @Controller
 @RequestMapping("/admin")
 public class AdminController {
-    private final IdentityService identityService;
 
+    private final IdentityService identityService;
     private final RecipesService recipesService;
     private final ImageService imageService;
     private final VotesService votesService;
 
-    public AdminController(IdentityService identityService, RecipesService recipesService, ImageService imageService, VotesService votesService) {
+    public AdminController(IdentityService identityService, RecipesService recipesService,
+                           ImageService imageService, VotesService votesService) {
         this.identityService = identityService;
         this.recipesService = recipesService;
         this.imageService = imageService;
         this.votesService = votesService;
     }
 
+    /**
+     * Endpoint for accessing the admin panel.
+     *
+     * @param jwtToken JWT token from the cookie
+     * @return admin panel view if the user is validated as admin, otherwise redirects to the home page
+     */
     @GetMapping("/panel")
     public String adminPanel(@CookieValue("jwtToken") String jwtToken) {
         IdentityValidateAdminResponse identityValidateAdminResponse = identityService.validateAdmin(jwtToken);
@@ -40,6 +50,14 @@ public class AdminController {
 
         return "redirect:/";
     }
+
+    /**
+     * Endpoint for managing users.
+     *
+     * @param jwtToken JWT token from the cookie
+     * @param model    Spring MVC model
+     * @return manage users view if the user is validated as admin, otherwise redirects to the home page
+     */
     @GetMapping("/users/manage")
     public String manageUsers(@CookieValue("jwtToken") String jwtToken, Model model) {
         IdentityValidateAdminResponse identityValidateAdminResponse = identityService.validateAdmin(jwtToken);
@@ -52,15 +70,23 @@ public class AdminController {
         return "redirect:/admin/users/manage";
     }
 
+    /**
+     * Endpoint for editing a user.
+     *
+     * @param id       ID of the user to edit
+     * @param jwtToken JWT token from the cookie
+     * @param model    Spring MVC model
+     * @return edit user view if the user is validated as admin, otherwise redirects to the home page
+     */
     @GetMapping("/users/edit/{id}")
     public String editUser(@PathVariable("id") Long id, @CookieValue("jwtToken") String jwtToken, Model model) {
         IdentityValidateAdminResponse identityValidateAdminResponse = identityService.validateAdmin(jwtToken);
         if (identityValidateAdminResponse.getIsValid()) {
             IdentityUserResponse identityUserResponse = identityService.findById(jwtToken, id);
             model.addAttribute("userDto", IdentityUserUpdateRequest.builder()
-                            .id(identityUserResponse.getId())
-                            .username(identityUserResponse.getUsername())
-                            .roleRequest(IdentityUserRoleRequest.valueOf(identityUserResponse.getRoleResponse().name()))
+                    .id(identityUserResponse.getId())
+                    .username(identityUserResponse.getUsername())
+                    .roleRequest(IdentityUserRoleRequest.valueOf(identityUserResponse.getRoleResponse().name()))
                     .build());
             return "editUser";
         }
@@ -68,6 +94,13 @@ public class AdminController {
         return "redirect:/";
     }
 
+    /**
+     * Endpoint for processing user update form submission.
+     *
+     * @param jwtToken        JWT token from the cookie
+     * @param userUpdateRequest updated user data
+     * @return redirects to manage users page if the user is validated as admin, otherwise redirects to the home page
+     */
     @PostMapping(path = "/users/edit", consumes = "application/x-www-form-urlencoded")
     public String editUser(@CookieValue("jwtToken") String jwtToken, @ModelAttribute IdentityUserUpdateRequest userUpdateRequest) {
         IdentityValidateAdminResponse identityValidateAdminResponse = identityService.validateAdmin(jwtToken);
@@ -79,12 +112,26 @@ public class AdminController {
         return "redirect:/";
     }
 
+    /**
+     * Endpoint for deleting a user.
+     *
+     * @param id       ID of the user to delete
+     * @param jwtToken JWT token from the cookie
+     * @return redirects to manage users page
+     */
     @GetMapping("/users/delete/{id}")
     public String deleteUser(@PathVariable("id") Long id, @CookieValue("jwtToken") String jwtToken) {
         identityService.delete(id, jwtToken);
         return "redirect:/admin/users/manage";
     }
 
+    /**
+     * Endpoint for managing recipes.
+     *
+     * @param jwtToken JWT token from the cookie
+     * @param model    Spring MVC model
+     * @return manage recipes view if the user is validated as admin, otherwise redirects to the home page
+     */
     @GetMapping("/recipes/manage")
     public String manageProducts(@CookieValue("jwtToken") String jwtToken, Model model) {
         IdentityValidateAdminResponse identityValidateAdminResponse = identityService.validateAdmin(jwtToken);
@@ -110,6 +157,15 @@ public class AdminController {
 
         return "redirect:/";
     }
+
+    /**
+     * Endpoint for editing a recipe.
+     *
+     * @param id       ID of the recipe to edit
+     * @param jwtToken JWT token from the cookie
+     * @param model    Spring MVC model
+     * @return edit recipe view if the user is validated as admin, otherwise redirects to the home page
+     */
     @GetMapping("/recipes/edit/{id}")
     public String editRecipe(@PathVariable("id") Long id, @CookieValue("jwtToken") String jwtToken, Model model) {
         IdentityValidateAdminResponse identityValidateAdminResponse = identityService.validateAdmin(jwtToken);
@@ -134,6 +190,13 @@ public class AdminController {
         return "redirect:/";
     }
 
+    /**
+     * Endpoint for processing recipe update form submission.
+     *
+     * @param jwtToken           JWT token from the cookie
+     * @param recipesUpdateRequest updated recipe data
+     * @return redirects to manage recipes page if the user is validated as admin, otherwise redirects to the home page
+     */
     @PostMapping(path = "/recipes/edit", consumes = "application/x-www-form-urlencoded")
     public String editRecipe(@CookieValue("jwtToken") String jwtToken, @ModelAttribute RecipesUpdateRequest recipesUpdateRequest) {
         IdentityValidateAdminResponse identityValidateAdminResponse = identityService.validateAdmin(jwtToken);
@@ -155,6 +218,13 @@ public class AdminController {
         return "redirect:/";
     }
 
+    /**
+     * Endpoint for deleting a recipe.
+     *
+     * @param id       ID of the recipe to delete
+     * @param jwtToken JWT token from the cookie
+     * @return redirects to manage recipes page
+     */
     @GetMapping("/recipes/delete/{id}")
     public String deleteRecipe(@PathVariable("id") Long id, @CookieValue("jwtToken") String jwtToken) {
         IdentityValidateAdminResponse identityValidateAdminResponse = identityService.validateAdmin(jwtToken);

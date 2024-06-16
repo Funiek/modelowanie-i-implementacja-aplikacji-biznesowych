@@ -9,8 +9,12 @@ import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
+/**
+ * Implementation of VoteService that manages votes for recipes.
+ */
 @Service
 public class VoteServiceImpl implements VoteService {
+
     private final WebClient.Builder builder;
     private final String VOTES_SERVICE_URL = "http://APPLICATION-GATEWAY/votes-service";
 
@@ -18,6 +22,11 @@ public class VoteServiceImpl implements VoteService {
         this.builder = builder;
     }
 
+    /**
+     * Retrieves all votes.
+     *
+     * @return a Flux emitting all votes
+     */
     @Override
     public Flux<VoteDto> findAll() {
         return builder.build()
@@ -27,6 +36,12 @@ public class VoteServiceImpl implements VoteService {
                 .bodyToFlux(VoteDto.class);
     }
 
+    /**
+     * Retrieves all votes for a recipe.
+     *
+     * @param recipeId the ID of the recipe
+     * @return a Flux emitting all votes for the recipe
+     */
     @Override
     public Flux<VoteDto> findAllByRecipe(Long recipeId) {
         return builder.build()
@@ -36,6 +51,12 @@ public class VoteServiceImpl implements VoteService {
                 .bodyToFlux(VoteDto.class);
     }
 
+    /**
+     * Saves a vote.
+     *
+     * @param voteDto the vote to save
+     * @return a Mono emitting the saved vote
+     */
     @Override
     public Mono<VoteDto> save(VoteDto voteDto) {
         HttpHeaders headers = new HttpHeaders();
@@ -50,6 +71,12 @@ public class VoteServiceImpl implements VoteService {
                 .bodyToMono(VoteDto.class);
     }
 
+    /**
+     * Deletes all votes for a recipe.
+     *
+     * @param recipeId the ID of the recipe
+     * @return a Mono emitting when the deletion is complete
+     */
     @Override
     public Mono<Void> deleteAllByRecipeId(Long recipeId) {
         return builder.build()
