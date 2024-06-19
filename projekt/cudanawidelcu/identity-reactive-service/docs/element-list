@@ -1,0 +1,12 @@
+org.example
+org.example.aspect
+org.example.config
+org.example.controller
+org.example.exception
+org.example.model
+org.example.repository
+org.example.request
+org.example.response
+org.example.security
+org.example.service
+org.example.util
